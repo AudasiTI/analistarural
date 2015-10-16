@@ -4,12 +4,13 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.analistarural.domain.entity.User;
 
 @Repository
-public interface UserRepository {
+public interface UserRepository extends CrudRepository<User, Long> {
 
 	@Query("select u from User u")
 	Stream<User> streamAllUsers();
