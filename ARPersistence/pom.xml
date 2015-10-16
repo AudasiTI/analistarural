@@ -121,9 +121,7 @@
 			<artifactId>javax.el-api</artifactId>
 			<version>2.2.4</version>
 		</dependency>
-
 		<!-- hibernate -->
-
 	</dependencies>
 
 	<properties>
