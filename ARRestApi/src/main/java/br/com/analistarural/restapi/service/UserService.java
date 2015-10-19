@@ -2,15 +2,15 @@ package br.com.analistarural.restapi.service;
 
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.entity.User;
 import br.com.analistarural.domain.repository.UserRepository;
+
 
 @Service
 @Transactional

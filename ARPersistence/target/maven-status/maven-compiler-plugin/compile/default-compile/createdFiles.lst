@@ -1,0 +1,5 @@
+br\com\analistarural\domain\entity\auth\Role.class
+br\com\analistarural\domain\config\ApplicationConfig.class
+br\com\analistarural\domain\details\ApiUserDetails.class
+br\com\analistarural\domain\entity\User.class
+br\com\analistarural\domain\repository\UserRepository.class
