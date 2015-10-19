@@ -2,13 +2,14 @@ package br.com.analistarural.restapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.analistarural.domain.details.ApiUserDetails;
 
 @Service
-public class SingleUserDetailsService {
+public class SingleUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserService userService;

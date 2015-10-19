@@ -29,33 +29,34 @@ import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 @Import(br.com.analistarural.domain.config.ApplicationConfig.class)
 public class ApplicationConfig {
 
-	  @Bean
-	    @Primary
-	    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+	@Bean
+	@Primary
+	public RedisTemplate<String, Object> redisTemplate(
+			RedisConnectionFactory factory) {
 
-	        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
-	        template.setConnectionFactory(factory);
-	        template.setValueSerializer(new OptionalJsonRedisSerializer());
-	        template.setKeySerializer(new StringRedisSerializer());
-	        return template;
-	    }
+		RedisTemplate<String, Object> template = new RedisTemplate<>();
+		template.setConnectionFactory(factory);
+		template.setValueSerializer(new OptionalJsonRedisSerializer());
+		template.setKeySerializer(new StringRedisSerializer());
+		return template;
+	}
 
-	    @Bean
-	    @Autowired
-	    public CacheManager cacheManager(RedisTemplate<String, Object> redisTemplate) {
-	        return new RedisCacheManager(redisTemplate);
-	    }
+	@Bean
+	@Autowired
+	public CacheManager cacheManager(RedisTemplate<String, Object> redisTemplate) {
+		return new RedisCacheManager(redisTemplate);
+	}
 
-	    @Bean
-	    public ObjectMapper objectMapper() {
-	        return new ObjectMapper()
-	                .registerModule(new JSR310Module())
-	                .registerModule(new Jdk8Module());
-	    }
+	@Bean
+	public ObjectMapper objectMapper() {
+		return new ObjectMapper().registerModule(new JSR310Module())
+				.registerModule(new Jdk8Module());
+	}
 
-	    @Bean
-	    public ApiAuthorization apiAuthorization() throws IOException {
-	        byte[] bytes = IOUtils.toByteArray(getClass().getResourceAsStream("/AuthorizationServerConfiguration.json"));
-	        return objectMapper().readValue(bytes, ApiAuthorization.class);
-	    }
+	@Bean
+	public ApiAuthorization apiAuthorization() throws IOException {
+		byte[] bytes = IOUtils.toByteArray(getClass().getResourceAsStream(
+				"/AuthorizationServerConfiguration.json"));
+		return objectMapper().readValue(bytes, ApiAuthorization.class);
+	}
 }

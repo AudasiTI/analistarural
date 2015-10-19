@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 public class GlobalExceptionController {
+
 	@ResponseBody
 	@ExceptionHandler({ Exception.class })
 	@ResponseStatus(BAD_REQUEST)

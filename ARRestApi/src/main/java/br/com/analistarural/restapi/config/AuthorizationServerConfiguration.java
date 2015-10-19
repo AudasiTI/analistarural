@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 import br.com.analistarural.restapi.helper.ApiAuthorization;
+import br.com.analistarural.restapi.service.SingleUserDetailsService;
 
 @Configuration
 @EnableAuthorizationServer
@@ -91,5 +92,4 @@ public class AuthorizationServerConfiguration extends
 	public TokenStore tokenStore() {
 		return new InMemoryTokenStore();
 	}
-
 }
