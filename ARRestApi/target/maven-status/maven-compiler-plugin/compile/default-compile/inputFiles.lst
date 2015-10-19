@@ -1,0 +1,14 @@
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\roles\RoleUsers.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\config\WebSecurityConfiguration.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\service\SingleUserDetailsService.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\config\ResourceServerConfiguration.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\exception\GlobalExceptionController.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\helper\OptionalJsonRedisSerializer.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\helper\ApiAuthorization.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\roles\RoleGuest.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\service\UserService.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\ApplicationMain.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\config\ApplicationConfig.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\config\AuthorizationServerConfiguration.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\controller\SampleController.java
+C:\Users\jocemar\git\analistarural\ARRestApi\src\main\java\br\com\analistarural\restapi\roles\RoleAdmin.java

@@ -27,6 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="/ARPersistence"/>
+	<classpathentry exported="true" kind="src" path="/ARPersistence"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
