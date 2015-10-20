@@ -1,5 +1,11 @@
-br\com\analistarural\domain\entity\auth\Role.class
+br\com\analistarural\domain\repository\SystemAccountRepository.class
+br\com\analistarural\domain\entity\SystemAccount.class
 br\com\analistarural\domain\config\ApplicationConfig.class
-br\com\analistarural\domain\details\ApiUserDetails.class
+br\com\analistarural\domain\entity\AccountType.class
 br\com\analistarural\domain\entity\User.class
+br\com\analistarural\domain\repository\UserAccountRepository.class
 br\com\analistarural\domain\repository\UserRepository.class
+br\com\analistarural\domain\entity\auth\Role.class
+br\com\analistarural\domain\entity\UserAccount.class
+br\com\analistarural\domain\repository\AccountTypeRepository.class
+br\com\analistarural\domain\details\ApiUserDetails.class
