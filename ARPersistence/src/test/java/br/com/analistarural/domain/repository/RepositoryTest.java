@@ -21,6 +21,7 @@ import br.com.analistarural.domain.entity.AccountType;
 import br.com.analistarural.domain.entity.SystemAccount;
 import br.com.analistarural.domain.entity.User;
 import br.com.analistarural.domain.entity.UserAccount;
+import br.com.analistarural.domain.entity.fields.Farm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfig.class })
@@ -38,6 +39,9 @@ public class RepositoryTest {
 
 	@Autowired
 	private UserAccountRepository userAccountRepository;
+
+	@Autowired
+	private FarmRepository farmRepository;
 
 	@Test
 	public void connect() {
@@ -77,6 +81,15 @@ public class RepositoryTest {
 				is(true));
 	}
 
+	@Test
+	@Transactional
+	@Rollback(false)
+	public void saveFarmTest() {
+		Farm farm = farmRepository.save(createFarm());
+
+		assertThat(farmRepository.findById(farm.getId()).isPresent(), is(true));
+	}
+
 	private User createSingleUser() {
 		User user = new User();
 		user.setEmail("renatomoitinho@gmail.com");
@@ -104,6 +117,15 @@ public class RepositoryTest {
 		user.setPassword("12345678");
 		user.setSystemAccounts(systemAccounts);
 		return user;
+	}
+
+	private Farm createFarm() {
+		Optional<SystemAccount> sa = systemAccountRepository.findById((long) 1);
+
+		Farm farm = new Farm();
+		farm.setName("Fazenda Jataí");
+		farm.setSystemAccount(sa.get());
+		return farm;
 	}
 
 }
