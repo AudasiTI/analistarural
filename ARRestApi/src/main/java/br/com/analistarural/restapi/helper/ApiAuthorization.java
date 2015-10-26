@@ -5,6 +5,10 @@ import java.util.List;
 
 public class ApiAuthorization implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String resourceId;
 	private String serverRedirect;
 	private List<ApiAuthorizationConfiguration> apiAuthorizationConfigurations;
@@ -35,6 +39,10 @@ public class ApiAuthorization implements Serializable {
 	}
 
 	public static class ApiAuthorizationConfiguration implements Serializable {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		private String clientId;
 		private String clientSecret;
 		private String[] scope;

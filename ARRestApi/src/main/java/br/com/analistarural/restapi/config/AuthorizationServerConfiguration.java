@@ -41,17 +41,15 @@ public class AuthorizationServerConfiguration extends
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints)
 			throws Exception {
-		// @formatter:off
 		endpoints.tokenStore(tokenStore)
 				.authenticationManager(authenticationManager)
 				.userDetailsService(userDetailsService);
-		// @formatter:on
 	}
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients)
 			throws Exception {
-		// @formatter:off
+
 		InMemoryClientDetailsServiceBuilder serviceBuilder = clients.inMemory();
 		Iterator<ApiAuthorization.ApiAuthorizationConfiguration> authorizationIterator = apiAuthorization
 				.getApiAuthorizationConfigurations().iterator();
@@ -76,7 +74,6 @@ public class AuthorizationServerConfiguration extends
 					.redirectUris(apiAuthorization.getServerRedirect());
 
 		}
-		// @formatter:on
 	}
 
 	@Bean
@@ -88,8 +85,4 @@ public class AuthorizationServerConfiguration extends
 		return tokenServices;
 	}
 
-	@Bean
-	public TokenStore tokenStore() {
-		return new InMemoryTokenStore();
-	}
 }
