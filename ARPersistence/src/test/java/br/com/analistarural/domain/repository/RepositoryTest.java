@@ -61,6 +61,15 @@ public class RepositoryTest {
 
 	@Test
 	@Transactional
+	@Rollback(true)
+	public void findAllUsersTest() {
+		Iterable<User> users = userRepository.findAll();
+
+		assertThat(users.toString()!="", is(true));
+	}
+
+	@Test
+	@Transactional
 	@Rollback(false)
 	public void saveSystemAccountTest() {
 

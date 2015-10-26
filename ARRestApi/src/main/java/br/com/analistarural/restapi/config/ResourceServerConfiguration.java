@@ -9,11 +9,14 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 
 import br.com.analistarural.restapi.helper.ApiAuthorization;
 
+/**
+ * @author renatomoitinhodias@gmail.com
+ */
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-	@Autowired
+    @Autowired
     private ApiAuthorization apiAuthorization;
 
     @Override

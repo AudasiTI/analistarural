@@ -12,13 +12,16 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 
 import br.com.analistarural.restapi.service.SingleUserDetailsService;
 
+/**
+ * @author renatomoitinhodias@gmail.com
+ */
 @Configuration
 @EnableWebSecurity
 @EnableWebMvcSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
+    @Autowired
     private SingleUserDetailsService detailsService;
 
     @Override
