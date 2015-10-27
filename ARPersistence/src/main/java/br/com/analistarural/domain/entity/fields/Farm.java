@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.analistarural.domain.entity.SystemAccount;
+import br.com.analistarural.domain.entity.Account.SystemAccount;
 
 @Table(name = "farm")
 public @Entity class Farm implements Serializable {

@@ -1,4 +1,4 @@
-package br.com.analistarural.domain.entity;
+package br.com.analistarural.domain.entity.Account;
 
 import java.io.Serializable;
 import java.util.List;
@@ -27,21 +27,12 @@ public @Entity class SystemAccount implements Serializable {
 	@SequenceGenerator(name = "\"system_account_idSystemAccount_seq\"", sequenceName = "\"system_account_idSystemAccount_seq\"", allocationSize = 1, initialValue = 1)
 	private @Id Long id;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "\"idAccountType\"", nullable = false)
-	private AccountType accountType;
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_account_system_account", joinColumns = { @JoinColumn(name = "\"idSystemAccount\"", referencedColumnName = "\"idSystemAccount\"") }, inverseJoinColumns = { @JoinColumn(name = "\"idUserAccount\"", referencedColumnName = "\"idUserAccount\"") })
-	private List<UserAccount> userAccounts;
-
 	public SystemAccount() {
 	}
 
 	public SystemAccount(SystemAccount systemAccount) {
 		super();
 		this.id = systemAccount.getId();
-		this.setAccountType(systemAccount.getAccountType());
 	}
 
 	public Long getId() {
@@ -52,19 +43,4 @@ public @Entity class SystemAccount implements Serializable {
 		this.id = id;
 	}
 
-	public AccountType getAccountType() {
-		return accountType;
-	}
-
-	public void setAccountType(AccountType accountType) {
-		this.accountType = accountType;
-	}
-
-	public List<UserAccount> getUserAccounts() {
-		return userAccounts;
-	}
-
-	public void setUserAccounts(List<UserAccount> userAccounts) {
-		this.userAccounts = userAccounts;
-	}
 }

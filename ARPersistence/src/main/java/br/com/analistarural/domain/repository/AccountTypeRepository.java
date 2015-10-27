@@ -7,19 +7,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.analistarural.domain.entity.AccountType;
+import br.com.analistarural.domain.entity.Account.TypeUserAccount;
 
 @Repository
 public interface AccountTypeRepository extends
-		CrudRepository<AccountType, Long> {
+		CrudRepository<TypeUserAccount, Long> {
 
 	@Query("select at from AccountType at")
-	Stream<AccountType> streamAllAccountType();
+	Stream<TypeUserAccount> streamAllAccountType();
 
 	// CRUD method using Optional
-	Optional<AccountType> findById(Long id);
+	Optional<TypeUserAccount> findById(Long id);
 	
 	// CRUD method using Optional
-	Optional<AccountType> findByName(String name);
+	Optional<TypeUserAccount> findByName(String name);
 
 }

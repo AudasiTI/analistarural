@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import br.com.analistarural.domain.entity.UserAccount;
+import br.com.analistarural.domain.entity.Account.UserAccount;
 
 public interface UserAccountRepository extends
 		CrudRepository<UserAccount, Long> {

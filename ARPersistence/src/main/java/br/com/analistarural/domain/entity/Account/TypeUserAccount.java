@@ -1,4 +1,4 @@
-package br.com.analistarural.domain.entity;
+package br.com.analistarural.domain.entity.Account;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -16,12 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Table(name = "account_type")
-public @Entity class AccountType implements Serializable {
+@Table(name = "type_user_account")
+public @Entity class TypeUserAccount implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idAccountType\"")
+	@Column(name = "\"idTypeUserAccount\"")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"account_type_idAccountType_seq\"")
 	@SequenceGenerator(name = "\"account_type_idAccountType_seq\"", sequenceName = "\"account_type_idAccountType_seq\"", allocationSize = 1)
 	private @Id Long id;
@@ -45,10 +45,10 @@ public @Entity class AccountType implements Serializable {
 		this.name = name;
 	}
 
-	public AccountType() {
+	public TypeUserAccount() {
 	}
 
-	public AccountType(String type) {
+	public TypeUserAccount(String type) {
 		super();
 		this.name = type;
 	}

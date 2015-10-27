@@ -17,10 +17,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
-import br.com.analistarural.domain.entity.AccountType;
-import br.com.analistarural.domain.entity.SystemAccount;
 import br.com.analistarural.domain.entity.User;
-import br.com.analistarural.domain.entity.UserAccount;
+import br.com.analistarural.domain.entity.Account.TypeUserAccount;
+import br.com.analistarural.domain.entity.Account.SystemAccount;
+import br.com.analistarural.domain.entity.Account.UserAccount;
 import br.com.analistarural.domain.entity.fields.Farm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -65,7 +65,7 @@ public class RepositoryTest {
 	public void findAllUsersTest() {
 		Iterable<User> users = userRepository.findAll();
 
-		assertThat(users.toString()!="", is(true));
+		assertThat(users.toString() != "", is(true));
 	}
 
 	@Test
@@ -109,22 +109,20 @@ public class RepositoryTest {
 	}
 
 	private SystemAccount createSystemAccount() {
-		Optional<AccountType> at = accountTypeRepository
+		Optional<TypeUserAccount> at = accountTypeRepository
 				.findByName("Produtor Rural");
 		SystemAccount sa = new SystemAccount();
-		sa.setAccountType(at.get());
 		return sa;
 	}
 
 	private UserAccount createUserAccount() {
 		Optional<SystemAccount> sa = systemAccountRepository.findById((long) 1);
-		List<SystemAccount> systemAccounts = new ArrayList<SystemAccount>();
-		systemAccounts.add(sa.get());
+		SystemAccount systemAccount = sa.get();
 
 		UserAccount user = new UserAccount();
 		user.setEmail("jocemarfg@gmail.com");
 		user.setPassword("12345678");
-		user.setSystemAccounts(systemAccounts);
+		user.setSystemAccount(systemAccount);
 		return user;
 	}
 
