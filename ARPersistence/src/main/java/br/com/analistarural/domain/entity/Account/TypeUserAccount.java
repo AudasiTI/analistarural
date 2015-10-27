@@ -22,8 +22,8 @@ public @Entity class TypeUserAccount implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "\"idTypeUserAccount\"")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"account_type_idAccountType_seq\"")
-	@SequenceGenerator(name = "\"account_type_idAccountType_seq\"", sequenceName = "\"account_type_idAccountType_seq\"", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"type_user_account_idTypeUserAccount_seq\"")
+	@SequenceGenerator(name = "\"type_user_account_idTypeUserAccount_seq\"", sequenceName = "\"type_user_account_idTypeUserAccount_seq\"", allocationSize = 1)
 	private @Id Long id;
 
 	@Column(name = "name", length = 120, nullable = false, unique = true)
