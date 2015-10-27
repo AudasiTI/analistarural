@@ -17,6 +17,8 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 import br.com.analistarural.restapi.helper.ApiAuthorization;
 import br.com.analistarural.restapi.helper.OptionalJsonRedisSerializer;
@@ -29,22 +31,27 @@ import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 @EnableCaching
 @ComponentScan(basePackages = "br.com.analistarural.restapi")
 @Import(br.com.analistarural.domain.config.ApplicationConfig.class)
-public class ApplicationConfig extends CachingConfigurerSupport {
+public class ApplicationConfig {
 
-	@Bean
-	@Override
-	public KeyGenerator keyGenerator() {
-		return (target, method, params) -> {
-			StringBuilder sb = new StringBuilder();
-			sb.append(target.getClass().getName());
-			sb.append(method.getName());
-			for (Object obj : params) {
-				sb.append(obj.toString());
-			}
-			return sb.toString();
-		};
-	}
+//	@Bean
+//	@Override
+//	public KeyGenerator keyGenerator() {
+//		return (target, method, params) -> {
+//			StringBuilder sb = new StringBuilder();
+//			sb.append(target.getClass().getName());
+//			sb.append(method.getName());
+//			for (Object obj : params) {
+//				sb.append(obj.toString());
+//			}
+//			return sb.toString();
+//		};
+//	}
 
+    @Bean
+    public TokenStore tokenStore() {
+        return new InMemoryTokenStore();
+    }
+    
 	@Bean
 	@Primary
 	public RedisTemplate<String, Object> redisTemplate(
@@ -52,8 +59,8 @@ public class ApplicationConfig extends CachingConfigurerSupport {
 
 		RedisTemplate<String, Object> template = new RedisTemplate<>();
 		template.setConnectionFactory(factory);
-		template.setValueSerializer(new OptionalJsonRedisSerializer());
-		template.setKeySerializer(new StringRedisSerializer());
+		//template.setValueSerializer(new OptionalJsonRedisSerializer());
+		//template.setKeySerializer(new StringRedisSerializer());
 		return template;
 	}
 
