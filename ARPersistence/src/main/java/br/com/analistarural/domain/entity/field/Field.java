@@ -1,4 +1,4 @@
-package br.com.analistarural.domain.entity.fields;
+package br.com.analistarural.domain.entity.field;
 
 import java.io.Serializable;
 
@@ -14,37 +14,25 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import br.com.analistarural.domain.entity.Account.SystemAccount;
-
-@Table(name = "farm")
-public @Entity class Farm implements Serializable {
+@Table(name = "field")
+public @Entity class Field implements Serializable, Ground {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idFarm\"")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"farm_idFarm_seq\"")
-	@SequenceGenerator(name = "\"farm_idFarm_seq\"", sequenceName = "\"farm_idFarm_seq\"", allocationSize = 1)
+	@Column(name = "\"idField\"")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"field_idField_seq\"")
+	@SequenceGenerator(name = "\"field_idField_seq\"", sequenceName = "\"field_idField_seq\"", allocationSize = 1)
 	private @Id Long id;
 
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "\"idSystemAccount\"", nullable = false)
-	private SystemAccount systemAccount;
-
-	public Farm() {
-	}
-
-	public Farm(Farm farm) {
-		super();
-		this.id = farm.getId();
-		this.name = farm.getName();
-		this.systemAccount = farm.getSystemAccount();
-	}
+	@JoinColumn(name = "\"idPlot\"", nullable = false)
+	private Plot plot;
 
 	public Long getId() {
 		return id;
@@ -62,12 +50,12 @@ public @Entity class Farm implements Serializable {
 		this.name = name;
 	}
 
-	public SystemAccount getSystemAccount() {
-		return systemAccount;
+	public Plot getPlot() {
+		return plot;
 	}
 
-	public void setSystemAccount(SystemAccount systemAccount) {
-		this.systemAccount = systemAccount;
+	public void setPlot(Plot plot) {
+		this.plot = plot;
 	}
 
 }

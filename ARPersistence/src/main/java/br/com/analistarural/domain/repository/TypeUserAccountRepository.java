@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import br.com.analistarural.domain.entity.Account.TypeUserAccount;
+import br.com.analistarural.domain.entity.account.TypeUserAccount;
 
 @Repository
 public interface TypeUserAccountRepository extends

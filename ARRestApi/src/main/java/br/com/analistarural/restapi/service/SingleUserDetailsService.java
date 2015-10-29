@@ -13,7 +13,7 @@ import br.com.analistarural.domain.details.ApiUserDetails;
 public class SingleUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserService userService;
+	private UserAccountService userService;
 
 	public UserDetails loadUserByUsername(String login)
 			throws UsernameNotFoundException {

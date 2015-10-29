@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import br.com.analistarural.domain.entity.fields.Farm;
+import br.com.analistarural.domain.entity.field.Farm;
 
 @Repository
 public interface FarmRepository extends CrudRepository<Farm, Long> {
@@ -20,7 +20,7 @@ public interface FarmRepository extends CrudRepository<Farm, Long> {
 	Optional<Farm> findById(Long id);
 
 	// Query method using Optional
-	@Query("select f from Farm f join f.systemAccount as sa where sa.id = :system_account_id and f.name = :name")
+	@Query("select f from Farm f  join f.systemAccount sa where sa.id = :system_account_id and f.name = :name")
 	Optional<Farm> findByName(@Param("name") String name,
 			@Param("system_account_id") Long system_account_id);
 

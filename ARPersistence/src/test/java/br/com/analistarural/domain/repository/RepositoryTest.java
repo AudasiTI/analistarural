@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
 import br.com.analistarural.domain.entity.User;
-import br.com.analistarural.domain.entity.fields.Farm;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfig.class })

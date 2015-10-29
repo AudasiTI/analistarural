@@ -1,7 +1,8 @@
-package br.com.analistarural.domain.entity.Account;
+package br.com.analistarural.domain.entity.account;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,10 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import br.com.analistarural.domain.entity.auth.Role;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Table(name = "user_account")
 public @Entity class UserAccount implements Serializable {
@@ -40,6 +45,11 @@ public @Entity class UserAccount implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"idTypeUserAccount\"", nullable = false)
 	private TypeUserAccount typeUserAccount;
+	
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
+    private Set<Role> roles = new HashSet<Role>();
 
 	public UserAccount() {
 	}
@@ -91,6 +101,14 @@ public @Entity class UserAccount implements Serializable {
 
 	public void setTypeUserAccount(TypeUserAccount typeUserAccount) {
 		this.typeUserAccount = typeUserAccount;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 }

@@ -1,7 +1,6 @@
-package br.com.analistarural.domain.entity.Account;
+package br.com.analistarural.domain.entity.account;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,6 +23,10 @@ public @Entity class SystemAccount implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"system_account_idSystemAccount_seq\"")
 	@SequenceGenerator(name = "\"system_account_idSystemAccount_seq\"", sequenceName = "\"system_account_idSystemAccount_seq\"", allocationSize = 1, initialValue = 1)
 	private @Id Long id;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "\"idSystemAccountState\"", nullable = false)
+	private SystemAccountState state;
 
 	public SystemAccount() {
 	}
@@ -41,6 +42,14 @@ public @Entity class SystemAccount implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public SystemAccountState getState() {
+		return state;
+	}
+
+	public void setState(SystemAccountState state) {
+		this.state = state;
 	}
 
 }

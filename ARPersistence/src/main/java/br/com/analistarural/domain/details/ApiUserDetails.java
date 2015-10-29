@@ -5,13 +5,13 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import br.com.analistarural.domain.entity.User;
+import br.com.analistarural.domain.entity.account.UserAccount;
 
-public class ApiUserDetails extends User implements UserDetails {
+public class ApiUserDetails extends UserAccount implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	public ApiUserDetails(User user) {
+	public ApiUserDetails(UserAccount user) {
 		super(user);
 	}
 
@@ -22,7 +22,7 @@ public class ApiUserDetails extends User implements UserDetails {
 
 	@Override
 	public String getUsername() {
-		return getLogin();
+		return getEmail();
 	}
 
 	@Override
