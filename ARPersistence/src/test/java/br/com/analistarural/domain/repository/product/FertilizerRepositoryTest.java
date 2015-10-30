@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.analistarural.domain.config.ApplicationConfig;
 import br.com.analistarural.domain.entity.product.Fertilizer;
 import br.com.analistarural.domain.entity.product.Source;
-import br.com.analistarural.domain.repository.FertilizerRepository;
 import br.com.analistarural.domain.repository.product.SourceRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)

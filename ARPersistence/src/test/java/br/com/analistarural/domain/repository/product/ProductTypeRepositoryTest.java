@@ -1,4 +1,4 @@
-package br.com.analistarural.domain.repository;
+package br.com.analistarural.domain.repository.product;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
