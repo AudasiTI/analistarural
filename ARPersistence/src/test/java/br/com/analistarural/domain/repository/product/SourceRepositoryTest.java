@@ -1,4 +1,4 @@
-package br.com.analistarural.domain.repository;
+package br.com.analistarural.domain.repository.product;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -13,43 +13,40 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
-import br.com.analistarural.domain.entity.product.ChemicalType;
-import br.com.analistarural.domain.repository.product.ChemicalTypeRepository;
+import br.com.analistarural.domain.entity.product.Source;
+import br.com.analistarural.domain.repository.product.SourceRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfig.class })
 @Transactional
-public class ChemicalTypeRepositoryTest {
-
+public class SourceRepositoryTest {
 
 	@Autowired
-	private ChemicalTypeRepository chemicalTypeRepository;
+	private SourceRepository sourceRepository;
 
 	@Autowired
 	@Test
 	public void connect() {
-		assertThat(chemicalTypeRepository, notNullValue());
+		assertThat(sourceRepository, notNullValue());
 	}
 	
 	@Test
 	@Transactional
 	@Rollback(false)
 	public void repositoryFlowTest() {
-		ChemicalType chemicalType1 = chemicalTypeRepository.save(createChemicalType());
-		ChemicalType chemicalType2 = chemicalTypeRepository.save(createChemicalType());
+		Source source1 = sourceRepository.save(createSource());
+		Source source2 = sourceRepository.save(createSource());
 
-		assertThat(chemicalTypeRepository.findById(chemicalType1.getId()).isPresent(), is(true));
-		assertThat(chemicalTypeRepository.findById(chemicalType2.getId()).isPresent(), is(true));
+		assertThat(sourceRepository.findById(source1.getId()).isPresent(), is(true));
+		assertThat(sourceRepository.findById(source2.getId()).isPresent(), is(true));
 	}
 	
 	
-	private ChemicalType createChemicalType() {
-		ChemicalType ct = new ChemicalType();
-		ct.setName("Fungicida");
-		return ct;
+	private Source createSource() {
+		Source s = new Source();
+		s.setName("Fertilizantes");
+		return s;
 	}
-
-	
 	
 	
 }

@@ -1,4 +1,4 @@
-package br.com.analistarural.domain.repository;
+package br.com.analistarural.domain.repository.product;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -13,40 +13,43 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
-import br.com.analistarural.domain.entity.product.Source;
-import br.com.analistarural.domain.repository.product.SourceRepository;
+import br.com.analistarural.domain.entity.product.ChemicalType;
+import br.com.analistarural.domain.repository.product.ChemicalTypeRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfig.class })
 @Transactional
-public class SourceRepositoryTest {
+public class ChemicalTypeRepositoryTest {
+
 
 	@Autowired
-	private SourceRepository sourceRepository;
+	private ChemicalTypeRepository chemicalTypeRepository;
 
 	@Autowired
 	@Test
 	public void connect() {
-		assertThat(sourceRepository, notNullValue());
+		assertThat(chemicalTypeRepository, notNullValue());
 	}
 	
 	@Test
 	@Transactional
 	@Rollback(false)
 	public void repositoryFlowTest() {
-		Source source1 = sourceRepository.save(createSource());
-		Source source2 = sourceRepository.save(createSource());
+		ChemicalType chemicalType1 = chemicalTypeRepository.save(createChemicalType());
+		ChemicalType chemicalType2 = chemicalTypeRepository.save(createChemicalType());
 
-		assertThat(sourceRepository.findById(source1.getId()).isPresent(), is(true));
-		assertThat(sourceRepository.findById(source2.getId()).isPresent(), is(true));
+		assertThat(chemicalTypeRepository.findById(chemicalType1.getId()).isPresent(), is(true));
+		assertThat(chemicalTypeRepository.findById(chemicalType2.getId()).isPresent(), is(true));
 	}
 	
 	
-	private Source createSource() {
-		Source s = new Source();
-		s.setName("Fertilizantes");
-		return s;
+	private ChemicalType createChemicalType() {
+		ChemicalType ct = new ChemicalType();
+		ct.setName("Fungicida");
+		return ct;
 	}
+
+	
 	
 	
 }
