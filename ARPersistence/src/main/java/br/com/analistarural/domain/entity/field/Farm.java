@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import br.com.analistarural.domain.entity.account.SystemAccount;
 
 @Table(name = "farm")
-public @Entity class Farm implements Serializable, Ground {
+public @Entity class Farm implements Serializable {
 
 	/**
 	 * 

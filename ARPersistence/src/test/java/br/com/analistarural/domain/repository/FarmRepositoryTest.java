@@ -31,7 +31,7 @@ public class FarmRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback(false)
-	public void saveSystemAccountTest() {
+	public void saveFarmTest() {
 
 		Farm f = farmRepository.save(createFarmTest());
 		assertThat(farmRepository.findById(f.getId()).isPresent(), is(true));

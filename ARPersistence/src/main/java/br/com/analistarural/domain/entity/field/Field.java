@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Table(name = "field")
-public @Entity class Field implements Serializable, Ground {
+public @Entity class Field implements Serializable {
 
 	/**
 	 * 
@@ -31,8 +31,13 @@ public @Entity class Field implements Serializable, Ground {
 	private String name;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "\"idPlot\"", nullable = false)
-	private Plot plot;
+	@JoinColumn(name = "\"idFarm\"", nullable = false)
+	private Farm farm;
+	
+
+	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "\"idFieldGroup\"", nullable = true)
+	private FieldGroup fieldGroup;
 
 	public Long getId() {
 		return id;
@@ -50,12 +55,20 @@ public @Entity class Field implements Serializable, Ground {
 		this.name = name;
 	}
 
-	public Plot getPlot() {
-		return plot;
+	public Farm getFarm() {
+		return farm;
 	}
 
-	public void setPlot(Plot plot) {
-		this.plot = plot;
+	public void setFarm(Farm farm) {
+		this.farm = farm;
+	}
+
+	public FieldGroup getFieldGroup() {
+		return fieldGroup;
+	}
+
+	public void setFieldGroup(FieldGroup fieldGroup) {
+		this.fieldGroup = fieldGroup;
 	}
 
 }
