@@ -1,6 +1,7 @@
 package br.com.analistarural.domain.repository;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,7 +14,7 @@ import br.com.analistarural.domain.entity.field.Farm;
 public interface FarmRepository extends CrudRepository<Farm, Long> {
 
 	@Query("select f from Farm f  join f.systemAccount sa where sa.id = :system_account_id")
-	Optional<Farm> streamAllFarmsBySystemAccount(
+	Stream<Farm> streamAllFarmsBySystemAccount(
 			@Param("system_account_id") Long system_account_id);
 
 	// CRUD method using Optional
