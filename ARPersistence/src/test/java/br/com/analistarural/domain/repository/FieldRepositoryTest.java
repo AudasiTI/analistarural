@@ -35,13 +35,13 @@ public class FieldRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback(false)
-	public void saveFarmTest() {
+	public void saveFieldTest() {
 
 		Field f1 = fieldRepository.save(createFieldTest());
 		Field f2 = fieldRepository.save(createFieldWithFieldGroupTest());
 
-		assertThat(farmRepository.findById(f1.getId()).isPresent(), is(true));
-		assertThat(farmRepository.findById(f2.getId()).isPresent(), is(true));
+		assertThat(fieldRepository.findById(f1.getId()).isPresent(), is(true));
+		assertThat(fieldRepository.findById(f2.getId()).isPresent(), is(true));
 	}
 
 	private Field createFieldTest() {

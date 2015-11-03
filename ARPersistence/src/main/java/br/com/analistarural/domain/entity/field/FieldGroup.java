@@ -2,11 +2,15 @@ package br.com.analistarural.domain.entity.field;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,8 +30,9 @@ public @Entity class FieldGroup implements Serializable {
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
-	// @OneToMany(mappedBy = "field")
-	// private List<Field> fields;
+	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "\"idFarm\"", referencedColumnName = "\"idFarm\"", nullable = false)
+	private Farm farm;
 
 	public Long getId() {
 		return id;
@@ -43,6 +48,14 @@ public @Entity class FieldGroup implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Farm getFarm() {
+		return farm;
+	}
+
+	public void setFarm(Farm farm) {
+		this.farm = farm;
 	}
 
 }
