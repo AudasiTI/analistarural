@@ -44,7 +44,7 @@ public class ProductTypeRepositoryTest {
 	
 	private ProductType createProductType() {
 		ProductType pt = new ProductType();
-		pt.setDescription("Fertilizantes");
+		pt.setDescription("Sementes");
 		return pt;
 	}
 

@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
 import br.com.analistarural.domain.entity.product.Fertilizer;
+import br.com.analistarural.domain.entity.product.ProductCategory;
+import br.com.analistarural.domain.entity.product.ProductType;
 import br.com.analistarural.domain.entity.product.Source;
 import br.com.analistarural.domain.repository.product.SourceRepository;
 
@@ -27,7 +29,14 @@ public class FertilizerRepositoryTest {
 	@Autowired
 	private FertilizerRepository fertilizerRepository;
 	
-	@Autowired SourceRepository sourceRepository;
+	@Autowired 
+	SourceRepository sourceRepository;
+	
+	@Autowired 
+	ProductCategoryRepository productCategoryRepository;
+	
+	@Autowired 
+	ProductTypeRepository productTypeRepository;
 	
 	@Autowired
 	@Test
@@ -52,6 +61,8 @@ public class FertilizerRepositoryTest {
 	private Fertilizer createFertilizer(){
 		Fertilizer f = new Fertilizer();
 		Optional<Source> s = sourceRepository.findById((long) 1);
+		Optional<ProductType> pt = productTypeRepository.findById((long) 1);
+		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 1);
 		f.setName("AgroFertilizante");
 		f.setPercentualNitrogen("10");
 		f.setPercentualPhosphate("12");
@@ -59,6 +70,8 @@ public class FertilizerRepositoryTest {
 		f.setCost(30.0);
 		f.setUnity("Kilo");
 		f.setSource(s.get());
+		f.setProductType(pt.get());
+		f.setProductCategory(pc.get());
 		
 		return f;
 		
