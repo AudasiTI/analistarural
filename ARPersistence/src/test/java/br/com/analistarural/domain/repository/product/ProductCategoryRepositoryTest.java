@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
-import br.com.analistarural.domain.entity.User;
 import br.com.analistarural.domain.entity.product.ProductCategory;
 import br.com.analistarural.domain.repository.product.ProductCategoryRepository;
 
@@ -33,7 +32,7 @@ public class ProductCategoryRepositoryTest {
 	
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(false)
 	public void repositoryFlowTest() {
 		ProductCategory productCategory1 = productCategoryRepository.save(createProductCategory());
 		ProductCategory productCategory2 = productCategoryRepository.save(createProductCategory());
