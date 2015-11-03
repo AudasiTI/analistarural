@@ -26,6 +26,9 @@ public @Entity class FieldGroup implements Serializable {
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
+	// @OneToMany(mappedBy = "field")
+	// private List<Field> fields;
+
 	public Long getId() {
 		return id;
 	}

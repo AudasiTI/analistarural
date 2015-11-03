@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,13 +30,12 @@ public @Entity class Field implements Serializable {
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "\"idFarm\"", nullable = false)
+	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "\"idFarm\"", referencedColumnName = "\"idFarm\"", nullable = false)
 	private Farm farm;
-	
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
-	@JoinColumn(name = "\"idFieldGroup\"", nullable = true)
+	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "\"idFieldGroup\"", referencedColumnName = "\"idFieldGroup\"", nullable = true)
 	private FieldGroup fieldGroup;
 
 	public Long getId() {
