@@ -17,13 +17,17 @@ public class FarmService {
 	@Autowired
 	private FarmRepository farmRepository;
 
-	public void register(Farm farm) {
+	public Boolean register(Farm farm) {
+		Boolean registered = false;
+		Farm f = farm;
 		if (farm.getName().isEmpty()) {
-
+			return registered;
 		} else if (farm.getSystemAccount().getId() <= 0) {
-
+			return registered;
 		} else {
-			farmRepository.save(farm);
+			farmRepository.save(f);
+			registered = true;
+			return registered;
 		}
 
 	}
