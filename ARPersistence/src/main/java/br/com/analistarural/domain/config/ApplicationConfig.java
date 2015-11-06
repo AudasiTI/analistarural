@@ -66,6 +66,8 @@ public class ApplicationConfig {
 		managerFactoryBean.setPackagesToScan(env
 				.getProperty("jdbc.scan.entity"));
 		managerFactoryBean.afterPropertiesSet();
+		managerFactoryBean.getJpaPropertyMap().put(
+				"jadira.usertype.autoRegisterUserTypes", "true");
 
 		return managerFactoryBean;
 	}

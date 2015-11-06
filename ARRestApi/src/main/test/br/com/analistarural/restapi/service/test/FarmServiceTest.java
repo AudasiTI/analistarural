@@ -1,20 +1,15 @@
 package br.com.analistarural.restapi.service.test;
 
-import static org.junit.Assert.*;
-
-import java.util.Optional;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
-import br.com.analistarural.domain.entity.account.SystemAccount;
-import br.com.analistarural.domain.entity.field.Farm;
 import br.com.analistarural.domain.repository.SystemAccountRepository;
 import br.com.analistarural.restapi.service.FarmService;
 
@@ -29,19 +24,19 @@ public class FarmServiceTest {
 	@Autowired
 	FarmService fs;
 	
-	@Test
-	@Transactional
-	@Rollback(false)
-	public void testRegister() {
-		Boolean c = false;
-		Farm fa = new Farm();
-		Optional<SystemAccount> sa = systemAccountRepository.findById((long)1);
-		SystemAccount s = sa.get();
-		fa.setName("Rancho");
-		fa.setSystemAccount(s);
-		c = fs.register(fa);
-		assertTrue(c);
-	}
+//	@Test
+//	@Transactional
+//	@Rollback(false)
+//	public void testRegister() {
+//		Boolean c = false;
+//		Farm fa = new Farm();
+//		Optional<SystemAccount> sa = systemAccountRepository.findById((long)1);
+//		SystemAccount s = sa.get();
+//		fa.setName("Rancho");
+//		fa.setSystemAccount(s);
+//		c = fs.register(fa);
+//		assertTrue(c);
+//	}
 
 	@Test
 	public void testFindFarmsBySystemAccount() {
