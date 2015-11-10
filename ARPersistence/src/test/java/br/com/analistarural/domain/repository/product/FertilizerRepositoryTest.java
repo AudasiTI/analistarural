@@ -60,7 +60,7 @@ public class FertilizerRepositoryTest {
 	
 	private Fertilizer createFertilizer(){
 		Fertilizer f = new Fertilizer();
-		Optional<Source> s = sourceRepository.findById((long) 1);
+		Optional<Source> s = sourceRepository.findById((long) 11);
 		Optional<ProductType> pt = productTypeRepository.findById((long) 25);
 		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 37);
 		f.setName("AgroFertilizante");
