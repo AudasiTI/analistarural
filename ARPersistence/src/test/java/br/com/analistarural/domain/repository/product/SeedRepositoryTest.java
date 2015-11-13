@@ -15,8 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
-import br.com.analistarural.domain.entity.product.ProductCategory;
-import br.com.analistarural.domain.entity.product.ProductType;
 import br.com.analistarural.domain.entity.product.Seed;
 import br.com.analistarural.domain.entity.product.Variety;
 
@@ -29,13 +27,7 @@ public class SeedRepositoryTest {
 	private SeedRepository seedRepository;
 	
 	@Autowired 
-	private VarietyRepository varietyRepository;
-	
-	@Autowired 
-	private ProductCategoryRepository productCategoryRepository;
-	
-	@Autowired 
-	private ProductTypeRepository productTypeRepository;
+	VarietyRepository varietyRepository;
 	
 	@Autowired
 	@Test
@@ -60,17 +52,13 @@ public class SeedRepositoryTest {
 	private Seed createSeed(){
 		Seed s  = new Seed();
 		Optional<Variety> v = varietyRepository.findById((long) 3);
-		Optional<ProductType> pt = productTypeRepository.findById((long) 25);
-		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 37);
 		s.setName("Semente de Soja");
 		s.setCost(20.0);
 		s.setUnity("Kilo");
 		s.setVariety(v.get());
-		s.setProductType(pt.get());
-		s.setProductCategory(pc.get());
+		
 		return s;
 		
 		
 	}
 }
-

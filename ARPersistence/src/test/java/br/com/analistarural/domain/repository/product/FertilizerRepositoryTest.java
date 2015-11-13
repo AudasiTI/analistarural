@@ -60,9 +60,15 @@ public class FertilizerRepositoryTest {
 	
 	private Fertilizer createFertilizer(){
 		Fertilizer f = new Fertilizer();
+<<<<<<< HEAD
 		Optional<Source> s = sourceRepository.findById((long) 11);
 		Optional<ProductType> pt = productTypeRepository.findById((long) 25);
 		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 37);
+=======
+		Optional<Source> s = sourceRepository.findById((long) 1);
+		Optional<ProductType> pt = productTypeRepository.findById((long) 1);
+		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 1);
+>>>>>>> parent of 9cf1706... * Correção nas classes de teste de produto
 		f.setName("AgroFertilizante");
 		f.setPercentualNitrogen("10");
 		f.setPercentualPhosphate("12");
