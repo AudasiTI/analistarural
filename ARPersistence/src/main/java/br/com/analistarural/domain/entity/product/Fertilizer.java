@@ -1,5 +1,7 @@
 package br.com.analistarural.domain.entity.product;
 
+
+import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,8 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "fertilizer")
 @SequenceGenerator(name = "default_gen", sequenceName = "\"fertilizer_idFertilizer_seq\"", allocationSize = 1)
+@AttributeOverride(name = "id", column=@Column(name="\"idFertilizer\""))
 public class Fertilizer extends Product{
-	
+		
 	@Column(name = "\"percentualNitrogen\"")
 	private String percentualNitrogen;
 	
@@ -60,6 +63,6 @@ public class Fertilizer extends Product{
 	public void setSource(Source source) {
 		this.source = source;
 	}
- 
+	 
 
 }

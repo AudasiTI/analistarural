@@ -13,10 +13,20 @@ import javax.persistence.OneToOne;
 @MappedSuperclass
 public abstract class Product {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "default_gen")
-	private Long id;
 	
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "default_gen")
+	protected @Id Long id;
+	
+
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Column(length = 120, nullable = false)
 	private String name;
 	
@@ -50,13 +60,6 @@ public abstract class Product {
 		this.productCategory = productCategory;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getName() {
 		return name;

@@ -64,7 +64,8 @@ public class FertilizerRepositoryTest {
 		Optional<Source> s = sourceRepository.findById((long) 11);
 		Optional<ProductType> pt = productTypeRepository.findById((long) 25);
 		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 37);
-
+		
+		
 		f.setName("AgroFertilizante");
 		f.setPercentualNitrogen("10");
 		f.setPercentualPhosphate("12");
