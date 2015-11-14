@@ -35,7 +35,7 @@ public class ActivityFertilizerRepositoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(false)
 	public void saveActivityFertilizerTest() {
 
 		ActivityFertilizer af = activityFertilizerRepository
@@ -47,9 +47,9 @@ public class ActivityFertilizerRepositoryTest {
 
 	private ActivityFertilizer createActivityFertilizerTest() {
 
-		Optional<Activity> a = activityRepository.findById((long) 1);
+		Optional<Activity> a = activityRepository.findById((long) 51);
 
-		Optional<Fertilizer> f = fertilizerRepository.findById((long) 13);
+		Optional<Fertilizer> f = fertilizerRepository.findById((long) 40);
 
 		ActivityFertilizer af = new ActivityFertilizer();
 		af.setActivity(a.get());

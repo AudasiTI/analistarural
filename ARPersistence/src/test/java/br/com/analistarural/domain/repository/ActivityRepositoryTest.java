@@ -34,7 +34,7 @@ public class ActivityRepositoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(true)
+	@Rollback(false)
 	public void saveActivityTest() {
 
 		Activity a = activityRepository.save(createActivityTest());
@@ -43,7 +43,7 @@ public class ActivityRepositoryTest {
 
 	private Activity createActivityTest() {
 
-		Optional<Field> f = fieldRepository.findById((long) 1);
+		Optional<Field> f = fieldRepository.findById((long) 10);
 
 		Optional<ActivityType> at = activityTypeRepository.findById((long) 1);
 
