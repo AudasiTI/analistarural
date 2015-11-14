@@ -17,19 +17,8 @@ public class FarmService {
 	@Autowired
 	private FarmRepository farmRepository;
 
-	public Boolean register(Farm farm) {
-		Boolean registered = false;
-		Farm f = farm;
-		if (farm.getName().isEmpty()) {
-			return registered;
-		} else if (farm.getSystemAccount().getId() <= 0) {
-			return registered;
-		} else {
-			farmRepository.save(f);
-			registered = true;
-			return registered;
-		}
-
+	public void save(Farm farm){
+		farmRepository.save(farm);
 	}
 
 	public Stream<Farm> findFarmsBySystemAccount(SystemAccount sa) {

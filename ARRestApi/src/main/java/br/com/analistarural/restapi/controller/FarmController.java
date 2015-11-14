@@ -1,9 +1,14 @@
 package br.com.analistarural.restapi.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +28,11 @@ public class FarmController {
 	public @ResponseBody Iterable<Farm> getFarms(
 			@AuthenticationPrincipal UserAccount user) {
 		return (Iterable<Farm>) farmService.findFarmsBySystemAccount(user.getSystemAccount());
+	}
+	
+	@RequestMapping(value = "/farm", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void saveFarm(@Valid @RequestBody Farm farm){
+		farmService.save(farm);
 	}
 
 }
