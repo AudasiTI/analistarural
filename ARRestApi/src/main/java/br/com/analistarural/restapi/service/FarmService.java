@@ -24,4 +24,9 @@ public class FarmService {
 	public Stream<Farm> findFarmsBySystemAccount(SystemAccount sa) {
 		return farmRepository.streamAllFarmsBySystemAccount(sa.getId());
 	}
+	
+	public Iterable<Farm> findAll() {
+        return farmRepository.findAll();
+    }
+	
 }
