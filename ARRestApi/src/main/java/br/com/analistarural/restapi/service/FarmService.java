@@ -17,6 +17,7 @@ public class FarmService {
 	@Autowired
 	private FarmRepository farmRepository;
 
+	@Transactional(readOnly = false)  
 	public void save(Farm farm){
 		farmRepository.save(farm);
 	}

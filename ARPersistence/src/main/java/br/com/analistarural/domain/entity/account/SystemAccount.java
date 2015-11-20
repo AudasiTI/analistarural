@@ -2,7 +2,6 @@ package br.com.analistarural.domain.entity.account;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Table(name = "system_account")
 public @Entity class SystemAccount implements Serializable {
 
@@ -24,7 +25,7 @@ public @Entity class SystemAccount implements Serializable {
 	@SequenceGenerator(name = "\"system_account_idSystemAccount_seq\"", sequenceName = "\"system_account_idSystemAccount_seq\"", allocationSize = 1, initialValue = 1)
 	private @Id Long id;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"idSystemAccountState\"", nullable = false)
 	private SystemAccountState state;
 

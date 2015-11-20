@@ -13,6 +13,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.analistarural.domain.config.ApplicationConfig;
 import br.com.analistarural.domain.entity.account.SystemAccount;
 import br.com.analistarural.domain.entity.field.Farm;
@@ -32,18 +35,26 @@ public class FarmRepositoryTest {
 	@Transactional
 	@Rollback(false)
 	public void saveFarmTest() {
-
 		Farm f = farmRepository.save(createFarmTest());
 		assertThat(farmRepository.findById(f.getId()).isPresent(), is(true));
 	}
 
 	private Farm createFarmTest() {
 		Optional<SystemAccount> sa = systemAccountRepository.findById((long) 1);
-
 		Farm farm = new Farm();
 		farm.setName("Fazenda Jataí");
 		farm.setSystemAccount(sa.get());
 		return farm;
+	}
+	
+	private Farm findByIdTest(){
+		Optional<Farm> farm = farmRepository.findById((long)1);
+		return farm.get();
+	}
+	
+	@Test
+	public void findTest() throws JsonProcessingException{
+		 System.out.println(new ObjectMapper().writeValueAsString(findByIdTest()));
 	}
 
 }
