@@ -24,7 +24,7 @@ public class FarmController {
 	private FarmService farmService;
 
 	@Secured("ROLE_ADMIN")
-	@RequestMapping("/farms")
+	@RequestMapping("/farms1")
 	public @ResponseBody Iterable<Farm> getFarms(
 			@AuthenticationPrincipal UserAccount user) {
 		return (Iterable<Farm>) farmService.findFarmsBySystemAccount(user.getSystemAccount());
@@ -34,5 +34,9 @@ public class FarmController {
 	public void saveFarm(@Valid @RequestBody Farm farm){
 		farmService.save(farm);
 	}
-
+	
+	@RequestMapping(value = "/farms", method = RequestMethod.GET)
+    public Iterable<Farm> getFarms() {
+        return farmService.findAll();
+	}
 }

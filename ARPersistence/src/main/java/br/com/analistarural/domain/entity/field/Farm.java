@@ -1,8 +1,6 @@
 package br.com.analistarural.domain.entity.field;
 
 import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +28,6 @@ public @Entity class Farm implements Serializable {
 	@Column(name = "\"idFarm\"")
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"farm_idFarm_seq\"")
 	@SequenceGenerator(name = "\"farm_idFarm_seq\"", sequenceName = "\"farm_idFarm_seq\"", allocationSize = 1)
-	@NotNull(message="{error.id.notnull}")
 	private @Id Long id;
 
 	@Column(name = "name", length = 120, nullable = false)
@@ -38,7 +35,7 @@ public @Entity class Farm implements Serializable {
     @NotEmpty(message = "{error.name.notEmpty}")
 	private String name;
 
-	@OneToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
+	@OneToOne(optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "\"idSystemAccount\"", nullable = false)
 	private SystemAccount systemAccount;
 

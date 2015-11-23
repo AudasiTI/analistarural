@@ -24,7 +24,7 @@ public @Entity class SystemAccount implements Serializable {
 	@SequenceGenerator(name = "\"system_account_idSystemAccount_seq\"", sequenceName = "\"system_account_idSystemAccount_seq\"", allocationSize = 1, initialValue = 1)
 	private @Id Long id;
 
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"idSystemAccountState\"", nullable = false)
 	private SystemAccountState state;
 

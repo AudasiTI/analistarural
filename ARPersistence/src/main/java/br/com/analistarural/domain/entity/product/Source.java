@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Table(name = "source")
 public @Entity class Source implements Serializable{
@@ -24,6 +27,8 @@ public @Entity class Source implements Serializable{
 	private @Id Long id;
 	
 	@Column(name = "name", length = 120, nullable = false, unique = true)
+	@NotNull(message = "{error.name.notnull}")
+    @NotEmpty(message = "{error.name.notEmpty}")
 	private String name;
 	
 	public String getName() {

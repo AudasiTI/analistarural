@@ -17,6 +17,7 @@ public class FarmService {
 	@Autowired
 	private FarmRepository farmRepository;
 
+	@Transactional(readOnly = false)  
 	public void save(Farm farm){
 		farmRepository.save(farm);
 	}
@@ -24,4 +25,9 @@ public class FarmService {
 	public Stream<Farm> findFarmsBySystemAccount(SystemAccount sa) {
 		return farmRepository.streamAllFarmsBySystemAccount(sa.getId());
 	}
+	
+	public Iterable<Farm> findAll() {
+        return farmRepository.findAll();
+    }
+	
 }
