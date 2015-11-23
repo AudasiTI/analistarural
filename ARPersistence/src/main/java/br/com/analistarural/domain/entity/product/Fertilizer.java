@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
@@ -17,18 +20,17 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "default_gen", sequenceName = "\"fertilizer_idFertilizer_seq\"", allocationSize = 1)
 @AttributeOverride(name = "id", column=@Column(name="\"idFertilizer\""))
 public class Fertilizer extends Product{
-		
+	
 	@Column(name = "\"percentualNitrogen\"")
 	private String percentualNitrogen;
 	
-
 	@Column(name = "\"percentualPhosphate\"")
 	private String percentualPhosphate;
 	
 	@Column(name = "\"percentualPotash\"")
 	private String percentualPotash;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "\"idSource\"", nullable = false)
     private Source source;
 

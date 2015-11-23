@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @MappedSuperclass
 public abstract class Product {
@@ -28,6 +31,8 @@ public abstract class Product {
 	}
 
 	@Column(length = 120, nullable = false)
+	@NotNull(message = "{error.name.notnull}")
+    @NotEmpty(message = "{error.name.notEmpty}")
 	private String name;
 	
 	@Column(length = 60, nullable = false)
@@ -36,11 +41,11 @@ public abstract class Product {
 	@Column(length = 60, nullable = false)
 	private String unity;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "\"idProductType\"", nullable = false)
 	private ProductType productType;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "\"idProductCategory\"", nullable = false)
 	private ProductCategory productCategory;
 
