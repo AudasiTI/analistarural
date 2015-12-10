@@ -65,6 +65,8 @@ public class SeedRepositoryTest {
 		s.setName("Semente de Soja");
 		s.setCost(20.0);
 		s.setUnity("Kilo");
+		s.setAverage(30.3);
+		s.setInventory((long) 10);
 		s.setVariety(v.get());
 		s.setProductType(pt.get());
 		s.setProductCategory(pc.get());

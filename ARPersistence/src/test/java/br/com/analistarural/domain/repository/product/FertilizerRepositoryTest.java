@@ -72,6 +72,8 @@ public class FertilizerRepositoryTest {
 		f.setPercentualPotash("11");
 		f.setCost(30.0);
 		f.setUnity("Kilo");
+		f.setAverage(30.3);
+		f.setInventory((long) 10);
 		f.setSource(s.get());
 		f.setProductType(pt.get());
 		f.setProductCategory(pc.get());

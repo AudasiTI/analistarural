@@ -1,6 +1,5 @@
 package br.com.analistarural.domain.entity.product;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,13 +21,6 @@ public abstract class Product {
 	
 
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	@Column(length = 120, nullable = false)
 	@NotNull(message = "{error.name.notnull}")
@@ -41,6 +33,12 @@ public abstract class Product {
 	@Column(length = 60, nullable = false)
 	private String unity;
 	
+	@Column()
+	private Long inventory;
+	
+	@Column()
+	private Double average;
+	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "\"idProductType\"", nullable = false)
 	private ProductType productType;
@@ -49,6 +47,15 @@ public abstract class Product {
 	@JoinColumn(name = "\"idProductCategory\"", nullable = false)
 	private ProductCategory productCategory;
 
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public ProductType getProductType() {
 		return productType;
 	}
@@ -88,6 +95,22 @@ public abstract class Product {
 
 	public void setUnity(String unity) {
 		this.unity = unity;
+	}
+
+	public Long getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Long inventory) {
+		this.inventory = inventory;
+	}
+
+	public Double getAverage() {
+		return average;
+	}
+
+	public void setAverage(Double average) {
+		this.average = average;
 	}
 	
 	
