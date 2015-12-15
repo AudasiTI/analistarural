@@ -1,16 +1,12 @@
 package br.com.analistarural.domain.entity.report;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,9 +19,12 @@ public @Entity class Report implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "report_report_id_seq")
 	@SequenceGenerator(name = "report_report_id_seq", sequenceName = "report_report_id_seq", allocationSize = 1, initialValue = 1)
 	private @Id Long id;
+	
+    @Column(name = "primary_email", length = 120, nullable = false, unique = false)
+    private String email;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
-	private Set<ElementValue> elementValues = new HashSet<ElementValue>(0);
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
+//	private Set<ElementValue> elementValues = new HashSet<ElementValue>(0);
 
 	public Report() {
 	}
@@ -43,12 +42,20 @@ public @Entity class Report implements Serializable {
 		this.id = id;
 	}
 
-	public Set<ElementValue> getElementValues() {
-		return elementValues;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setElementValues(Set<ElementValue> elementValues) {
-		this.elementValues = elementValues;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+
+//	public Set<ElementValue> getElementValues() {
+//		return elementValues;
+//	}
+//
+//	public void setElementValues(Set<ElementValue> elementValues) {
+//		this.elementValues = elementValues;
+//	}
 
 }

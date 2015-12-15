@@ -37,6 +37,13 @@ public @Entity class ElementValue implements Serializable {
 	@JoinColumn(name = "element_type_id", referencedColumnName = "element_type_id", nullable = false)
 	private ElementType elementType;
 
+	@Column(name = "element_name")
+	private String elementName;
+	
+	
+	@Column(name = "default_value")
+	private Long defaultValue;
+	
 	@Column(name = "value")
 	private Long value;
 
@@ -90,6 +97,22 @@ public @Entity class ElementValue implements Serializable {
 
 	public void setReport(Report report) {
 		this.report = report;
+	}
+
+	public String getElementName() {
+		return elementName;
+	}
+
+	public void setElementName(String elementName) {
+		this.elementName = elementName;
+	}
+
+	public Long getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(Long defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 }

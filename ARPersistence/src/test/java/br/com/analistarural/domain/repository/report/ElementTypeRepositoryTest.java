@@ -32,7 +32,7 @@ public class ElementTypeRepositoryTest {
 
 	@Test
 	@Transactional
-	@Rollback(false)
+	@Rollback(true)
 	public void saveElementTest() {
 
 		ElementType et = elementTypeRepository.save(createElementTypeTest());
