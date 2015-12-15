@@ -11,6 +11,7 @@ import br.com.analistarural.domain.dto.ReportDTO;
 import br.com.analistarural.domain.dto.ReportElementsDTO;
 import br.com.analistarural.domain.entity.report.ElementValue;
 import br.com.analistarural.domain.entity.report.Report;
+import br.com.analistarural.domain.repository.report.ElementTypeRepository;
 import br.com.analistarural.domain.repository.report.ElementValueRepository;
 import br.com.analistarural.domain.repository.report.ReportRepository;
 
@@ -23,6 +24,9 @@ public class ReportService {
 
 	@Autowired
 	private ElementValueRepository elementValueRepository;
+
+	@Autowired
+	private ElementTypeRepository elementTypeRepository;
 
 	public Iterable<Report> findAll() {
 		return reportRepository.findAll();
@@ -46,8 +50,11 @@ public class ReportService {
 		Report report = reportRepository.save(reportDTO.toReport(reportDTO));
 
 		for (ReportElementsDTO elementDTO : reportDTO.getElements()) {
+
 			ElementValue elementValue = elementDTO.toElementValue(elementDTO);
 			elementValue.setReport(report);
+			elementValue.setElementType(elementTypeRepository.findByDescription(elementValue.getElementName()).get());
+			elementValue.setDefaultValue(elementValue.getElementType().getDefaultValue());
 			elementValueRepository.save(elementValue);
 		}
 

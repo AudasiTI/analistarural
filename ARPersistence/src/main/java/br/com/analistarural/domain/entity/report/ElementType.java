@@ -26,6 +26,9 @@ public @Entity class ElementType implements Serializable {
 
 	@Column(name = "description", length = 60, nullable = false, unique = true)
 	private String description;
+	
+	@Column(name = "default_value")
+	private Long defaultValue;
 
 	public Long getId() {
 		return id;
@@ -41,6 +44,14 @@ public @Entity class ElementType implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Long getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(Long defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 }
