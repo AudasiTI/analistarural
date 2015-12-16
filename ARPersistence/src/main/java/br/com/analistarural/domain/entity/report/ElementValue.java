@@ -33,7 +33,7 @@ public @Entity class ElementValue implements Serializable {
 	@Column(name = "id", length = 30, nullable = false, unique = true)
 	private String ident;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "element_type_id", referencedColumnName = "element_type_id", nullable = false)
 	private ElementType elementType;
 
@@ -42,12 +42,12 @@ public @Entity class ElementValue implements Serializable {
 	
 	
 	@Column(name = "default_value")
-	private Long defaultValue;
+	private Double defaultValue;
 	
 	@Column(name = "value")
-	private Long value;
+	private Double value;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "report_id", referencedColumnName = "report_id", nullable = false)
 	private Report report;
 
@@ -83,11 +83,11 @@ public @Entity class ElementValue implements Serializable {
 		this.elementType = elementType;
 	}
 
-	public Long getValue() {
+	public Double getValue() {
 		return value;
 	}
 
-	public void setValue(Long value) {
+	public void setValue(Double value) {
 		this.value = value;
 	}
 
@@ -107,11 +107,11 @@ public @Entity class ElementValue implements Serializable {
 		this.elementName = elementName;
 	}
 
-	public Long getDefaultValue() {
+	public Double getDefaultValue() {
 		return defaultValue;
 	}
 
-	public void setDefaultValue(Long defaultValue) {
+	public void setDefaultValue(Double defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 

@@ -1,9 +1,10 @@
-package br.com.analistarural.restapi.controller;
+package br.com.analistarural.restapi.controller.report;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,14 +29,21 @@ public class ReportController {
 	// return reportService.findAll();
 	// }
 
-	@RequestMapping(value = "/report", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void saveReportFarm(@Valid @RequestBody ReportDTO reportDTO) {
+	@RequestMapping(value = "/reports", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String saveReport(@Valid @RequestBody ReportDTO reportDTO) {
 		reportService.save(reportDTO);
+		return "Registro salvo com sucesso.";
 	}
 
-	@RequestMapping(value = "/reports", method = RequestMethod.GET)
-	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(@RequestParam("email") String email) {
+	@RequestMapping(value = "/reports/{email}", method = RequestMethod.GET)
+	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(@PathVariable("email")  String email) {
 		return (Iterable<ReportDTO>) reportService.findReportsByEmail(email);
+	}
+
+	@RequestMapping(value = "/reports/{report_id}", method = RequestMethod.DELETE)
+	public @ResponseBody String deleteReport(@PathVariable("report_id") Long report_id) {
+		reportService.delete(report_id);
+		return "Registro excluído com sucesso.";
 	}
 
 }

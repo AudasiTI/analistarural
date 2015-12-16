@@ -15,10 +15,10 @@ public class ReportElementsDTO implements Serializable {
 
 	private String elementName;
 
-	private Long elementDefaultValue;
+	private Double elementDefaultValue;
 
 	@JsonFormat(shape=JsonFormat.Shape.NUMBER_FLOAT)
-	private Long elementValue;
+	private Double elementValue;
 
 	public ReportElementsDTO() {
 	}
@@ -37,19 +37,19 @@ public class ReportElementsDTO implements Serializable {
 		this.elementName = elementName;
 	}
 
-	public Long getElementDefaultValue() {
+	public Double getElementDefaultValue() {
 		return elementDefaultValue;
 	}
 
-	public void setElementDefaultValue(Long elementDefaultValue) {
+	public void setElementDefaultValue(Double elementDefaultValue) {
 		this.elementDefaultValue = elementDefaultValue;
 	}
 
-	public Long getElementValue() {
+	public Double getElementValue() {
 		return elementValue;
 	}
 
-	public void setElementValue(Long elementValue) {
+	public void setElementValue(Double elementValue) {
 		this.elementValue = elementValue;
 	}
 

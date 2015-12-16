@@ -1,12 +1,17 @@
 package br.com.analistarural.domain.entity.report;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,8 +28,8 @@ public @Entity class Report implements Serializable {
     @Column(name = "primary_email", length = 120, nullable = false, unique = false)
     private String email;
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report")
-//	private Set<ElementValue> elementValues = new HashSet<ElementValue>(0);
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "report")
+	private Set<ElementValue> elementValues = new HashSet<ElementValue>(0);
 
 	public Report() {
 	}

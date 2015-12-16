@@ -28,7 +28,7 @@ public @Entity class ElementType implements Serializable {
 	private String description;
 	
 	@Column(name = "default_value")
-	private Long defaultValue;
+	private Double defaultValue;
 
 	public Long getId() {
 		return id;
@@ -46,11 +46,11 @@ public @Entity class ElementType implements Serializable {
 		this.description = description;
 	}
 
-	public Long getDefaultValue() {
+	public Double getDefaultValue() {
 		return defaultValue;
 	}
 
-	public void setDefaultValue(Long defaultValue) {
+	public void setDefaultValue(Double defaultValue) {
 		this.defaultValue = defaultValue;
 	}
 
