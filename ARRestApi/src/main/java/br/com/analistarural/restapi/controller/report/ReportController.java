@@ -45,5 +45,11 @@ public class ReportController {
 		reportService.delete(report_id);
 		return "Registro excluído com sucesso.";
 	}
+	
+	@RequestMapping(value = "/reports/{report_id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String updateReport(@Valid @RequestBody ReportDTO reportDTO) {
+		reportService.updateReport(reportDTO);
+		return "Registro atualizado com sucesso.";
+	}
 
 }

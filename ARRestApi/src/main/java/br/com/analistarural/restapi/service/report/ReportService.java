@@ -62,6 +62,13 @@ public class ReportService {
 
 	}
 
+	@Transactional(readOnly = false)
+	public void updateReport(ReportDTO reportDTO) {
+
+		Report report = reportRepository.save(reportDTO.toReport(reportDTO));
+
+	}
+
 	public void delete(Long id) {
 		reportRepository.delete(id);
 	}
