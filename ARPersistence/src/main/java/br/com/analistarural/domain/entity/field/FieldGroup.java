@@ -30,7 +30,7 @@ public @Entity class FieldGroup implements Serializable {
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"idFarm\"", referencedColumnName = "\"idFarm\"", nullable = false)
 	private Farm farm;
 
@@ -56,6 +56,10 @@ public @Entity class FieldGroup implements Serializable {
 
 	public void setFarm(Farm farm) {
 		this.farm = farm;
+	}
+
+	public FieldGroup() {
+		this.farm = new Farm();
 	}
 
 }

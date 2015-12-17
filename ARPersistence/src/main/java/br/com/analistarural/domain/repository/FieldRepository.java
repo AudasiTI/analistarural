@@ -14,7 +14,7 @@ import br.com.analistarural.domain.entity.field.Field;
 public interface FieldRepository extends CrudRepository<Field, Long> {
 
 	@Query("select f from Field f join f.farm fa where fa.id = :farm_id")
-	Stream<Field> streamAllFieldsByFarm(@Param("farm_id") Long farm_id);
+	Iterable<Field> findFieldsByFarm(@Param("farm_id") Long farm_id);
 
 	// CRUD method using Optional
 	Optional<Field> findById(Long id);

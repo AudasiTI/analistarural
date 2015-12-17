@@ -32,10 +32,13 @@ public @Entity class Farm implements Serializable {
 
 	@Column(name = "name", length = 120, nullable = false)
 	@NotNull(message = "{error.name.notnull}")
-    @NotEmpty(message = "{error.name.notEmpty}")
+	@NotEmpty(message = "{error.name.notEmpty}")
 	private String name;
 
-	@OneToOne(optional = true, fetch = FetchType.EAGER, orphanRemoval = true)
+	@Column(name = "size")
+	private Double size;
+
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"idSystemAccount\"", nullable = false)
 	private SystemAccount systemAccount;
 
@@ -71,6 +74,14 @@ public @Entity class Farm implements Serializable {
 
 	public void setSystemAccount(SystemAccount systemAccount) {
 		this.systemAccount = systemAccount;
+	}
+
+	public Double getSize() {
+		return size;
+	}
+
+	public void setSize(Double size) {
+		this.size = size;
 	}
 
 }
