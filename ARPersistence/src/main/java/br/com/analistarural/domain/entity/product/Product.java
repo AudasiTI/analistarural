@@ -1,75 +1,57 @@
 package br.com.analistarural.domain.entity.product;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-@MappedSuperclass
-public abstract class Product {
+@Entity
+@Table(name = "product")
+public class Product implements Serializable{
 	
 	
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "default_gen")
-	protected @Id Long id;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
+
+	@Column(name = "\"idProduct\"")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"product_idProduct_seq\"")
+    @SequenceGenerator(name = "\"product_idProduct_seq\"", sequenceName = "\"product_idProduct_seq\"", allocationSize = 1, initialValue = 1)
+	@Id
+	private Long idProduct;
 
 
 	@Column(length = 120, nullable = false)
 	@NotNull(message = "{error.name.notnull}")
     @NotEmpty(message = "{error.name.notEmpty}")
 	private String name;
-	
-	@Column(length = 60, nullable = false)
-	private Double cost;
-	
-	@Column(length = 60, nullable = false)
-	private String unity;
-	
-	@Column()
-	private Long inventory;
-	
-	@Column()
-	private Double average;
+
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idProductType\"", nullable = false)
-	private ProductType productType;
-	
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idProductCategory\"", nullable = false)
-	private ProductCategory productCategory;
+	@JoinColumn(name = "\"idMeasurement\"", nullable = false)
+	private Measurement measurement;
 
 
-	public Long getId() {
-		return id;
+	public Long getIdProduct() {
+		return idProduct;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public ProductType getProductType() {
-		return productType;
-	}
 
-	public void setProductType(ProductType productType) {
-		this.productType = productType;
-	}
-
-	public ProductCategory getProductCategory() {
-		return productCategory;
-	}
-
-	public void setProductCategory(ProductCategory productCategory) {
-		this.productCategory = productCategory;
+	public void setIdProduct(Long idProduct) {
+		this.idProduct = idProduct;
 	}
 
 
@@ -77,42 +59,21 @@ public abstract class Product {
 		return name;
 	}
 
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Double getCost() {
-		return cost;
+
+	public Measurement getMeasurement() {
+		return measurement;
 	}
 
-	public void setCost(Double cost) {
-		this.cost = cost;
-	}
 
-	public String getUnity() {
-		return unity;
-	}
-
-	public void setUnity(String unity) {
-		this.unity = unity;
-	}
-
-	public Long getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(Long inventory) {
-		this.inventory = inventory;
-	}
-
-	public Double getAverage() {
-		return average;
-	}
-
-	public void setAverage(Double average) {
-		this.average = average;
+	public void setMeasurement(Measurement measurement) {
+		this.measurement = measurement;
 	}
 	
 	
-
-}
+	
+	}

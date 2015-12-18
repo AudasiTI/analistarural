@@ -15,7 +15,7 @@ public interface FertilizerRepository extends CrudRepository<Fertilizer, Long> {
 	@Query("select f from Fertilizer f")
 	Stream<Fertilizer> streamAllFertilizers();
 	
-	Optional<Fertilizer> findById(Long id);
+	Optional<Fertilizer> findByIdFertilizer(Long idFertilizer);
 	
-	Optional<Fertilizer> findByName(String name);
+	//Optional<Fertilizer> findByName(String name);
 }

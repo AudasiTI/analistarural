@@ -1,61 +1,71 @@
 package br.com.analistarural.domain.entity.product;
 
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
+
+
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 
 
 @Entity
 @Table(name = "fertilizer")
-@SequenceGenerator(name = "default_gen", sequenceName = "\"fertilizer_idFertilizer_seq\"", allocationSize = 1)
-@AttributeOverride(name = "id", column=@Column(name="\"idFertilizer\""))
-public class Fertilizer extends Product{
+public class Fertilizer implements Serializable{
 	
-	@Column(name = "\"percentualNitrogen\"")
-	private String percentualNitrogen;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column(name = "\"idFertilizer\"")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"fertilizer_idFertilizer_seq\"")
+    @SequenceGenerator(name = "\"fertilizer_idFertilizer_seq\"", sequenceName = "\"fertilizer_idFertilizer_seq\"", allocationSize = 1, initialValue = 1)
+	@Id
+	private Long idFertilizer;
 	
-	@Column(name = "\"percentualPhosphate\"")
-	private String percentualPhosphate;
+	public enum Type{ORGANIC, MINERAL}
 	
-	@Column(name = "\"percentualPotash\"")
-	private String percentualPotash;
+	@Column(name="type_fertilizer")
+	private Type typeFertilizer;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "\"idChemicalElement\"", nullable = false)
+	private ChemicalElement chemicalElement;	
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "\"idSource\"", nullable = false)
-    private Source source;
+	private Source source;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "\"idFeedstock\"", nullable = false)
+	private Feedstock feedstock;
 
-	public String getPercentualNitrogen() {
-		return percentualNitrogen;
+	public Long getIdFertilizer() {
+		return idFertilizer;
 	}
 
-	public void setPercentualNitrogen(String percentualNitrogen) {
-		this.percentualNitrogen = percentualNitrogen;
+	public void setIdFertilizer(Long idFertilizer) {
+		this.idFertilizer = idFertilizer;
 	}
 
-	public String getPercentualPhosphate() {
-		return percentualPhosphate;
+	
+
+	public ChemicalElement getChemicalElement() {
+		return chemicalElement;
 	}
 
-	public void setPercentualPhosphate(String percentualPhosphate) {
-		this.percentualPhosphate = percentualPhosphate;
-	}
-
-	public String getPercentualPotash() {
-		return percentualPotash;
-	}
-
-	public void setPercentualPotash(String percentualPotash) {
-		this.percentualPotash = percentualPotash;
+	public void setChemicalElement(ChemicalElement chemicalElement) {
+		this.chemicalElement = chemicalElement;
 	}
 
 	public Source getSource() {
@@ -65,6 +75,23 @@ public class Fertilizer extends Product{
 	public void setSource(Source source) {
 		this.source = source;
 	}
-	 
 
+	public Feedstock getFeedstock() {
+		return feedstock;
+	}
+
+	public void setFeedstock(Feedstock feedstock) {
+		this.feedstock = feedstock;
+	}
+
+	public Type getTypeFertilizer() {
+		return typeFertilizer;
+	}
+
+	public void setTypeFertilizer(Type type) {
+		this.typeFertilizer = type;
+	}
 }
+
+
+

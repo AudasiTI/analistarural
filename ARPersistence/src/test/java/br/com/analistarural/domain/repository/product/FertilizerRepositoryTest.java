@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,9 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
+import br.com.analistarural.domain.entity.product.ChemicalElement;
+import br.com.analistarural.domain.entity.product.Feedstock;
 import br.com.analistarural.domain.entity.product.Fertilizer;
-import br.com.analistarural.domain.entity.product.ProductCategory;
-import br.com.analistarural.domain.entity.product.ProductType;
+import br.com.analistarural.domain.entity.product.Fertilizer.Type;
 import br.com.analistarural.domain.entity.product.Source;
 import br.com.analistarural.domain.repository.product.SourceRepository;
 
@@ -30,13 +31,17 @@ public class FertilizerRepositoryTest {
 	private FertilizerRepository fertilizerRepository;
 	
 	@Autowired 
-	SourceRepository sourceRepository;
+	private SourceRepository sourceRepository;
 	
-	@Autowired 
-	ProductCategoryRepository productCategoryRepository;
 	
-	@Autowired 
-	ProductTypeRepository productTypeRepository;
+	@Autowired
+	private FeedstockRepository feedstockRepository;
+	
+	
+	@Autowired
+	private ChemicalElementRepository chemicalElementRepository;
+	
+	
 	
 	@Autowired
 	@Test
@@ -51,34 +56,24 @@ public class FertilizerRepositoryTest {
 		Fertilizer fertilizer1 = fertilizerRepository.save(createFertilizer());
 		Fertilizer fertilizer2 = fertilizerRepository.save(createFertilizer());
 
-		assertThat(fertilizerRepository.findById(fertilizer1.getId()).isPresent(), is(true));
-		assertThat(fertilizerRepository.findById(fertilizer2.getId()).isPresent(), is(true));
+		assertThat(fertilizerRepository.findByIdFertilizer(fertilizer1.getIdFertilizer()).isPresent(), is(true));
+		assertThat(fertilizerRepository.findByIdFertilizer(fertilizer2.getIdFertilizer()).isPresent(), is(true));
 	}
 	
 	
 	
 	
 	private Fertilizer createFertilizer(){
-		Fertilizer f = new Fertilizer();
-
-		Optional<Source> s = sourceRepository.findById((long) 11);
-		Optional<ProductType> pt = productTypeRepository.findById((long) 25);
-		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 37);
+		Fertilizer fertilizer = new Fertilizer();
+		List<Feedstock> feedstocks = (List<Feedstock>) feedstockRepository.findAll();
+		List<Source> sources = (List<Source>) sourceRepository.findAll();
+		List<ChemicalElement> chemicalElements = (List<ChemicalElement>) chemicalElementRepository.findAll();
+		fertilizer.setTypeFertilizer(Type.MINERAL);
+		fertilizer.setSource(sources.get(0));
+		fertilizer.setFeedstock(feedstocks.get(0));
+		fertilizer.setChemicalElement(chemicalElements.get(0));
 		
-		
-		f.setName("AgroFertilizante");
-		f.setPercentualNitrogen("10");
-		f.setPercentualPhosphate("12");
-		f.setPercentualPotash("11");
-		f.setCost(30.0);
-		f.setUnity("Kilo");
-		f.setAverage(30.3);
-		f.setInventory((long) 10);
-		f.setSource(s.get());
-		f.setProductType(pt.get());
-		f.setProductCategory(pc.get());
-		
-		return f;
+		return fertilizer;
 		
 		
 	}

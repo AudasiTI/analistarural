@@ -10,8 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Table(name = "chemical_type")
-public @Entity class ChemicalType implements Serializable {
+@Entity
+@Table(name = "defensive_type")
+public class DefensiveType implements Serializable {
 
 		/**
 		 * Adelino
@@ -19,10 +20,10 @@ public @Entity class ChemicalType implements Serializable {
 		private static final long serialVersionUID = 1L;
 		
 
-		@Column(name = "\"idChemicalType\"")
-		@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"chemical_type_idChemicalType_seq\"")
-		@SequenceGenerator(name = "\"chemical_type_idChemicalType_seq\"", sequenceName = "\"chemical_type_idChemicalType_seq\"", allocationSize = 1)
-		private @Id Long id;
+		@Column(name = "\"idDefensiveType\"")
+		@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"defensive_type_idDefensiveType_seq\"")
+		@SequenceGenerator(name = "\"defensive_type_idDefensiveType_seq\"", sequenceName = "\"defensive_type_idDefensiveType_seq\"", allocationSize = 1)
+		private @Id Long idDefensiveType;
 		
 		@Column(name = "name", length = 120, nullable = false, unique = true)
 		private String name;
@@ -33,11 +34,11 @@ public @Entity class ChemicalType implements Serializable {
 		public void setName(String name) {
 			this.name = name;
 		}
-		public Long getId() {
-			return id;
+		public Long getIdDefensiveType() {
+			return idDefensiveType;
 		}
-		public void setId(Long id){
-			this.id = id;
+		public void setIdDefensiveType(Long id){
+			this.idDefensiveType = id;
 			
 		}
 }

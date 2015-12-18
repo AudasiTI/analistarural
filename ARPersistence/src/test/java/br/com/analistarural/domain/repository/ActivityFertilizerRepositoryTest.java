@@ -49,7 +49,7 @@ public class ActivityFertilizerRepositoryTest {
 
 		Optional<Activity> a = activityRepository.findById((long) 51);
 
-		Optional<Fertilizer> f = fertilizerRepository.findById((long) 40);
+		Optional<Fertilizer> f = fertilizerRepository.findByIdFertilizer((long) 40);
 
 		ActivityFertilizer af = new ActivityFertilizer();
 		af.setActivity(a.get());

@@ -13,38 +13,38 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
-import br.com.analistarural.domain.entity.product.ChemicalType;
-import br.com.analistarural.domain.repository.product.ChemicalTypeRepository;
+import br.com.analistarural.domain.entity.product.DefensiveType;
+import br.com.analistarural.domain.repository.product.DefensiveTypeRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { ApplicationConfig.class })
 @Transactional
-public class ChemicalTypeRepositoryTest {
+public class DefensiveTypeRepositoryTest {
 
 
 	@Autowired
-	private ChemicalTypeRepository chemicalTypeRepository;
+	private DefensiveTypeRepository defensiveTypeRepository;
 
 	@Autowired
 	@Test
 	public void connect() {
-		assertThat(chemicalTypeRepository, notNullValue());
+		assertThat(defensiveTypeRepository, notNullValue());
 	}
 	
 	@Test
 	@Transactional
 	@Rollback(false)
 	public void repositoryFlowTest() {
-		ChemicalType chemicalType1 = chemicalTypeRepository.save(createChemicalType());
-		ChemicalType chemicalType2 = chemicalTypeRepository.save(createChemicalType());
+		DefensiveType defensiveType1 = defensiveTypeRepository.save(createDefensiveType());
+		DefensiveType defensiveType2 = defensiveTypeRepository.save(createDefensiveType());
 
-		assertThat(chemicalTypeRepository.findById(chemicalType1.getId()).isPresent(), is(true));
-		assertThat(chemicalTypeRepository.findById(chemicalType2.getId()).isPresent(), is(true));
+		assertThat(defensiveTypeRepository.findByIdDefensiveType(defensiveType1.getIdDefensiveType()).isPresent(), is(true));
+		assertThat(defensiveTypeRepository.findByIdDefensiveType(defensiveType2.getIdDefensiveType()).isPresent(), is(true));
 	}
 	
 	
-	private ChemicalType createChemicalType() {
-		ChemicalType ct = new ChemicalType();
+	private DefensiveType createDefensiveType() {
+		DefensiveType ct = new DefensiveType();
 		ct.setName("Fungicida");
 		return ct;
 	}

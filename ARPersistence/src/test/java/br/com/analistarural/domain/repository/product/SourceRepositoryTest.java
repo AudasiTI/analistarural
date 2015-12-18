@@ -44,7 +44,7 @@ public class SourceRepositoryTest {
 	
 	private Source createSource() {
 		Source s = new Source();
-		s.setName("Fertilizantes");
+		s.setName("Frango");
 		return s;
 	}
 	
