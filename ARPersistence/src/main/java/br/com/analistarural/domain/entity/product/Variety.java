@@ -19,10 +19,10 @@ public class Variety implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name = "\"idVariety\"")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"variety_idVariety_seq\"")
-	@SequenceGenerator(name = "\"variety_idVariety_seq\"", sequenceName = "\"variety_idVariety_seq\"", allocationSize = 1)
-	private @Id Long id;
+	@Column(name = "id_variety")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "variety_id_variety_seq")
+	@SequenceGenerator(name = "variety_id_variety_seq", sequenceName = "variety_id_variety_seq", allocationSize = 1)
+	private @Id Long idVariety;
 	
 	@Column(name = "name", length = 120, nullable = false, unique = true)
 	private String name;
@@ -33,11 +33,11 @@ public class Variety implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Long getId() {
-		return id;
+	public Long getIdVariety() {
+		return idVariety;
 	}
-	public void setId(Long id){
-		this.id = id;
+	public void setIdVariety(Long idVariety){
+		this.idVariety = idVariety;
 		
 	}
 
