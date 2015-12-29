@@ -22,13 +22,13 @@ public class ProductFinished implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idProductFinished\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"product_finished_idProductFinished_seq\"")
-    @SequenceGenerator(name = "\"product_finished_idProductFinished_seq\"", sequenceName = "\"product_finished_idProductFinished_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_product_finished")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "product_finished_id_product_finished_seq")
+    @SequenceGenerator(name = "product_finished_id_product_finished_seq", sequenceName = "product_finished_id_product_finished_seq", allocationSize = 1, initialValue = 1)
 	@Id
-	private Long ididProductFinished;
+	private Long idProductFinished;
 	
-	@Column(name = "\"average_cost\"")
+	@Column(name = "average_cost")
 	private Double averageCost;
 	
 	@Column
@@ -41,7 +41,7 @@ public class ProductFinished implements Serializable{
 
 
 	public Long getIdidProductFinished() {
-		return ididProductFinished;
+		return idProductFinished;
 	}
 
 
@@ -60,8 +60,8 @@ public class ProductFinished implements Serializable{
 	}
 
 
-	public void setIdidProductFinished(Long ididProductFinished) {
-		this.ididProductFinished = ididProductFinished;
+	public void setIdProductFinished(Long idProductFinished) {
+		this.idProductFinished = idProductFinished;
 	}
 
 
@@ -78,7 +78,5 @@ public class ProductFinished implements Serializable{
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	
-	
 	
 }
