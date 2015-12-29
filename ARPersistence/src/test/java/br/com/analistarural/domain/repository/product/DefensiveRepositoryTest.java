@@ -2,9 +2,7 @@ package br.com.analistarural.domain.repository.product;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.*;
-
-import java.util.Optional;
-
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +10,14 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-
+import static org.hamcrest.CoreMatchers.is;
 import br.com.analistarural.domain.config.ApplicationConfig;
+import br.com.analistarural.domain.entity.product.ChemicalElement;
 import br.com.analistarural.domain.entity.product.Defensive;
 import br.com.analistarural.domain.entity.product.DefensiveType;
-import br.com.analistarural.domain.entity.product.ProductCategory;
-import br.com.analistarural.domain.entity.product.ProductType;
+import br.com.analistarural.domain.entity.product.Feedstock;
+
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,41 +26,45 @@ import br.com.analistarural.domain.entity.product.ProductType;
 public class DefensiveRepositoryTest {
 
 	@Autowired
-	private DefensiveRepository chemicalRepository;
+	private DefensiveRepository defensiveRepository;
 	
 	@Autowired
-	DefensiveTypeRepository chemicalTypeRepository;
+	DefensiveTypeRepository defensiveTypeRepository;
 	
-	@Autowired 
-	ProductCategoryRepository productCategoryRepository;
+	@Autowired
+	private FeedstockRepository feedstockRepository;
 	
-	@Autowired 
-	ProductTypeRepository productTypeRepository;
+	
+	@Autowired
+	private ChemicalElementRepository chemicalElementRepository;
+	
+	
 	
 	@Autowired
 	@Test
 	public void connect() {
-		assertThat(chemicalRepository, notNullValue());
+		assertThat(defensiveRepository, notNullValue());
 	}
 	
 	@Test
 	@Transactional
 	@Rollback(false)
 	public void repositoryFlowTest() {
-		Defensive defensive1 = chemicalRepository.save(createDefensive());
-		Defensive defensive2 = chemicalRepository.save(createDefensive());
-
-		//assertThat(chemicalRepository.findById(chemical1.getId()).isPresent(), is(true));
-		//assertThat(chemicalRepository.findById(chemical2.getId()).isPresent(), is(true));
+		Defensive defensive1 = defensiveRepository.save(createDefensive());
+		assertThat(defensiveRepository.findByIdDefensive(defensive1.getIdDefensive()).isPresent(), is(true));
 	}
 	
 	
 	private Defensive createDefensive(){
 
 		Defensive defensive = new Defensive();
-		java.util.List<DefensiveType> ct = (java.util.List<DefensiveType>) chemicalTypeRepository.findAll();
-		Optional<ProductType> pt = productTypeRepository.findById((long) 25);
-		Optional<ProductCategory> pc = productCategoryRepository.findById((long) 37);
+		java.util.List<DefensiveType> defensiveType = (java.util.List<DefensiveType>) defensiveTypeRepository.findAll();
+		List<Feedstock> feedstocks = (List<Feedstock>) feedstockRepository.findAll();
+		List<ChemicalElement> chemicalElements = (List<ChemicalElement>) chemicalElementRepository.findAll();
+		defensive.setRestrictUse(true);
+		defensive.setDefensiveType(defensiveType.get(0));
+		defensive.setFeedstock(feedstocks.get(0));
+		defensive.setChemicalElement(chemicalElements.get(0));
 		
 	
 		return defensive;

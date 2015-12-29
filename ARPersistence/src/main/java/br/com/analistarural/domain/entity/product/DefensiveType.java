@@ -20,9 +20,9 @@ public class DefensiveType implements Serializable {
 		private static final long serialVersionUID = 1L;
 		
 
-		@Column(name = "\"idDefensiveType\"")
-		@GeneratedValue(strategy = GenerationType.AUTO, generator = "\"defensive_type_idDefensiveType_seq\"")
-		@SequenceGenerator(name = "\"defensive_type_idDefensiveType_seq\"", sequenceName = "\"defensive_type_idDefensiveType_seq\"", allocationSize = 1)
+		@Column(name = "id_defensive_type")
+		@GeneratedValue(strategy = GenerationType.AUTO, generator = "defensive_type_id_defensive_type_seq")
+		@SequenceGenerator(name = "defensive_type_id_defensive_type_seq", sequenceName = "defensive_type_id_defensive_type_seq", allocationSize = 1)
 		private @Id Long idDefensiveType;
 		
 		@Column(name = "name", length = 120, nullable = false, unique = true)
