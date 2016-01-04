@@ -22,13 +22,13 @@ public class Consumption implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idConsumption\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"consumption_idconsumption_seq\"")
-    @SequenceGenerator(name = "\"consumption_idconsumption_seq\"", sequenceName = "\"consumption_idconsumption_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_consumption")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "consumption_id_consumption_seq")
+    @SequenceGenerator(name = "consumption_id_consumption_seq", sequenceName = "consumption_id_consumption_seq", allocationSize = 1, initialValue = 1)
 	@Id
 	private Long idConsumption;
 	
-	@Column(name = "\"unity_value\"")
+	@Column(name = "unity_value")
 	private Double unityValue;
 	
 	@Column
@@ -38,7 +38,7 @@ public class Consumption implements Serializable{
 	@JoinColumn(name = "\"idProduct\"", nullable = false)
 	private Product product;
 
-	public Long getId() {
+	public Long getIdConsumption() {
 		return idConsumption;
 	}
 
@@ -54,7 +54,7 @@ public class Consumption implements Serializable{
 		return product;
 	}
 
-	public void setId(Long id) {
+	public void setIdConsumption(Long id) {
 		this.idConsumption = id;
 	}
 
