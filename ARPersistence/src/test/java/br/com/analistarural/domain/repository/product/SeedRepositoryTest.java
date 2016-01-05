@@ -33,8 +33,6 @@ public class SeedRepositoryTest {
 	@Autowired 
 	FeedstockRepository feedstockRepository;
 	
-	@Autowired 
-	ProductTypeRepository productTypeRepository;
 	
 	@Autowired
 	@Test
