@@ -22,9 +22,9 @@ public class Assets implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idAssets\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"assets_idAssets_seq\"")
-    @SequenceGenerator(name = "\"assets_idAssets_seq\"", sequenceName = "\"assets_idAssets_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_assets")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "assets_id_assets_seq")
+    @SequenceGenerator(name = "assets_id_assets_seq", sequenceName = "assets_id_assets_seq", allocationSize = 1, initialValue = 1)
 	@Id
 	private Long idAssets;
 	
