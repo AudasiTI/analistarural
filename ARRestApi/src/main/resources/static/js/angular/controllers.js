@@ -1,11 +1,21 @@
-app.controller("importController",function($scope,$http){
-	var url = "files/reports.txt";
-	$http.get(url).success(function(response){
-		$scope.reports = response;
-	});
+'use strict';
 
-});
+angular.module('App').controller('PreviewController', function($scope, XLSXReaderService) {
+    $scope.showPreview = false;
 
-app.controller("reportsController",function($scope){
+    $scope.fileChanged = function(files) {
+        $scope.sheets = [];
+        $scope.excelFile = files[0];
+        XLSXReaderService.readFile($scope.excelFile, $scope.showPreview).then(function(xlsxData) {
+            $scope.sheets = xlsxData.sheets;
+        });
+    };
 
+    $scope.showPreviewChanged = function() {
+        if ($scope.showPreview) {
+            XLSXReaderService.readFile($scope.excelFile, $scope.showPreview).then(function(xlsxData) {
+                $scope.sheets = xlsxData.sheets;
+            });
+        };
+    };
 });

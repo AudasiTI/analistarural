@@ -22,9 +22,5 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
 	// CRUD method using Optional
 	@Query("select r from Report r where r.email=:email")
 	Iterable<Report> findByEmail(@Param("email") String email);
-	
-	
-	
-	
 
 }

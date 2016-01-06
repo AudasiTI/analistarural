@@ -27,7 +27,7 @@ public class ReportRepositoryTest {
 
 	@Autowired
 	private ElementTypeRepository elementTypeRepository;
-	
+
 	@Autowired
 	private ElementValueRepository elementValueRepository;
 
@@ -43,31 +43,29 @@ public class ReportRepositoryTest {
 		ElementValue element2 = new ElementValue();
 		ElementType elementType = new ElementType();
 		elementType = elementTypeRepository.findByDescription("phcacl2").get();
-		element1.setElementType(elementType);
-		element1.setValue( 5.09999990463257);
-		//element1.setReport(report);
-		//report.getElementValues().add(element1);
+		element1.setMeasuredValue(5.09999990463257);
+		// element1.setReport(report);
+		// report.getElementValues().add(element1);
 
 		elementType = elementTypeRepository.findByDescription("phh2o").get();
-		element2.setElementType(elementType);
-		element2.setValue(4.42000007629395);
-		//element2.setReport(report);
-		//report.getElementValues().add(element2);
-		
+		element2.setMeasuredValue(4.42000007629395);
+		// element2.setReport(report);
+		// report.getElementValues().add(element2);
+
 		return report;
 	}
 
-//	@Test
-//	@Transactional
-//	@Rollback(true)
-//	public void saveReportTest() {
-//
-//		Report r = reportRepository.save(createReport());
-//		assertThat(reportRepository.findById(r.getId()).isPresent(), is(true));
-//		
-//		//elementValueRepository.save(r.getElementValues());
-//		
-//	}
+	// @Test
+	// @Transactional
+	// @Rollback(true)
+	// public void saveReportTest() {
+	//
+	// Report r = reportRepository.save(createReport());
+	// assertThat(reportRepository.findById(r.getId()).isPresent(), is(true));
+	//
+	// //elementValueRepository.save(r.getElementValues());
+	//
+	// }
 
 	// private void readExcelFile() {
 	// try {

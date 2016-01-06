@@ -27,25 +27,43 @@ public @Entity class ElementValue implements Serializable {
 	@SequenceGenerator(name = "element_value_element_value_id_seq", sequenceName = "element_value_element_value_id_seq", allocationSize = 1)
 	private @Id Long id;
 
-	@Column(name = "lab", nullable = false, unique = true)
+	@Column(name = "lab", nullable = false, unique = false)
 	private Long lab;
 
-	@Column(name = "id", length = 30, nullable = false, unique = true)
-	private String ident;
+	@Column(name = "id", length = 30, nullable = false, unique = false)
+	private String customerElementIdent;
 
-	@ManyToOne(optional = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "element_type_id", referencedColumnName = "element_type_id", nullable = false)
-	private ElementType elementType;
+	// @ManyToOne(optional = true, fetch = FetchType.EAGER)
+	// @JoinColumn(name = "element_type_id", referencedColumnName =
+	// "element_type_id", nullable = false)
+	// private ElementType elementType;
 
 	@Column(name = "element_name")
 	private String elementName;
-	
-	
-	@Column(name = "default_value")
-	private Double defaultValue;
-	
-	@Column(name = "value")
-	private Double value;
+
+	@Column(name = "measured_value")
+	private Double measuredValue;
+
+	@Column(name = "very_low_value")
+	private Double veryLowValue;
+
+	@Column(name = "low_value")
+	private Double lowValue;
+
+	@Column(name = "moderate_value")
+	private Double moderateValue;
+
+	@Column(name = "good_value")
+	private Double goodValue;
+
+	@Column(name = "high_value")
+	private Double highValue;
+
+	@Column(name = "element_unit")
+	private String elementUnit;
+
+	@Column(name = "element_extractor")
+	private String elementExtractor;
 
 	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "report_id", referencedColumnName = "report_id", nullable = false)
@@ -67,28 +85,12 @@ public @Entity class ElementValue implements Serializable {
 		this.lab = lab;
 	}
 
-	public String getIdent() {
-		return ident;
+	public String getCustomerElementIdent() {
+		return customerElementIdent;
 	}
 
-	public void setIdent(String ident) {
-		this.ident = ident;
-	}
-
-	public ElementType getElementType() {
-		return elementType;
-	}
-
-	public void setElementType(ElementType elementType) {
-		this.elementType = elementType;
-	}
-
-	public Double getValue() {
-		return value;
-	}
-
-	public void setValue(Double value) {
-		this.value = value;
+	public void setCustomerElementIdent(String ident) {
+		this.customerElementIdent = ident;
 	}
 
 	public Report getReport() {
@@ -107,12 +109,68 @@ public @Entity class ElementValue implements Serializable {
 		this.elementName = elementName;
 	}
 
-	public Double getDefaultValue() {
-		return defaultValue;
+	public Double getMeasuredValue() {
+		return measuredValue;
 	}
 
-	public void setDefaultValue(Double defaultValue) {
-		this.defaultValue = defaultValue;
+	public void setMeasuredValue(Double measuredValue) {
+		this.measuredValue = measuredValue;
+	}
+
+	public Double getVeryLowValue() {
+		return veryLowValue;
+	}
+
+	public void setVeryLowValue(Double veryLowValue) {
+		this.veryLowValue = veryLowValue;
+	}
+
+	public Double getLowValue() {
+		return lowValue;
+	}
+
+	public void setLowValue(Double lowValue) {
+		this.lowValue = lowValue;
+	}
+
+	public Double getModerateValue() {
+		return moderateValue;
+	}
+
+	public void setModerateValue(Double moderateValue) {
+		this.moderateValue = moderateValue;
+	}
+
+	public Double getGoodValue() {
+		return goodValue;
+	}
+
+	public void setGoodValue(Double goodValue) {
+		this.goodValue = goodValue;
+	}
+
+	public Double getHighValue() {
+		return highValue;
+	}
+
+	public void setHighValue(Double highValue) {
+		this.highValue = highValue;
+	}
+
+	public String getElementUnit() {
+		return elementUnit;
+	}
+
+	public void setElementUnit(String elementUnit) {
+		this.elementUnit = elementUnit;
+	}
+
+	public String getElementExtractor() {
+		return elementExtractor;
+	}
+
+	public void setElementExtractor(String elementExtractor) {
+		this.elementExtractor = elementExtractor;
 	}
 
 }

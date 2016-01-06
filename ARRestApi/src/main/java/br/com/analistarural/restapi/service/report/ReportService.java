@@ -55,8 +55,6 @@ public class ReportService {
 			ElementValue elementValue = elementDTO.toElementValue(elementDTO);
 			ElementType elementType = elementTypeRepository.findByDescription(elementValue.getElementName()).get();
 			elementValue.setReport(report);
-			elementValue.setElementType(elementType);
-			elementValue.setDefaultValue(elementType.getDefaultValue());
 			elementValueRepository.save(elementValue);
 		}
 

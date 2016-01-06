@@ -1,13 +1,25 @@
-var app = angular.module("soilApp",["ngRoute"]);
+(function(undefined) {
+	// Get angular app
+	var app = angular.module("App");
 
-app.config(["$routeProvider", function($routeProvider){
-	$routeProvider.when("/importReports",{
-		templateUrl:'views/html/import.html',
-		controller:'importController'
-	}).when("/reports",{
-		templateUrl:'views/html/reports.html',
-		controller:'reportsController'
-	}).otherwise({
-		redirectTo:'/reports'
-	});
-}]);
+	app.factory("XLSXReaderService", [ '$q', '$rootScope',
+			function($q, $rootScope) {
+				var service = function(data) {
+					angular.extend(this, data);
+				};
+
+				service.readFile = function(file, showPreview) {
+					var deferred = $q.defer();
+
+					XLSXReader(file, showPreview, function(data) {
+						$rootScope.$apply(function() {
+							deferred.resolve(data);
+						});
+					});
+
+					return deferred.promise;
+				};
+
+				return service;
+			} ]);
+}).call(this);

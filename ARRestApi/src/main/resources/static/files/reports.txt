@@ -1,5 +1,0 @@
-[{"numReport":11222,"client":"Fazenda São Francisco","emailPrimary":"cliente1@gmail.com","emailSecundary":"cliente1ss@gmail.com"},
-{"numReport":11222,"client":"Fazenda São Francisco","emailPrimary":"cliente1@gmail.com","emailSecundary":"cliente1ss@gmail.com"},
-{"numReport":11222,"client":"Fazenda São Francisco","emailPrimary":"cliente1@gmail.com","emailSecundary":"cliente1ss@gmail.com"},
-{"numReport":11222,"client":"Fazenda São Francisco","emailPrimary":"cliente1@gmail.com","emailSecundary":"cliente1ss@gmail.com"},
-{"numReport":11222,"client":"Fazenda São Francisco","emailPrimary":"cliente1@gmail.com","emailSecundary":"cliente1ss@gmail.com"}]
