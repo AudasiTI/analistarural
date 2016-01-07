@@ -36,7 +36,7 @@ public class ProductFinished implements Serializable{
 	
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idProduct\"", nullable = false)
+	@JoinColumn(name = "id_product", nullable = false)
 	private Product product;
 
 

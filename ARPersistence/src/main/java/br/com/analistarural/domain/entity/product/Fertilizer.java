@@ -29,9 +29,9 @@ public class Fertilizer implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idFertilizer\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"fertilizer_idFertilizer_seq\"")
-    @SequenceGenerator(name = "\"fertilizer_idFertilizer_seq\"", sequenceName = "\"fertilizer_idFertilizer_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_fertilizer")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "fertilizer_id_fertilizer_seq")
+    @SequenceGenerator(name = "fertilizer_id_fertilizer_seq", sequenceName = "fertilizer_id_fertilizer_seq", allocationSize = 1, initialValue = 1)
 	@Id
 	private Long idFertilizer;
 	
@@ -43,15 +43,15 @@ public class Fertilizer implements Serializable{
 	private Type typeFertilizer;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idChemicalElement\"", nullable = false)
+	@JoinColumn(name = "id_chemical_element", nullable = false)
 	private ChemicalElement chemicalElement;	
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idSource\"", nullable = false)
+	@JoinColumn(name = "id_source", nullable = false)
 	private Source source;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idFeedstock\"", nullable = false)
+	@JoinColumn(name = "id_feedstock", nullable = false)
 	private Feedstock feedstock;
 
 	public Long getIdFertilizer() {

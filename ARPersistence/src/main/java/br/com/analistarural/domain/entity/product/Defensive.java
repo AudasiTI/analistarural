@@ -37,11 +37,11 @@ public class Defensive implements Serializable{
     private DefensiveType defensiveType;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idFeedstock\"", nullable = false)
+	@JoinColumn(name = "id_feedstock", nullable = false)
 	private Feedstock feedstock;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idChemicalElement\"", nullable = false)
+	@JoinColumn(name = "id_chemical_element", nullable = false)
 	private ChemicalElement chemicalElement;
 	
 

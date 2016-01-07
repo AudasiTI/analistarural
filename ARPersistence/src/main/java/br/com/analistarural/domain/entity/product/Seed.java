@@ -34,7 +34,7 @@ public class Seed implements Serializable{
 	private Variety variety;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idFeedstock\"", nullable = false)
+	@JoinColumn(name = "id_feedstock", nullable = false)
 	private Feedstock feedstock;
 
 	public Variety getVariety() {

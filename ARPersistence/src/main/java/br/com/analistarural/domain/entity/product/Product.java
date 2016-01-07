@@ -27,9 +27,9 @@ public class Product implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 
-	@Column(name = "\"idProduct\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"product_idProduct_seq\"")
-    @SequenceGenerator(name = "\"product_idProduct_seq\"", sequenceName = "\"product_idProduct_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_product")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "product_id_product_seq")
+    @SequenceGenerator(name = "product_id_product_seq", sequenceName = "product_id_product_seq", allocationSize = 1, initialValue = 1)
 	@Id
 	private Long idProduct;
 
@@ -41,7 +41,7 @@ public class Product implements Serializable{
 
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idMeasurement\"", nullable = false)
+	@JoinColumn(name = "id_measurement", nullable = false)
 	private Measurement measurement;
 
 

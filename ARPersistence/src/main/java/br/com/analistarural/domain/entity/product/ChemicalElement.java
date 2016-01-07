@@ -22,9 +22,9 @@ public class ChemicalElement implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idChemicalElement\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"chemical_element_idChemicalElement_seq\"")
-    @SequenceGenerator(name = "\"chemical_element_idChemicalElement_seq\"", sequenceName = "\"chemical_element_idChemicalElement_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_chemical_element")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "chemical_element_id_chemical_element_seq")
+    @SequenceGenerator(name = "chemical_element_id_chemical_element_seq", sequenceName = "chemical_element_id_chemical_element_seq", allocationSize = 1, initialValue = 1)
 	@Id
 	private Long idChemicalElement;
 	

@@ -22,9 +22,9 @@ public class Feedstock implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idFeedstock\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"feedstock_idFeedstock_seq\"")
-    @SequenceGenerator(name = "\"feedstock_idFeedstock_seq\"", sequenceName = "\"feedstock_idFeedstock_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_feedstock")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "feedstock_id_feedstock_seq")
+    @SequenceGenerator(name = "feedstock_id_feedstock_seq", sequenceName = "feedstock_id_feedstock_seq", allocationSize = 1, initialValue = 1)
 	@Id
 	private Long idFeedstock;
 	
@@ -37,14 +37,14 @@ public class Feedstock implements Serializable{
 	@Column
 	private Double cost;
 	
-	@Column(name = "\"averageCost\"")
+	@Column(name = "average_cost")
 	private Double averageCost;
 	
 	@Column
 	private Double quantity;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idProduct\"", nullable = false)
+	@JoinColumn(name = "id_product", nullable = false)
 	private Product product;
 
 	public Long getIdFeedstock() {

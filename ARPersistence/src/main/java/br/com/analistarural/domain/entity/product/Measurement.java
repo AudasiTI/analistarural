@@ -19,9 +19,9 @@ public class Measurement implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "\"idMeasurement\"")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "\"measurement_idMeasurement_seq\"")
-    @SequenceGenerator(name = "\"measurement_idMeasurement_seq\"", sequenceName = "\"measurement_idMeasurement_seq\"", allocationSize = 1, initialValue = 1)
+	@Column(name = "id_measurement")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "measurement_id_measurement_seq")
+    @SequenceGenerator(name = "measurement_id_measurement_seq", sequenceName = "measurement_id_measurement_seq", allocationSize = 1, initialValue = 1)
 	@Id
 	private Long idMeasurement;
 

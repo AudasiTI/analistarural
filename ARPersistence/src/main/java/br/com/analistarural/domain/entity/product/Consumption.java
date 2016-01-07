@@ -35,7 +35,7 @@ public class Consumption implements Serializable{
 	private Double quantity;
 		
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "\"idProduct\"", nullable = false)
+	@JoinColumn(name = "id_product", nullable = false)
 	private Product product;
 
 	public Long getIdConsumption() {
