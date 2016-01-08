@@ -1,6 +1,6 @@
 (function(undefined) {
 	// Get angular app
-	var app = angular.module("App");
+	var app = angular.module("infoSoilAdmin");
 
 	app.factory("XLSXReaderService", [ '$q', '$rootScope',
 			function($q, $rootScope) {
@@ -8,17 +8,17 @@
 					angular.extend(this, data);
 				};
 
-				service.readFile = function(file, showPreview) {
+				service.readFile = function(file, readCells, toJSON) {
 					var deferred = $q.defer();
 
-					XLSXReader(file, showPreview, function(data) {
+					XLSXReader(file, readCells, toJSON, function(data) {
 						$rootScope.$apply(function() {
 							deferred.resolve(data);
 						});
 					});
 
 					return deferred.promise;
-				};
+				}
 
 				return service;
 			} ]);
