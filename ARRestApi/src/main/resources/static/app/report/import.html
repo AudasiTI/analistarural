@@ -2,14 +2,15 @@
 <div>
 	<div class="row">
 		<fieldset>
-			<legend>Importar Laudos</legend>
+			<legend>Importação de Laudos</legend>
 			<form>
 				<div class="row">
 					<div class="large-12 columns">
 						<div class="row collapse">
 							<div class="small-10 columns">
-								<input type="file" name="excel_file" accept=".xlsx, .xls"
-									onchange="angular.element(this).scope().showPreviewChanged(this.files);"
+								<input type="file" name="excel_file" multiple
+									accept=".xlsx, .xls"
+									onchange="angular.element(this).scope().showPreviewChanged2(this.files);"
 									required="true">
 							</div>
 						</div>
@@ -21,9 +22,6 @@
 		</fieldset>
 	</div>
 
-	<div ng-show="isProcessing">
-		<span>Processing ...</span>
-	</div>
 
 	<!-- 		<div class='form-group'> -->
 	<!-- 			<label for='sheet_name'>Sheet Name</label> <select id="sheet_name" -->
@@ -37,9 +35,10 @@
 	<!-- 		<input type="hidden" name="sheet_name" value="{{ selectedSheetName }}"> -->
 	<!-- 		<input type="submit" value="Submit"> -->
 
+
 	<div class="row">
 		<fieldset>
-			<legend>Laudos</legend>
+			<legend>Lista de Laudos</legend>
 			<div class="medium-12 colunms">
 				<table class="table table-bordered">
 					<thead>
@@ -47,8 +46,9 @@
 							<th ng-repeat="col in colunas track by $index" ng-bind="col"></th>
 						</tr>
 					</thead>
-					<tr>
-						<td ng-repeat="row in laudo track by $index" ng-bind="row"></td>
+					<tr ng-repeat="indice in listaLaudos track by $index">
+						<td ng-repeat="col in indice track by $index" ng-bind="col"></td>
+						<!-- 						<td><input type="checkbox" name="importar" value="Importar"></td> -->
 					</tr>
 				</table>
 			</div>
