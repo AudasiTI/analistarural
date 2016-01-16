@@ -1,0 +1,71 @@
+<h2>Unidade de medida</h2>
+<div ng-init="loadRow()">
+	<form name="form" class="form-horizontal" ng-show="row!=null">
+		<div class="control-group">
+			<label class="control-label">ID: </label>
+			<div class="controls">
+				<input name="idMeasurement" type="text" ng-model="row.idMeasurement"
+					class="input-small" input-desable = "true" /> <!-- <span
+<!-- 					class="help-inline text-error"  ng-disabled="row.idMeasurement"-->
+<!-- 					ng-show="form.idMeasurement.$dirty && form.idMeasurement.$invalid">Campo -->
+<!-- 					obrigatório</span> -->
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Nome:</label>
+			<div class="controls">
+				<input name="name" required type="text" ng-model="row.name"
+					class="input-xxlarge" /> <span class="help-inline text-error"
+					ng-show="form.name.$dirty && form.name.$invalid">Campo
+					obrigatório</span>
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label">Abreviacao:</label>
+			<div class="controls">
+				<input type="text" ng-model="row.abbreviation" />
+			</div>
+		</div>
+		<!--         <div class="control-group"> -->
+		<!--             <label class="control-label">Email:</label> -->
+		<!--             <div class="controls"> -->
+		<!--                 <input name="Email" type="email" ng-model="row.Email" required/> -->
+		<!--                 <span class="help-inline text-error" ng-show="form.Email.$dirty && form.Email.$invalid"> -->
+		<!--                         <span ng-show="form.Email.$error.required">Campo obrigatório</span> -->
+		<!--                 <span ng-show="form.Email.$error.email">Email inválido</span> -->
+		<!--                 </span> -->
+		<!--             </div> -->
+		<!--         </div> -->
+		<!--         <div class="control-group"> -->
+		<!--             <label class="control-label">Url:</label> -->
+		<!--             <div class="controls"> -->
+		<!--                 <input name="Url" type="url" ng-model="row.Url" ng-pattern="/https?://.+/" /> -->
+		<!--                 <span class="help-inline text-error" ng-show="form.Url.$dirty && form.Url.$invalid"> -->
+		<!--                         <span>Url inválida</span> -->
+		<!--                 </span> -->
+		<!--             </div> -->
+		<!--         </div> -->
+		<!--         <div class="control-group"> -->
+		<!--             <label class="control-label">Data simples:</label> -->
+		<!--             <div class="controls"> -->
+		<!--                 <input name="DataSimples" ng-model="row.DataSimples" type="text" ng-pattern="/\d{1,2}/\d{1,2}/\d{4}/" /> -->
+		<!--                 <span class="help-inline text-error" ng-show="form.DataSimples.$dirty && form.DataSimples.$invalid"> -->
+		<!--                         <span>Data inválida</span> -->
+		<!--                 </span> -->
+		<!--             </div> -->
+		<!--         </div> -->
+</div>
+</div>
+
+<div class="form-actions">
+	<button type="submit" class="btn btn-primary" ng-click="save()"
+		ng-Disabled="form.$invalid">Salvar</button>
+	<a href="#/measurements" class="btn">Voltar</a>
+</div>
+
+</form>
+<button class="btn btn-danger pull-right" ng-click="del()">Apagar</button>
+</div>
+<div>
+	{{row}}
+</div>

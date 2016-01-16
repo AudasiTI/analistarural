@@ -1,9 +1,14 @@
 package br.com.analistarural.restapi.service.product;
 
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.analistarural.domain.entity.account.SystemAccount;
+import br.com.analistarural.domain.entity.field.Farm;
 import br.com.analistarural.domain.entity.product.Measurement;
 import br.com.analistarural.domain.repository.product.MeasurementRepository;
 
@@ -25,6 +30,10 @@ public class MeasurementService {
 	
 	public void delete(Long id){
 		measurementRepository.delete(id);
+	}
+	
+	public Optional<Measurement> findByIdMeasurement(Long idMeasurement) {
+		return measurementRepository.findByIdMeasurement(idMeasurement);
 	}
 
 }
