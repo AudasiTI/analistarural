@@ -1,86 +1,29 @@
 (function() {
-    'use strict';
 
-    angular
-        .module('infoSoilAdmin', ['ngResource'])
-        .factory('reportservice', reportservice);
+	var injectParams = [ '$http', '$q' ];
 
-    /* @ngInject */
-    function reportservice($resource, $location, $q, exception, logger) {
+	var reportFactory = function($http, $q) {
 
-        var service = {
-            getAvengersCast: getAvengersCast,
-            getAvengerCount: getAvengerCount,
-            getReports: getAvengers,
-            ready: ready
-        };
+		var serviceBase = '/api/reports/', factory = {};
 
-        return service;
+		factory.getReports = function(email) {
+			return $http.get(serviceBase + email).then(function(results) {
+				return results.data;
+			});
+		};
 
-        function getReports() {
-            return $http.get('/api/reports')
-                .then(getAvengersComplete)
-                .catch(function(message) {
-                    exception.catcher('XHR Failed for getAvengers')(message);
-                    $location.url('/');
-                });
+		factory.insertReport = function(file) {
+			return $http.post('/api/relatorio/', file).then(function(results) {
+				// report.id = results.data.id;
+				return results.data;
+			});
+		};
 
-            function getAvengersComplete(data, status, headers, config) {
-                return data.data[0].data.results;
-            }
-        }
+		return factory;
+	};
 
-        function getAvengerCount() {
-            var count = 0;
-            return getAvengersCast()
-                .then(getAvengersCastComplete)
-                .catch(exception.catcher('XHR Failed for getAvengerCount'));
+	reportFactory.$inject = injectParams;
 
-            function getAvengersCastComplete (data) {
-                count = data.length;
-                return $q.when(count);
-            }
-        }
+	angular.module('infoSoilAdmin').factory('reportService', reportFactory);
 
-        function getAvengersCast() {
-            var cast = [
-                {name: 'Robert Downey Jr.', character: 'Tony Stark / Iron Man'},
-                {name: 'Chris Hemsworth', character: 'Thor'},
-                {name: 'Chris Evans', character: 'Steve Rogers / Captain America'},
-                {name: 'Mark Ruffalo', character: 'Bruce Banner / The Hulk'},
-                {name: 'Scarlett Johansson', character: 'Natasha Romanoff / Black Widow'},
-                {name: 'Jeremy Renner', character: 'Clint Barton / Hawkeye'},
-                {name: 'Gwyneth Paltrow', character: 'Pepper Potts'},
-                {name: 'Samuel L. Jackson', character: 'Nick Fury'},
-                {name: 'Paul Bettany', character: 'Jarvis'},
-                {name: 'Tom Hiddleston', character: 'Loki'},
-                {name: 'Clark Gregg', character: 'Agent Phil Coulson'}
-            ];
-            return $q.when(cast);
-        }
-
-        function prime() {
-            // This function can only be called once.
-            if (primePromise) {
-                return primePromise;
-            }
-
-            primePromise = $q.when(true).then(success);
-            return primePromise;
-
-            function success() {
-                isPrimed = true;
-                logger.info('Primed data');
-            }
-        }
-
-        function ready(nextPromises) {
-            var readyPromise = primePromise || prime();
-
-            return readyPromise
-                .then(function() { return $q.all(nextPromises); })
-                .catch(exception.catcher('"ready" function failed'));
-        }
-
-    }
-})();
+}());

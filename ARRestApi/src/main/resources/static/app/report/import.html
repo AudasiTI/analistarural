@@ -22,20 +22,6 @@
 		</fieldset>
 	</div>
 
-
-	<!-- 		<div class='form-group'> -->
-	<!-- 			<label for='sheet_name'>Sheet Name</label> <select id="sheet_name" -->
-	<!-- 				class="form-control" ng-change="updateJSONString();" -->
-	<!-- 				ng-model="selectedSheetName" required="true" ng-required="true" -->
-	<!-- 				ng-options="sheetName as sheetName for (sheetName, sheetData) in sheets"> -->
-	<!-- 				<option value="">---- Select a sheet ----</option> -->
-	<!-- 			</select> -->
-	<!-- 		</div> -->
-
-	<!-- 		<input type="hidden" name="sheet_name" value="{{ selectedSheetName }}"> -->
-	<!-- 		<input type="submit" value="Submit"> -->
-
-
 	<div class="row">
 		<fieldset>
 			<legend>Lista de Laudos</legend>
@@ -48,7 +34,7 @@
 					</thead>
 					<tr ng-repeat="indice in listaLaudos track by $index">
 						<td ng-repeat="col in indice track by $index" ng-bind="col"></td>
-						<!-- 						<td><input type="checkbox" name="importar" value="Importar"></td> -->
+						<td><input type="checkbox" name="importar" value="Importar"></td>
 					</tr>
 				</table>
 			</div>
@@ -64,19 +50,9 @@
 			</div>
 		</fieldset>
 	</div>
+	<div>
+		<h4>{{vm.resultado}}</h4>
+	</div>
 
 
-	<!-- 		<div ng-show="showPreview"> -->
-	<!-- 			<table class="table table-bordered" -->
-	<!-- 				ng-repeat="(sheetName, sheetData) in sheets track by $index"> -->
-	<!-- 				<thead> -->
-	<!-- 					<tr> -->
-	<!-- 						<th ng-bind="sheetName"></th> -->
-	<!-- 					</tr> -->
-	<!-- 				</thead> -->
-	<!-- 				<tr ng-repeat="row in sheetData.data track by $index"> -->
-	<!-- 					<td ng-repeat="col in row track by $index" ng-bind="col"></td> -->
-	<!-- 				</tr> -->
-	<!-- 			</table> -->
-	<!-- 		</div> -->
 </div>

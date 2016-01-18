@@ -19,7 +19,7 @@ public interface ElementValueRepository extends CrudRepository<ElementValue, Lon
 	// CRUD method using Optional
 	Optional<ElementValue> findById(Long id);
 
-	@Query("select e from ElementValue e join e.report r where r.id = :report_id")
-	Iterable<ElementValue> findByReport(@Param("report_id") Long report_id);
+	@Query("select e from ElementValue e join e.sample s where s.id = :sample_id")
+	Iterable<ElementValue> findBySample(@Param("sample_id") Long sample_id);
 
 }

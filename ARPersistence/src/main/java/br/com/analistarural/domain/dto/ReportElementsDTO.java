@@ -5,6 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.analistarural.domain.entity.report.ElementValue;
+import br.com.analistarural.domain.entity.report.SoilSampleResult;
 
 public class ReportElementsDTO implements Serializable {
 
@@ -13,7 +14,7 @@ public class ReportElementsDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String customerElementIdent;
+	private Long id;
 
 	private String elementName;
 
@@ -31,8 +32,10 @@ public class ReportElementsDTO implements Serializable {
 
 	private String elementExtractor;
 
+	private Long SampleID;
+
 	@JsonFormat(shape = JsonFormat.Shape.NUMBER_FLOAT)
-	private Double measuredValue;
+	private String measuredValue;
 
 	public ReportElementsDTO() {
 	}
@@ -50,13 +53,13 @@ public class ReportElementsDTO implements Serializable {
 
 	public ElementValue toElementValue(ReportElementsDTO reportElementsDTO) {
 
-		ElementValue elementValue = new ElementValue();
+		ElementValue elementValue = new ElementValue(reportElementsDTO.getSampleID());
+
 		elementValue.setElementName(reportElementsDTO.getElementName());
 		elementValue.setElementExtractor(reportElementsDTO.getElementExtractor());
 		elementValue.setElementUnit(reportElementsDTO.getElementUnit());
 		elementValue.setGoodValue(reportElementsDTO.getGoodValue());
 		elementValue.setHighValue(reportElementsDTO.getHighVlue());
-		elementValue.setCustomerElementIdent(reportElementsDTO.getCustomerElementIdent());
 		elementValue.setElementUnit(reportElementsDTO.getElementUnit());
 		elementValue.setGoodValue(reportElementsDTO.getGoodValue());
 		elementValue.setHighValue(reportElementsDTO.getHighVlue());
@@ -67,14 +70,6 @@ public class ReportElementsDTO implements Serializable {
 
 		return elementValue;
 
-	}
-
-	public String getCustomerElementIdent() {
-		return customerElementIdent;
-	}
-
-	public void setCustomerElementIdent(String elementID) {
-		this.customerElementIdent = elementID;
 	}
 
 	public Double getVeryLowValue() {
@@ -133,12 +128,28 @@ public class ReportElementsDTO implements Serializable {
 		this.elementExtractor = elementExtractor;
 	}
 
-	public Double getMeasuredValue() {
+	public String getMeasuredValue() {
 		return measuredValue;
 	}
 
-	public void setMeasuredValue(Double measuredValue) {
+	public void setMeasuredValue(String measuredValue) {
 		this.measuredValue = measuredValue;
+	}
+
+	public Long getSampleID() {
+		return SampleID;
+	}
+
+	public void setSampleID(Long sampleID) {
+		SampleID = sampleID;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }

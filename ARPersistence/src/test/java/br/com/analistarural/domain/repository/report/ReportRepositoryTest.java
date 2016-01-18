@@ -43,12 +43,12 @@ public class ReportRepositoryTest {
 		ElementValue element2 = new ElementValue();
 		ElementType elementType = new ElementType();
 		elementType = elementTypeRepository.findByDescription("phcacl2").get();
-		element1.setMeasuredValue(5.09999990463257);
+		element1.setMeasuredValue("5.09999990463257");
 		// element1.setReport(report);
 		// report.getElementValues().add(element1);
 
 		elementType = elementTypeRepository.findByDescription("phh2o").get();
-		element2.setMeasuredValue(4.42000007629395);
+		element2.setMeasuredValue("4.42000007629395");
 		// element2.setReport(report);
 		// report.getElementValues().add(element2);
 

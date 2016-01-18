@@ -1,8 +1,9 @@
 package br.com.analistarural.domain.entity.report;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -44,8 +45,12 @@ public @Entity class Report implements Serializable {
 	@Column(name = "customer_cpf", length = 120, nullable = false, unique = false)
 	private String customerCpf;
 
+	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =
+	// "report")
+	// private Set<ElementValue> elementValues = new HashSet<ElementValue>(0);
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "report")
-	private Set<ElementValue> elementValues = new HashSet<ElementValue>(0);
+	private List<SoilSampleResult> soilSampleResults = new ArrayList<SoilSampleResult>(0);
 
 	public Report() {
 	}
@@ -109,6 +114,14 @@ public @Entity class Report implements Serializable {
 
 	public void setCustomerCpf(String customerCpf) {
 		this.customerCpf = customerCpf;
+	}
+
+	public List<SoilSampleResult> getSoilSampleResults() {
+		return soilSampleResults;
+	}
+
+	public void setSoilSampleResults(List<SoilSampleResult> soilSampleResults) {
+		this.soilSampleResults = soilSampleResults;
 	}
 
 	// public Set<ElementValue> getElementValues() {

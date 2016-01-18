@@ -3,16 +3,20 @@ package br.com.analistarural.domain.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import br.com.analistarural.domain.entity.report.ElementValue;
 import br.com.analistarural.domain.entity.report.Report;
+import br.com.analistarural.domain.entity.report.SoilSampleResult;
 
 public class ReportDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
+	private String code;
 
 	private String email;
 
@@ -26,7 +30,11 @@ public class ReportDTO implements Serializable {
 
 	private String customerCPF;
 
-	private List<ReportElementsDTO> elements = new ArrayList<ReportElementsDTO>();
+	private String city;
+
+	private String farm;
+
+	private List<SampleDTO> samples = new ArrayList<SampleDTO>();
 
 	public String getEmail() {
 		return email;
@@ -34,14 +42,6 @@ public class ReportDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public List<ReportElementsDTO> getElements() {
-		return elements;
-	}
-
-	public void setElements(List<ReportElementsDTO> elements) {
-		this.elements = elements;
 	}
 
 	public Long getId() {
@@ -55,7 +55,7 @@ public class ReportDTO implements Serializable {
 	public ReportDTO() {
 	}
 
-	public ReportDTO(Report report, Iterable<ElementValue> elements) {
+	public ReportDTO(Report report) {
 
 		setEmail(report.getEmail());
 		setId(report.getId());
@@ -65,9 +65,8 @@ public class ReportDTO implements Serializable {
 		setSecondaryEmail(report.getSecondaryEmail());
 		setSoilReport(report.getReportSoil());
 
-		for (ElementValue elementValue : elements) {
-			ReportElementsDTO elementDTO = new ReportElementsDTO(elementValue);
-			getElements().add(elementDTO);
+		for (SoilSampleResult iterator : report.getSoilSampleResults()) {
+			getSamples().add(new SampleDTO(iterator));
 
 		}
 	}
@@ -125,6 +124,38 @@ public class ReportDTO implements Serializable {
 
 	public void setCustomerCPF(String customerCPF) {
 		this.customerCPF = customerCPF;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getFarm() {
+		return farm;
+	}
+
+	public void setFarm(String farm) {
+		this.farm = farm;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public List<SampleDTO> getSamples() {
+		return samples;
+	}
+
+	public void setSamples(List<SampleDTO> samples) {
+		this.samples = samples;
 	}
 
 }

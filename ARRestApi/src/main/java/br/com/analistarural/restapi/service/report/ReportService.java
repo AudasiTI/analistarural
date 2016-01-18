@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.dto.ReportDTO;
 import br.com.analistarural.domain.dto.ReportElementsDTO;
-import br.com.analistarural.domain.entity.report.ElementType;
-import br.com.analistarural.domain.entity.report.ElementValue;
+import br.com.analistarural.domain.dto.SampleDTO;
 import br.com.analistarural.domain.entity.report.Report;
-import br.com.analistarural.domain.repository.report.ElementTypeRepository;
+import br.com.analistarural.domain.entity.report.SoilSampleResult;
 import br.com.analistarural.domain.repository.report.ElementValueRepository;
 import br.com.analistarural.domain.repository.report.ReportRepository;
+import br.com.analistarural.domain.repository.report.SoilSampleResultRepository;
 
 @Service
 @Transactional
@@ -24,10 +24,10 @@ public class ReportService {
 	private ReportRepository reportRepository;
 
 	@Autowired
-	private ElementValueRepository elementValueRepository;
+	private SoilSampleResultRepository soilSampleResultRepository;
 
 	@Autowired
-	private ElementTypeRepository elementTypeRepository;
+	private ElementValueRepository elementValueRepository;
 
 	public Iterable<Report> findAll() {
 		return reportRepository.findAll();
@@ -40,7 +40,7 @@ public class ReportService {
 		Iterable<Report> report = reportRepository.findByEmail(email);
 
 		for (Report report2 : report) {
-			reportDTOList.add(new ReportDTO(report2, elementValueRepository.findByReport(report2.getId())));
+			reportDTOList.add(new ReportDTO(report2));
 		}
 		return reportDTOList;
 	}
@@ -50,14 +50,16 @@ public class ReportService {
 
 		Report report = reportRepository.save(reportDTO.toReport(reportDTO));
 
-		for (ReportElementsDTO elementDTO : reportDTO.getElements()) {
+		for (SampleDTO iterator : reportDTO.getSamples()) {
+			iterator.setReportID(report.getId());
 
-			ElementValue elementValue = elementDTO.toElementValue(elementDTO);
-			ElementType elementType = elementTypeRepository.findByDescription(elementValue.getElementName()).get();
-			elementValue.setReport(report);
-			elementValueRepository.save(elementValue);
+			SoilSampleResult sample = soilSampleResultRepository.save(iterator.toSample(iterator));
+
+			for (ReportElementsDTO elements : iterator.getElements()) {
+				elements.setSampleID(sample.getId());
+				elementValueRepository.save(elements.toElementValue(elements));
+			}
 		}
-
 	}
 
 	@Transactional(readOnly = false)

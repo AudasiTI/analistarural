@@ -27,12 +27,6 @@ public @Entity class ElementValue implements Serializable {
 	@SequenceGenerator(name = "element_value_element_value_id_seq", sequenceName = "element_value_element_value_id_seq", allocationSize = 1)
 	private @Id Long id;
 
-	@Column(name = "lab", nullable = false, unique = false)
-	private Long lab;
-
-	@Column(name = "id", length = 30, nullable = false, unique = false)
-	private String customerElementIdent;
-
 	// @ManyToOne(optional = true, fetch = FetchType.EAGER)
 	// @JoinColumn(name = "element_type_id", referencedColumnName =
 	// "element_type_id", nullable = false)
@@ -42,7 +36,7 @@ public @Entity class ElementValue implements Serializable {
 	private String elementName;
 
 	@Column(name = "measured_value")
-	private Double measuredValue;
+	private String measuredValue;
 
 	@Column(name = "very_low_value")
 	private Double veryLowValue;
@@ -65,9 +59,9 @@ public @Entity class ElementValue implements Serializable {
 	@Column(name = "element_extractor")
 	private String elementExtractor;
 
-	@ManyToOne(optional = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "report_id", referencedColumnName = "report_id", nullable = false)
-	private Report report;
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "soil_sample_result_id", referencedColumnName = "soil_sample_result_id", nullable = false)
+	private SoilSampleResult sample;
 
 	public Long getId() {
 		return id;
@@ -75,30 +69,6 @@ public @Entity class ElementValue implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getLab() {
-		return lab;
-	}
-
-	public void setLab(Long lab) {
-		this.lab = lab;
-	}
-
-	public String getCustomerElementIdent() {
-		return customerElementIdent;
-	}
-
-	public void setCustomerElementIdent(String ident) {
-		this.customerElementIdent = ident;
-	}
-
-	public Report getReport() {
-		return report;
-	}
-
-	public void setReport(Report report) {
-		this.report = report;
 	}
 
 	public String getElementName() {
@@ -109,11 +79,11 @@ public @Entity class ElementValue implements Serializable {
 		this.elementName = elementName;
 	}
 
-	public Double getMeasuredValue() {
+	public String getMeasuredValue() {
 		return measuredValue;
 	}
 
-	public void setMeasuredValue(Double measuredValue) {
+	public void setMeasuredValue(String measuredValue) {
 		this.measuredValue = measuredValue;
 	}
 
@@ -171,6 +141,23 @@ public @Entity class ElementValue implements Serializable {
 
 	public void setElementExtractor(String elementExtractor) {
 		this.elementExtractor = elementExtractor;
+	}
+
+	public SoilSampleResult getSample() {
+		return sample;
+	}
+
+	public void setSample(SoilSampleResult sample) {
+		this.sample = sample;
+	}
+	
+	public ElementValue(Long sampleID){
+		sample = new SoilSampleResult();
+		sample.setId(sampleID);
+	}
+
+	public ElementValue() {
+		// TODO Auto-generated constructor stub
 	}
 
 }
