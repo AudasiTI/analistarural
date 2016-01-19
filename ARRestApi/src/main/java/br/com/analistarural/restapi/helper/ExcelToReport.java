@@ -23,7 +23,6 @@ public final class ExcelToReport {
 		// e.printStackTrace();
 		// }
 
-
 		if (file[4][7].contentEquals("Q,(Pres)(-MI)")) {
 
 			report.setCode(file[4][8]);
@@ -60,19 +59,17 @@ public final class ExcelToReport {
 			for (int row = 6; row < file.length; row++) {
 
 				SampleDTO sample = new SampleDTO();
-				sample.setCrop(file[3][1]);
-				sample.setCustomerElementIdent(file[3][1]);
-				sample.setField(file[3][1]);
-				sample.setTipoAnalise(file[3][1]);
-
-				report.getSamples().add(sample);
+				sample.setCrop(file[row][4]);
+				sample.setCustomerElementIdent(file[row][1]);
+				sample.setTipoAnalise(file[row][5]);
 
 				for (int col = 7; col < 20; col++) {
 					ReportElementsDTO elements = new ReportElementsDTO();
 					elements.setElementName(file[5][col]);
 					elements.setMeasuredValue(file[row][col]);
-
+					sample.getElements().add(elements);
 				}
+				report.getSamples().add(sample);
 			}
 		}
 

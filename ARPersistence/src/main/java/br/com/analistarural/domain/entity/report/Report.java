@@ -13,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -51,6 +53,10 @@ public @Entity class Report implements Serializable {
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "report")
 	private List<SoilSampleResult> soilSampleResults = new ArrayList<SoilSampleResult>(0);
+
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "element_table_params_id", referencedColumnName = "element_table_params_id", nullable = false)
+	private ElementTableParams params;
 
 	public Report() {
 	}
@@ -122,6 +128,14 @@ public @Entity class Report implements Serializable {
 
 	public void setSoilSampleResults(List<SoilSampleResult> soilSampleResults) {
 		this.soilSampleResults = soilSampleResults;
+	}
+
+	public ElementTableParams getParams() {
+		return params;
+	}
+
+	public void setParams(ElementTableParams params) {
+		this.params = params;
 	}
 
 	// public Set<ElementValue> getElementValues() {

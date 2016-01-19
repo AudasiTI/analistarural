@@ -15,7 +15,7 @@
 						$scope.showPreview = true;
 						$scope.showJSONPreview = false;
 						$scope.json_string = "";
-						$scope.selectedSheetName = "Planilha1";
+						$scope.selectedSheetName = "Resultados Folha";
 						$scope.colunas = "";
 
 						$scope.listaLaudos = [];

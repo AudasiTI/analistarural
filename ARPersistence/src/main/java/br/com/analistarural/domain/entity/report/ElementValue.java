@@ -38,21 +38,6 @@ public @Entity class ElementValue implements Serializable {
 	@Column(name = "measured_value")
 	private String measuredValue;
 
-	@Column(name = "very_low_value")
-	private Double veryLowValue;
-
-	@Column(name = "low_value")
-	private Double lowValue;
-
-	@Column(name = "moderate_value")
-	private Double moderateValue;
-
-	@Column(name = "good_value")
-	private Double goodValue;
-
-	@Column(name = "high_value")
-	private Double highValue;
-
 	@Column(name = "element_unit")
 	private String elementUnit;
 
@@ -87,46 +72,6 @@ public @Entity class ElementValue implements Serializable {
 		this.measuredValue = measuredValue;
 	}
 
-	public Double getVeryLowValue() {
-		return veryLowValue;
-	}
-
-	public void setVeryLowValue(Double veryLowValue) {
-		this.veryLowValue = veryLowValue;
-	}
-
-	public Double getLowValue() {
-		return lowValue;
-	}
-
-	public void setLowValue(Double lowValue) {
-		this.lowValue = lowValue;
-	}
-
-	public Double getModerateValue() {
-		return moderateValue;
-	}
-
-	public void setModerateValue(Double moderateValue) {
-		this.moderateValue = moderateValue;
-	}
-
-	public Double getGoodValue() {
-		return goodValue;
-	}
-
-	public void setGoodValue(Double goodValue) {
-		this.goodValue = goodValue;
-	}
-
-	public Double getHighValue() {
-		return highValue;
-	}
-
-	public void setHighValue(Double highValue) {
-		this.highValue = highValue;
-	}
-
 	public String getElementUnit() {
 		return elementUnit;
 	}
@@ -150,8 +95,8 @@ public @Entity class ElementValue implements Serializable {
 	public void setSample(SoilSampleResult sample) {
 		this.sample = sample;
 	}
-	
-	public ElementValue(Long sampleID){
+
+	public ElementValue(Long sampleID) {
 		sample = new SoilSampleResult();
 		sample.setId(sampleID);
 	}

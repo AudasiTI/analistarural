@@ -58,15 +58,8 @@ public class ReportElementsDTO implements Serializable {
 		elementValue.setElementName(reportElementsDTO.getElementName());
 		elementValue.setElementExtractor(reportElementsDTO.getElementExtractor());
 		elementValue.setElementUnit(reportElementsDTO.getElementUnit());
-		elementValue.setGoodValue(reportElementsDTO.getGoodValue());
-		elementValue.setHighValue(reportElementsDTO.getHighVlue());
 		elementValue.setElementUnit(reportElementsDTO.getElementUnit());
-		elementValue.setGoodValue(reportElementsDTO.getGoodValue());
-		elementValue.setHighValue(reportElementsDTO.getHighVlue());
-		elementValue.setLowValue(reportElementsDTO.getLowValue());
 		elementValue.setMeasuredValue(reportElementsDTO.getMeasuredValue());
-		elementValue.setModerateValue(reportElementsDTO.getModerateValue());
-		elementValue.setVeryLowValue(reportElementsDTO.getVeryLowValue());
 
 		return elementValue;
 
