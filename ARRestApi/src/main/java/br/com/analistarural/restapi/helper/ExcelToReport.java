@@ -53,7 +53,7 @@ public final class ExcelToReport {
 			report.setCode(file[6][6]);
 			report.setFarm(file[6][2]);
 			report.setCity(file[6][3]);
-			report.setEmail(file[2][1]);
+			report.setPrimaryEmail(file[2][1]);
 			report.setSecondaryEmail(file[3][1]);
 
 			for (int row = 6; row < file.length; row++) {

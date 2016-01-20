@@ -19,7 +19,8 @@ public interface ElementDefaultValueRepository extends CrudRepository<ElementDef
 	// CRUD method using Optional
 	Optional<ElementDefaultValue> findById(Long id);
 
-	@Query("select s from ElementDefaultValue s join s.params p where p.id = :table_params_id")
-	Iterable<ElementDefaultValue> findByTableParams(@Param("table_params_id") Long table_params_id);
+	@Query("select s from ElementDefaultValue s join s.params p where s.elementName = :element_name and p.id = :table_params_id")
+	Optional<ElementDefaultValue> findByName(@Param("element_name") String element_name,
+			@Param("table_params_id") Long table_params_id);
 
 }

@@ -20,7 +20,9 @@ public interface ReportRepository extends CrudRepository<Report, Long> {
 	Optional<Report> findById(Long id);
 
 	// CRUD method using Optional
-	@Query("select r from Report r where r.email=:email")
-	Iterable<Report> findByEmail(@Param("email") String email);
+	// @Query("select r from Report r where r.primaryEmail = :email")
+	// Iterable<Report> findByEmail(@Param("email") String email);
+
+	Iterable<Report> findByPrimaryEmail(String email);
 
 }

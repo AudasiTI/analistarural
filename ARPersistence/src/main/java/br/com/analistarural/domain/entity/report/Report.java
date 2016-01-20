@@ -30,7 +30,7 @@ public @Entity class Report implements Serializable {
 	private @Id Long id;
 
 	@Column(name = "primary_email", length = 120, nullable = false, unique = false)
-	private String email;
+	private String primaryEmail;
 
 	@Column(name = "report_soil", length = 120, nullable = false, unique = false)
 	private Boolean reportSoil;
@@ -46,6 +46,12 @@ public @Entity class Report implements Serializable {
 
 	@Column(name = "customer_cpf", length = 120, nullable = false, unique = false)
 	private String customerCpf;
+
+	@Column(name = "farm", length = 120, nullable = true, unique = false)
+	private String farm;
+	
+	@Column(name = "code", length = 16, nullable = false, unique = true)
+	private String code;
 
 	// @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy =
 	// "report")
@@ -74,12 +80,12 @@ public @Entity class Report implements Serializable {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getPrimaryEmail() {
+		return primaryEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPrimaryEmail(String email) {
+		this.primaryEmail = email;
 	}
 
 	public Boolean getReportSoil() {
@@ -136,6 +142,22 @@ public @Entity class Report implements Serializable {
 
 	public void setParams(ElementTableParams params) {
 		this.params = params;
+	}
+
+	public String getFarm() {
+		return farm;
+	}
+
+	public void setFarm(String farm) {
+		this.farm = farm;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	// public Set<ElementValue> getElementValues() {

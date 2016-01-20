@@ -15,7 +15,8 @@
 						$scope.showPreview = true;
 						$scope.showJSONPreview = false;
 						$scope.json_string = "";
-						$scope.selectedSheetName = "Resultados Folha";
+						$scope.selectedSheetNameFolha = "Resultados Folha";
+						$scope.selectedSheetNameSolo = "Planilha1";
 						$scope.colunas = "";
 
 						$scope.listaLaudos = [];
@@ -26,7 +27,7 @@
 								$scope.sheets = [];
 								$scope.showJSONPreview = false;
 								$scope.isProcessing = true;
-								$scope.colunas = [ "Laudo", "Fazenda",
+								$scope.colunas = [ "Laudo", "Tipo", "Fazenda",
 										"Município", "Data de Geração",
 										"Status", "Importar" ];
 
@@ -45,20 +46,36 @@
 														$scope.laudo = "";
 														$scope.sheets = xlsxData.sheets;
 														$scope.isProcessing = false;
-														$scope.planilha = $scope.sheets[$scope.selectedSheetName].data;
-														vm
-																.addReport($scope.planilha);
-														$scope.laudo = {
-															numero : $scope.planilha[4][8],
-															fazenda : $scope.planilha[4][4],
-															municipio : $scope.planilha[4][5],
-															geracao : $scope.planilha[4][2],
-															impotar : true
-														};
+
+														if ($scope.sheets[$scope.selectedSheetNameSolo] != null) {
+
+															$scope.planilha = $scope.sheets[$scope.selectedSheetNameSolo].data;
+
+															$scope.laudo = {
+																numero : $scope.planilha[4][8],
+																tipo : "Solo",
+																fazenda : $scope.planilha[4][4],
+																municipio : $scope.planilha[4][5],
+																geracao : $scope.planilha[4][2],
+																status:""
+
+															};
+														} else {
+
+															$scope.planilha = $scope.sheets[$scope.selectedSheetNameFolha].data;
+
+															$scope.laudo = {
+																numero : $scope.planilha[6][6],
+																tipo : "Foliar",
+																fazenda : $scope.planilha[6][2],
+																municipio : $scope.planilha[6][3],
+																geracao : "",
+																status:""
+															};
+														}
 
 														$scope.listaLaudos
 																.push($scope.laudo);
-
 													});
 
 								}

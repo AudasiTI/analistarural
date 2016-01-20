@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import br.com.analistarural.domain.entity.report.ElementDefaultValue;
 import br.com.analistarural.domain.entity.report.ElementValue;
-import br.com.analistarural.domain.entity.report.SoilSampleResult;
 
 public class ReportElementsDTO implements Serializable {
 
@@ -14,9 +14,14 @@ public class ReportElementsDTO implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
-
 	private String elementName;
+
+	private String elementUnit;
+
+	private String elementExtractor;
+
+	@JsonFormat(shape = JsonFormat.Shape.NUMBER_FLOAT)
+	private String measuredValue;
 
 	private Double veryLowValue;
 
@@ -26,21 +31,17 @@ public class ReportElementsDTO implements Serializable {
 
 	private Double goodValue;
 
-	private Double highVlue;
-
-	private String elementUnit;
-
-	private String elementExtractor;
-
-	private Long SampleID;
-
-	@JsonFormat(shape = JsonFormat.Shape.NUMBER_FLOAT)
-	private String measuredValue;
+	private Double highValue;
 
 	public ReportElementsDTO() {
 	}
 
 	public ReportElementsDTO(ElementValue elements) {
+
+		setElementExtractor(elements.getElementExtractor());
+		setElementName(elements.getElementName());
+		setElementUnit(elements.getElementUnit());
+		setMeasuredValue(elements.getMeasuredValue());
 	}
 
 	public String getElementName() {
@@ -51,9 +52,9 @@ public class ReportElementsDTO implements Serializable {
 		this.elementName = elementName;
 	}
 
-	public ElementValue toElementValue(ReportElementsDTO reportElementsDTO) {
+	public ElementValue toElementValue(ReportElementsDTO reportElementsDTO, Long sampleID) {
 
-		ElementValue elementValue = new ElementValue(reportElementsDTO.getSampleID());
+		ElementValue elementValue = new ElementValue(sampleID);
 
 		elementValue.setElementName(reportElementsDTO.getElementName());
 		elementValue.setElementExtractor(reportElementsDTO.getElementExtractor());
@@ -63,6 +64,15 @@ public class ReportElementsDTO implements Serializable {
 
 		return elementValue;
 
+	}
+
+	public void setDefaults(ElementDefaultValue elementDefaults) {
+
+		setVeryLowValue(elementDefaults.getVeryLowValue());
+		setLowValue(elementDefaults.getLowValue());
+		setModerateValue(elementDefaults.getModerateValue());
+		setGoodValue(elementDefaults.getGoodValue());
+		setHighVlue(elementDefaults.getHighValue());
 	}
 
 	public Double getVeryLowValue() {
@@ -98,11 +108,11 @@ public class ReportElementsDTO implements Serializable {
 	}
 
 	public Double getHighVlue() {
-		return highVlue;
+		return highValue;
 	}
 
 	public void setHighVlue(Double highVlue) {
-		this.highVlue = highVlue;
+		this.highValue = highVlue;
 	}
 
 	public String getElementUnit() {
@@ -127,22 +137,6 @@ public class ReportElementsDTO implements Serializable {
 
 	public void setMeasuredValue(String measuredValue) {
 		this.measuredValue = measuredValue;
-	}
-
-	public Long getSampleID() {
-		return SampleID;
-	}
-
-	public void setSampleID(Long sampleID) {
-		SampleID = sampleID;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 }

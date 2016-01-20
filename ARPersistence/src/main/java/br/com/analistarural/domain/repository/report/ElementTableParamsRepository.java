@@ -21,6 +21,6 @@ public interface ElementTableParamsRepository extends CrudRepository<ElementTabl
 	Optional<ElementTableParams> findById(Long id);
 
 	@Query("select s from ElementTableParams s where s.registration <= :registration")
-	Iterable<ElementTableParams> findByRegistration(@Param("registration") Date registration);
+	Optional<ElementTableParams> findFirstByRegistration(@Param("registration") Date registration);
 
 }

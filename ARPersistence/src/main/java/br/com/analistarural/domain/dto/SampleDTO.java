@@ -19,13 +19,9 @@ public class SampleDTO implements Serializable {
 
 	private String crop;
 
-	private String Field;
+	private String field;
 
 	private String tipoAnalise;
-
-	private Long reportID;
-
-	private Long id;
 
 	private List<ReportElementsDTO> elements = new ArrayList<ReportElementsDTO>();
 
@@ -46,11 +42,11 @@ public class SampleDTO implements Serializable {
 	}
 
 	public String getField() {
-		return Field;
+		return field;
 	}
 
-	public void setField(String field) {
-		Field = field;
+	public void setField(String fieldParam) {
+		field = fieldParam;
 	}
 
 	public String getTipoAnalise() {
@@ -75,17 +71,19 @@ public class SampleDTO implements Serializable {
 		setCustomerElementIdent(sample.getIdent());
 		setField(sample.getField());
 		setTipoAnalise(sample.getTipoAnalise());
-		setReportID(sample.getReport().getId());
 
 		for (ElementValue iterator : sample.getElementValues()) {
-			getElements().add(new ReportElementsDTO(iterator));
+
+			if ((iterator.getMeasuredValue() != null) && (!iterator.getMeasuredValue().contentEquals("ns"))) {
+				getElements().add(new ReportElementsDTO(iterator));
+			}
 		}
 
 	}
 
-	public SoilSampleResult toSample(SampleDTO sampleDTO) {
+	public SoilSampleResult toSample(SampleDTO sampleDTO, Long reportID) {
 
-		SoilSampleResult sample = new SoilSampleResult(sampleDTO.getReportID());
+		SoilSampleResult sample = new SoilSampleResult(reportID);
 		sample.setCrop(sampleDTO.getCrop());
 		sample.setField(sampleDTO.getField());
 		sample.setIdent(sampleDTO.getCustomerElementIdent());
@@ -95,24 +93,8 @@ public class SampleDTO implements Serializable {
 
 	}
 
-	public Long getReportID() {
-		return reportID;
-	}
-
-	public void setReportID(Long reportID) {
-		this.reportID = reportID;
-	}
-
 	public SampleDTO() {
 
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 }

@@ -1,6 +1,6 @@
 package br.com.analistarural.restapi.controller.report;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -38,15 +38,19 @@ public class ReportController {
 		return "Registro salvo com sucesso.";
 	}
 
-	@RequestMapping(value = "/relatorio", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String saveReports(@RequestBody String[][] relatorio) {
+	@RequestMapping(value = "/relatorio", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+	public @ResponseBody Map<String,String>  saveReports(@RequestBody String[][] relatorio) {
+		
+		
 		reportService.save(ExcelToReport.toReportDTO(relatorio));
-		return "Registro salvo com sucesso.";
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Message", "Registro salvo com sucesso.");
+		return map;
 	}
 
-	@RequestMapping(value = "/reports/{email}", method = RequestMethod.GET)
-	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(@PathVariable("email") String email) {
-		return (Iterable<ReportDTO>) reportService.findReportsByEmail(email);
+	@RequestMapping(value = "/reports/{email:.+}", method = RequestMethod.GET)
+	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(@PathVariable("email") String emailParam) {
+		return (Iterable<ReportDTO>) reportService.findReportsByEmail(emailParam);
 	}
 
 	@RequestMapping(value = "/reports/{report_id}", method = RequestMethod.DELETE)

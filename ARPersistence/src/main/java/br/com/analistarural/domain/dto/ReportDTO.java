@@ -18,11 +18,11 @@ public class ReportDTO implements Serializable {
 
 	private String code;
 
-	private String email;
-
-	private Boolean soilReport;
+	private String primaryEmail;
 
 	private String secondaryEmail;
+
+	private Boolean soilReport;
 
 	private Date entryDate;
 
@@ -36,34 +36,20 @@ public class ReportDTO implements Serializable {
 
 	private List<SampleDTO> samples = new ArrayList<SampleDTO>();
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public ReportDTO() {
 	}
 
 	public ReportDTO(Report report) {
 
-		setEmail(report.getEmail());
+		setPrimaryEmail(report.getPrimaryEmail());
 		setId(report.getId());
 		setCustomerCPF(report.getCustomerCpf());
 		setEntryDate(report.getEntryDate());
 		setGenerationDate(report.getGenerationDate());
 		setSecondaryEmail(report.getSecondaryEmail());
 		setSoilReport(report.getReportSoil());
+		setFarm(report.getFarm());
+		setCode(report.getCode());
 
 		for (SoilSampleResult iterator : report.getSoilSampleResults()) {
 			getSamples().add(new SampleDTO(iterator));
@@ -75,23 +61,41 @@ public class ReportDTO implements Serializable {
 
 		Report report = new Report();
 		report.setId(reportDTO.getId());
-		report.setEmail(reportDTO.getEmail());
+		report.setPrimaryEmail(reportDTO.getPrimaryEmail());
 		report.setCustomerCpf(reportDTO.getCustomerCPF());
 		report.setEntryDate(reportDTO.getEntryDate());
 		report.setGenerationDate(reportDTO.getEntryDate());
 		report.setReportSoil(reportDTO.getSoilReport());
 		report.setSecondaryEmail(reportDTO.getSecondaryEmail());
+		report.setCode(reportDTO.getCode());
+		report.setFarm(reportDTO.getFarm());
 
 		return report;
 
 	}
 
-	public Boolean getSoilReport() {
-		return soilReport;
+	public Long getId() {
+		return id;
 	}
 
-	public void setSoilReport(Boolean soilReport) {
-		this.soilReport = soilReport;
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getPrimaryEmail() {
+		return primaryEmail;
+	}
+
+	public void setPrimaryEmail(String primaryEmail) {
+		this.primaryEmail = primaryEmail;
 	}
 
 	public String getSecondaryEmail() {
@@ -100,6 +104,14 @@ public class ReportDTO implements Serializable {
 
 	public void setSecondaryEmail(String secondaryEmail) {
 		this.secondaryEmail = secondaryEmail;
+	}
+
+	public Boolean getSoilReport() {
+		return soilReport;
+	}
+
+	public void setSoilReport(Boolean soilReport) {
+		this.soilReport = soilReport;
 	}
 
 	public Date getEntryDate() {
@@ -126,12 +138,12 @@ public class ReportDTO implements Serializable {
 		this.customerCPF = customerCPF;
 	}
 
-	public String getCode() {
-		return code;
+	public String getCity() {
+		return city;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getFarm() {
@@ -142,14 +154,6 @@ public class ReportDTO implements Serializable {
 		this.farm = farm;
 	}
 
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 	public List<SampleDTO> getSamples() {
 		return samples;
 	}
@@ -157,5 +161,4 @@ public class ReportDTO implements Serializable {
 	public void setSamples(List<SampleDTO> samples) {
 		this.samples = samples;
 	}
-
 }
