@@ -32,9 +32,14 @@
 							<th ng-repeat="col in colunas track by $index" ng-bind="col"></th>
 						</tr>
 					</thead>
-					<tr ng-repeat="indice in listaLaudos track by $index">
-						<td ng-repeat="col in indice track by $index" ng-bind="col"></td>
-						<td><input type="checkbox" name="importar" value="Importar"></td>
+					<tr ng-repeat="laudo in listaLaudos track by $index">
+						<td ng-bind="laudo.numero"></td>
+						<td ng-bind="laudo.tipo"></td>
+						<td ng-bind="laudo.fazenda"></td>
+						<td ng-bind="laudo.municipio"></td>
+						<td ng-bind="laudo.geracao"></td>
+						<td ng-bind="laudo.status"></td>
+						<td><input type="checkbox" ng-model="laudo.importar"></td>
 					</tr>
 				</table>
 			</div>
@@ -45,14 +50,10 @@
 					</div>
 				</div>
 				<div class="medium-2 columns">
-					<button class="button postfix">IMPORTAR</button>
+					<button class="button postfix" ng-click="importarLaudos()">Importar</button>
 				</div>
 			</div>
 		</fieldset>
 	</div>
-	<div>
-		<h4>{{vm.resultado}}</h4>
-	</div>
-
 
 </div>

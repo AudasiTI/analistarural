@@ -41,10 +41,9 @@ public class ReportController {
 	@RequestMapping(value = "/relatorio", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
 	public @ResponseBody Map<String,String>  saveReports(@RequestBody String[][] relatorio) {
 		
-		
 		reportService.save(ExcelToReport.toReportDTO(relatorio));
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("Message", "Registro salvo com sucesso.");
+		map.put("Message", "Laudo importado com sucesso");
 		return map;
 	}
 

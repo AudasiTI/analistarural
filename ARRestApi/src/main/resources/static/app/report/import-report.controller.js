@@ -19,6 +19,8 @@
 						$scope.selectedSheetNameSolo = "Planilha1";
 						$scope.colunas = "";
 
+						$scope.teste;
+
 						$scope.listaLaudos = [];
 
 						$scope.showPreviewChanged2 = function(files) {
@@ -56,8 +58,11 @@
 																tipo : "Solo",
 																fazenda : $scope.planilha[4][4],
 																municipio : $scope.planilha[4][5],
-																geracao : $scope.planilha[4][2],
-																status:""
+																geracao : new Date(
+																		$scope.planilha[4][2]),
+																status : null,
+																importar : true,
+																planilha : $scope.planilha
 
 															};
 														} else {
@@ -70,7 +75,9 @@
 																fazenda : $scope.planilha[6][2],
 																municipio : $scope.planilha[6][3],
 																geracao : "",
-																status:""
+																status : null,
+																importar : true,
+																planilha : $scope.planilha
 															};
 														}
 
@@ -99,12 +106,26 @@
 						// });
 						//
 						// }
-						vm.resultado = "";
-						vm.addReport = function(file) {
-							reportService.insertReport(file).then(
-									function(data) {
-										vm.resultado = data;
-									});
+
+						vm.addReport = function(indice) {
+							reportService
+									.insertReport(
+											$scope.listaLaudos[indice].planilha)
+									.then(
+											function(data) {
+												$scope.listaLaudos[indice].status = data.Message;
+											});
+						}
+
+						$scope.importarLaudos = function() {
+
+							var item;
+
+							for (item in $scope.listaLaudos) {
+								if ($scope.listaLaudos[item].importar == true) {
+									vm.addReport(item);
+								}
+							}
 						}
 					});
 
