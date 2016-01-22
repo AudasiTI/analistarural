@@ -39,7 +39,7 @@ public class ReportDTO implements Serializable {
 	public ReportDTO() {
 	}
 
-	public ReportDTO(Report report) {
+	public ReportDTO(Report report, Boolean deepLoad) {
 
 		setPrimaryEmail(report.getPrimaryEmail());
 		setId(report.getId());
@@ -51,9 +51,11 @@ public class ReportDTO implements Serializable {
 		setFarm(report.getFarm());
 		setCode(report.getCode());
 
-		for (SoilSampleResult iterator : report.getSoilSampleResults()) {
-			getSamples().add(new SampleDTO(iterator));
+		if (deepLoad) {
+			for (SoilSampleResult iterator : report.getSoilSampleResults()) {
+				getSamples().add(new SampleDTO(iterator));
 
+			}
 		}
 	}
 

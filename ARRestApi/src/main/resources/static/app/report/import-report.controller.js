@@ -19,7 +19,7 @@
 						$scope.selectedSheetNameSolo = "Planilha1";
 						$scope.colunas = "";
 
-						$scope.teste;
+						$scope.dynamic = 0;
 
 						$scope.listaLaudos = [];
 
@@ -30,13 +30,15 @@
 								$scope.showJSONPreview = false;
 								$scope.isProcessing = true;
 								$scope.colunas = [ "Laudo", "Tipo", "Fazenda",
-										"Município", "Data de Geração",
+										"Município", "E-mail Principal",
+										"E-mail Secundário", "Data de Geração",
 										"Status", "Importar" ];
 
 								$scope.tamanho = files.length;
 								var i = 0;
 								for (i = 0; i < files.length; i++) {
 									$scope.planilha = [];
+
 									$scope.excelFile = files[i];
 
 									XLSXReaderService
@@ -58,6 +60,8 @@
 																tipo : "Solo",
 																fazenda : $scope.planilha[4][4],
 																municipio : $scope.planilha[4][5],
+																emailPrincipal : null, // $scope.planilha[2][1]),
+																emailSecundario : null, // $scope.planilhafile[3][1],
 																geracao : new Date(
 																		$scope.planilha[4][2]),
 																status : null,
@@ -74,13 +78,14 @@
 																tipo : "Foliar",
 																fazenda : $scope.planilha[6][2],
 																municipio : $scope.planilha[6][3],
+																emailPrincipal : $scope.planilha[2][1],
+																emailSecundario : $scope.planilha[3][1],
 																geracao : "",
 																status : null,
 																importar : true,
 																planilha : $scope.planilha
 															};
 														}
-
 														$scope.listaLaudos
 																.push($scope.laudo);
 													});
@@ -92,21 +97,6 @@
 
 						}
 
-						// vm.getReports = function(email) {
-						// reportService
-						// .getReports(email)
-						// .then(
-						// function(data) {
-						// vm.reports = data;
-						// },
-						// function(error) {
-						// $window
-						// .alert('Sorry, an error occurred: '
-						// + error.data.message);
-						// });
-						//
-						// }
-
 						vm.addReport = function(indice) {
 							reportService
 									.insertReport(
@@ -114,6 +104,7 @@
 									.then(
 											function(data) {
 												$scope.listaLaudos[indice].status = data.Message;
+												$scope.dynamic += 1;
 											});
 						}
 
@@ -121,10 +112,13 @@
 
 							var item;
 
+							$scope.dynamic = 0;
+
 							for (item in $scope.listaLaudos) {
 								if ($scope.listaLaudos[item].importar == true) {
 									vm.addReport(item);
 								}
+
 							}
 						}
 					});

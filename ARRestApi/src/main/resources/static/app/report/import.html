@@ -1,59 +1,59 @@
-
-<div>
+<div class="container">
 	<div class="row">
-		<fieldset>
-			<legend>Importação de Laudos</legend>
-			<form>
-				<div class="row">
-					<div class="large-12 columns">
-						<div class="row collapse">
-							<div class="small-10 columns">
-								<input type="file" name="excel_file" multiple
-									accept=".xlsx, .xls"
-									onchange="angular.element(this).scope().showPreviewChanged2(this.files);"
-									required="true">
-							</div>
-						</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Seleção de Laudos</div>
+			<div class="panel-body">
+				<form>
+
+					<div>
+						<input type="file" name="excel_file" multiple accept=".xlsx, .xls"
+							onchange="angular.element(this).scope().showPreviewChanged2(this.files);"
+							required="true">
 					</div>
-			</form>
-			<div class="progress success">
-				<span class="meter" style="width: 1%"></span>
+
+				</form>
 			</div>
-		</fieldset>
+		</div>
 	</div>
 
 	<div class="row">
-		<fieldset>
-			<legend>Lista de Laudos</legend>
-			<div class="medium-12 colunms">
-				<table class="table table-bordered">
+		<div class="panel panel-default">
+			<div class="panel-heading">Lista de Laudos</div>
+			<div class="panel-body">
+				<table class="table-bordered table-hover table-striped col-md-12">
 					<thead>
 						<tr>
-							<th ng-repeat="col in colunas track by $index" ng-bind="col"></th>
+							<th class="label label-primary col-md-1"
+								ng-repeat="col in colunas track by $index" ng-bind="col"></th>
 						</tr>
 					</thead>
 					<tr ng-repeat="laudo in listaLaudos track by $index">
-						<td ng-bind="laudo.numero"></td>
-						<td ng-bind="laudo.tipo"></td>
-						<td ng-bind="laudo.fazenda"></td>
-						<td ng-bind="laudo.municipio"></td>
-						<td ng-bind="laudo.geracao"></td>
-						<td ng-bind="laudo.status"></td>
-						<td><input type="checkbox" ng-model="laudo.importar"></td>
+						<td class="text-center" ng-bind="laudo.numero"></td>
+						<td class="text-center" ng-bind="laudo.tipo"></td>
+						<td class="text-left" ng-bind="laudo.fazenda"></td>
+						<td class="text-left" ng-bind="laudo.municipio"></td>
+						<td class="text-center" ng-bind="laudo.emailPrincipal"></td>
+						<td class="text-center" ng-bind="laudo.emailSecundario"></td>
+						<td class="text-center" ng-bind="laudo.geracao | date"></td>
+						<td class="text-center" ng-bind="laudo.status"></td>
+						<td class="text-center"><input type="checkbox"
+							ng-model="laudo.importar"></td>
 					</tr>
 				</table>
 			</div>
-			<div class="row">
-				<div class="medium-10 columns">
-					<div class="progress success">
-						<span class="meter" style="width: 1%"></span>
-					</div>
+			<div class="panel-footer">
+				<div>
+					<uib-progressbar max="listaLaudos.length" value="dynamic">
+					<span style="color: white; white-space: nowrap;">{{dynamic}}
+						/ {{listaLaudos.length}}</span></uib-progressbar>
 				</div>
-				<div class="medium-2 columns">
-					<button class="button postfix" ng-click="importarLaudos()">Importar</button>
+				<div>
+					<button type="button" class="btn btn-primary"
+						ng-click="importarLaudos()">
+						<span class="glyphicon glyphicon-ok"></span>Importar
+					</button>
 				</div>
 			</div>
-		</fieldset>
+		</div>
 	</div>
-
 </div>

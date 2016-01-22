@@ -6,8 +6,14 @@
 
 		var serviceBase = '/api/reports/', factory = {};
 
-		factory.getReports = function(email) {
+		factory.getReportsByEmail = function(email) {
 			return $http.get(serviceBase + email).then(function(results) {
+				return results.data;
+			});
+		};
+		
+		factory.getReports = function() {
+			return $http.get(serviceBase).then(function(results) {
 				return results.data;
 			});
 		};

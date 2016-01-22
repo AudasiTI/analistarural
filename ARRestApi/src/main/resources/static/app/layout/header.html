@@ -1,19 +1,20 @@
-<nav class="top-bar" data-topbar>
-	<ul class="title-area">
-		<li class="name">
-			<h1>
-				<i class="fi-home"></i><a href="#">Laboratório Exata - Info SOIL
-					Admin</a>
-			</h1>
-		</li>
-	</ul>
-</nav>
-<div class="row spacing-top">
-	<div class="large-12 colunms">
-		<ul class="button-group even-3">
-			<li><a href="#reports" class="button">LAUDOS</a></li>
-			<li><a href="#importReports" class="button">IMPORTAR</a></li>
-			<li><a href="#" class="button">SAIR</a></li>
-		</ul>
-	</div>
+<div ng-controller="NavbarController as vm">
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div id="navbar" class="navbar-header">
+				<ul class="nav navbar-nav">
+					<li><a class="navbar-brand" href="#/"> <img
+							src="app/logo_exata.png" height="180%" alt="logo"></a></li>
+					<li><a href="#viewReports">LAUDOS</a></li>
+					<li><a href="#importReports">IMPORTAR</a></li>
+					<li id="nav-login" ng-click="vm.loginOrOut()">
+						<!-- href not used but needed to compare against path in menu-highlighter -->
+						<a data-href="#/login">{{ vm.loginLogoutText }}</a>
+					</li>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</nav>
 </div>

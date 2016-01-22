@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.analistarural.domain.dto.ReportDTO;
+import br.com.analistarural.domain.entity.report.Report;
 import br.com.analistarural.restapi.helper.ExcelToReport;
 import br.com.analistarural.restapi.service.report.ReportService;
 
@@ -39,17 +40,28 @@ public class ReportController {
 	}
 
 	@RequestMapping(value = "/relatorio", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
-	public @ResponseBody Map<String,String>  saveReports(@RequestBody String[][] relatorio) {
-		
-		reportService.save(ExcelToReport.toReportDTO(relatorio));
+	public @ResponseBody Map<String, String> saveReports(@RequestBody String[][] relatorio) {
+
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("Message", "Laudo importado com sucesso");
+
+		try {
+			reportService.save(ExcelToReport.toReportDTO(relatorio));
+			map.put("Message", "Laudo importado com sucesso");
+		} catch (Exception e) {
+			map.put("Message", e.getMessage());
+			// TODO: handle exception
+		}
 		return map;
 	}
 
 	@RequestMapping(value = "/reports/{email:.+}", method = RequestMethod.GET)
 	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(@PathVariable("email") String emailParam) {
 		return (Iterable<ReportDTO>) reportService.findReportsByEmail(emailParam);
+	}
+
+	@RequestMapping(value = "/reports", method = RequestMethod.GET)
+	public @ResponseBody Iterable<ReportDTO> getReports() {
+		return (Iterable<ReportDTO>) reportService.findReports();
 	}
 
 	@RequestMapping(value = "/reports/{report_id}", method = RequestMethod.DELETE)

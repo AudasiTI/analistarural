@@ -2,6 +2,7 @@ package br.com.analistarural.restapi.service.report;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import br.com.analistarural.domain.dto.ReportDTO;
 import br.com.analistarural.domain.dto.ReportElementsDTO;
 import br.com.analistarural.domain.dto.SampleDTO;
 import br.com.analistarural.domain.entity.report.ElementDefaultValue;
-import br.com.analistarural.domain.entity.report.ElementValue;
 import br.com.analistarural.domain.entity.report.Report;
 import br.com.analistarural.domain.entity.report.SoilSampleResult;
 import br.com.analistarural.domain.repository.report.ElementDefaultValueRepository;
@@ -52,7 +52,7 @@ public class ReportService {
 
 		for (Report report : reportList) {
 
-			ReportDTO reportDTO = new ReportDTO(report);
+			ReportDTO reportDTO = new ReportDTO(report, true);
 
 			for (SampleDTO sample : reportDTO.getSamples()) {
 
@@ -89,7 +89,7 @@ public class ReportService {
 
 		for (SampleDTO iterator : reportDTO.getSamples()) {
 
-			SoilSampleResult sample = soilSampleResultRepository.save(iterator.toSample(iterator,report.getId()));
+			SoilSampleResult sample = soilSampleResultRepository.save(iterator.toSample(iterator, report.getId()));
 
 			for (ReportElementsDTO elements : iterator.getElements()) {
 
@@ -101,8 +101,7 @@ public class ReportService {
 					// TODO: handle exception
 				}
 
-
-				elementValueRepository.save(elements.toElementValue(elements,sample.getId()));
+				elementValueRepository.save(elements.toElementValue(elements, sample.getId()));
 			}
 		}
 	}
@@ -116,6 +115,20 @@ public class ReportService {
 
 	public void delete(Long id) {
 		reportRepository.delete(id);
+	}
+
+	public Iterable<ReportDTO> findReports() {
+
+		Iterable<Report> listReports = reportRepository.findAll();
+
+		List<ReportDTO> reportDTOList = new ArrayList<ReportDTO>();
+
+		for (Report report : listReports) {
+			ReportDTO reportDTO = new ReportDTO(report, false);
+			reportDTOList.add(reportDTO);
+		}
+
+		return reportDTOList;
 	}
 
 }

@@ -1,0 +1,54 @@
+<div class="container">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">Laudos Importados</div>
+			<div class="panel-body">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="col-md-1">
+							<label for="sel1">Filtro:</label>
+						</div>
+						<div class="col-md-4">
+							<select class="form-control" id="sel1">
+								<option>Número do Laudo</option>
+								<option>Identificação da Amostra</option>
+								<option>E-Mail Principal</option>
+								<option>E-Mail Secundário</option>
+								<option>CPF do Cliente</option>
+								<option>Nome da Propriedade</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<input type="text" class="form-control" id="textobusca">
+						</div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-primary"
+								ng-click="buscarLaudos()">
+								<span class="glyphicon glyphicon-search"></span>Buscar
+							</button>
+						</div>
+					</div>
+				</div>
+				<table class="table-bordered table-hover table-striped col-md-12">
+					<thead>
+						<tr>
+							<th class="label label-primary col-md-1"
+								ng-repeat="col in colunas track by $index" ng-bind="col"></th>
+						</tr>
+					</thead>
+					<tr ng-repeat="report in reports track by $index">
+						<td class="text-center" ng-bind="report.code"></td>
+						<td class="text-center" ng-bind="report.farm"></td>
+						<td class="text-center" ng-bind="report.primaryEmail"></td>
+						<td class="text-center" ng-bind="report.secondaryEmail"></td>
+						<td class="text-center"><a id="link-1" href
+							ng-click="exibirDetalhes(code)">Exibir</a></td>
+						<td></td>
+					</tr>
+				</table>
+			</div>
+			<div class="panel-footer"></div>
+		</div>
+
+	</div>
+</div>
