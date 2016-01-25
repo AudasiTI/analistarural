@@ -1,8 +1,8 @@
 (function() {
 
-	var injectParams = [ '$location', '$routeParams', 'authService' ];
+	var injectParams = [ '$location', '$routeParams', 'authService', '$log'];
 
-	var LoginController = function($location, $routeParams, authService) {
+	var LoginController = function($location, $routeParams, authService, $log) {
 		var vm = this, path = '/';
 
 		vm.email = null;
@@ -11,8 +11,6 @@
 
 		vm.login = function() {
 			authService.login(vm.email, vm.password).then(function(status) {
-				// $routeParams.redirect will have the route
-				// they were trying to go to initially
 				if (!status) {
 					vm.errorMessage = 'Unable to login';
 					return;

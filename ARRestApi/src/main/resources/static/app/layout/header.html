@@ -1,4 +1,4 @@
-<div ng-controller="NavbarController as vm">
+<header ng-controller="NavbarController as vm">
 	<!-- Fixed navbar -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -6,8 +6,8 @@
 				<ul class="nav navbar-nav">
 					<li><a class="navbar-brand" href="#/"> <img
 							src="app/logo_exata.png" height="180%" alt="logo"></a></li>
-					<li><a href="#viewReports">LAUDOS</a></li>
-					<li><a href="#importReports">IMPORTAR</a></li>
+					<li><a href="#viewReports">Exibição de Laudos</a></li>
+					<li><a href="#importReports">Importação de Laudos</a></li>
 					<li id="nav-login" ng-click="vm.loginOrOut()">
 						<!-- href not used but needed to compare against path in menu-highlighter -->
 						<a data-href="#/login">{{ vm.loginLogoutText }}</a>
@@ -17,4 +17,4 @@
 			<!--/.nav-collapse -->
 		</div>
 	</nav>
-</div>
+</header>

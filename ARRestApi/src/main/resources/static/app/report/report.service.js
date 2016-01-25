@@ -11,7 +11,7 @@
 				return results.data;
 			});
 		};
-		
+
 		factory.getReports = function() {
 			return $http.get(serviceBase).then(function(results) {
 				return results.data;
@@ -19,7 +19,7 @@
 		};
 
 		factory.insertReport = function(file) {
-			return $http.post('/api/relatorio/', file).then(function(results) {
+			return $http.post(serviceBase, file).then(function(results) {
 				// report.id = results.data.id;
 				return results.data;
 			});

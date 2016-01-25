@@ -3,9 +3,9 @@
 	var injectParams = [ '$scope', '$location', 'authService' ];
 
 	var NavbarController = function($scope, $location, authService) {
-		var vm = this, appTitle = 'Customer Management';
+		var vm = this;
 
-		vm.isCollapsed = false;
+		vm.isCollapsed = true;
 
 		vm.highlight = function(path) {
 			return $location.path().substr(0, path.length) === path;

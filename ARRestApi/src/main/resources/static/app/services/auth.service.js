@@ -1,10 +1,10 @@
 (function() {
 
-	var injectParams = [ '$http', '$rootScope' ];
+	var injectParams = [ '$http', '$rootScope', '$log' ];
 
-	var authFactory = function($http, $rootScope) {
+	var authFactory = function($http, $rootScope, $log) {
 		var serviceBase = '/api/', factory = {
-			loginPath : '/login',
+			loginPath : 'login',
 			user : {
 				isAuthenticated : false,
 				roles : null
@@ -13,13 +13,13 @@
 
 		factory.login = function(email, password) {
 			return $http.post(serviceBase + 'login', {
-				userLogin : {
-					userName : email,
-					password : password
-				}
+				userName : email,
+				password : password
+
 			}).then(function(results) {
+				$log.debug(results.data);
 				var loggedIn = results.data.status;
-				;
+
 				changeAuth(loggedIn);
 				return loggedIn;
 			});

@@ -33,13 +33,7 @@ public class ReportController {
 	// return reportService.findAll();
 	// }
 
-	@RequestMapping(value = "/reports", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String saveReport(@Valid @RequestBody ReportDTO reportDTO) {
-		reportService.save(reportDTO);
-		return "Registro salvo com sucesso.";
-	}
-
-	@RequestMapping(value = "/relatorio", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
+	@RequestMapping(value = "/reports", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
 	public @ResponseBody Map<String, String> saveReports(@RequestBody String[][] relatorio) {
 
 		Map<String, String> map = new HashMap<String, String>();
@@ -48,7 +42,7 @@ public class ReportController {
 			reportService.save(ExcelToReport.toReportDTO(relatorio));
 			map.put("Message", "Laudo importado com sucesso");
 		} catch (Exception e) {
-			map.put("Message", e.getMessage());
+			map.put("Message", e.getCause().getLocalizedMessage());
 			// TODO: handle exception
 		}
 		return map;

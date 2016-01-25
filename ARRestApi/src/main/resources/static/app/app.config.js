@@ -10,19 +10,18 @@
 		$routeProvider.when("/importReports", {
 			templateUrl : viewBase + 'report/import.html',
 			controller : 'ImportReportController',
-			controllerAs : 'vm'
+			controllerAs : 'vm',
+			secure : true
 		}).when("/viewReports", {
 			templateUrl : viewBase + 'report/view.html',
 			controller : 'ViewReportController',
-			controllerAs : 'vm',
-			secure : true
-		// This route requires an authenticated user
+			controllerAs : 'vm'
 		}).when('/login/:redirect*?', {
 			controller : 'LoginController',
 			templateUrl : viewBase + 'login/login.html',
 			controllerAs : 'vm'
 		}).otherwise({
-			redirectTo : '/importReports'
+			redirectTo : '/'
 		})
 
 	} ]);
