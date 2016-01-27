@@ -6,7 +6,7 @@
 			.module('infoSoilAdmin')
 			.controller(
 					'ImportReportController',
-					function($scope, XLSXReaderService, reportService, $window) {
+					function($scope, XLSReaderService, reportService, $window) {
 
 						var vm = this;
 
@@ -41,7 +41,7 @@
 
 									$scope.excelFile = files[i];
 
-									XLSXReaderService
+									XLSReaderService
 											.readFile($scope.excelFile,
 													$scope.showPreview,
 													$scope.showJSONPreview)

@@ -1,12 +1,13 @@
 package br.com.analistarural.restapi.helper;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import br.com.analistarural.domain.dto.ReportDTO;
 import br.com.analistarural.domain.dto.ReportElementsDTO;
 import br.com.analistarural.domain.dto.SampleDTO;
-import br.com.analistarural.domain.entity.report.SoilSampleResult;
 
 public final class ExcelToReport {
 
@@ -42,13 +43,22 @@ public final class ExcelToReport {
 				for (int col = 10; col < 44; col++) {
 					ReportElementsDTO elements = new ReportElementsDTO();
 					elements.setElementName(file[3][col]);
-					elements.setMeasuredValue(file[row][col]);
+					try {
+						BigDecimal bd = new BigDecimal(file[row][col]);
+						bd = bd.setScale(2, RoundingMode.HALF_UP);
+						elements.setMeasuredValue(bd.toString());
+						System.out.println(bd.toString());
+					} catch (Exception e) {
+						elements.setMeasuredValue(file[row][col]);
+					}
+
 					sample.getElements().add(elements);
 
 				}
 				report.getSamples().add(sample);
 			}
-		} else if (file[6][5].contentEquals("COMPLETA (N,P,K,Ca,Mg,S,B,Cu,Fe,Mn,Zn)")) {
+		} else if (file[6][5]
+				.contentEquals("COMPLETA (N,P,K,Ca,Mg,S,B,Cu,Fe,Mn,Zn)")) {
 
 			report.setCode(file[6][6]);
 			report.setFarm(file[6][2]);
@@ -66,7 +76,17 @@ public final class ExcelToReport {
 				for (int col = 7; col < 20; col++) {
 					ReportElementsDTO elements = new ReportElementsDTO();
 					elements.setElementName(file[5][col]);
-					elements.setMeasuredValue(file[row][col]);
+
+					try {
+						BigDecimal bd = new BigDecimal(file[row][col]);
+						bd = bd.setScale(2, RoundingMode.HALF_UP);
+						elements.setMeasuredValue(bd.toString());
+						System.out.println(bd.toString());
+					} catch (Exception e) {
+						elements.setMeasuredValue(file[row][col]);
+					}
+
+					// elements.setMeasuredValue(file[row][col]);
 					sample.getElements().add(elements);
 				}
 				report.getSamples().add(sample);
