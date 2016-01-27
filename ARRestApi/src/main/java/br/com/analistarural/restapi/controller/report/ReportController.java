@@ -34,7 +34,8 @@ public class ReportController {
 	// }
 
 	@RequestMapping(value = "/reports", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
-	public @ResponseBody Map<String, String> saveReports(@RequestBody String[][] relatorio) {
+	public @ResponseBody Map<String, String> saveReports(
+			@RequestBody String[][] relatorio) {
 
 		Map<String, String> map = new HashMap<String, String>();
 
@@ -42,15 +43,17 @@ public class ReportController {
 			reportService.save(ExcelToReport.toReportDTO(relatorio));
 			map.put("Message", "Laudo importado com sucesso");
 		} catch (Exception e) {
-			map.put("Message", e.getCause().getLocalizedMessage());
+			map.put("Message", e.getMessage());
 			// TODO: handle exception
 		}
 		return map;
 	}
 
 	@RequestMapping(value = "/reports/{email:.+}", method = RequestMethod.GET)
-	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(@PathVariable("email") String emailParam) {
-		return (Iterable<ReportDTO>) reportService.findReportsByEmail(emailParam);
+	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(
+			@PathVariable("email") String emailParam) {
+		return (Iterable<ReportDTO>) reportService
+				.findReportsByEmail(emailParam);
 	}
 
 	@RequestMapping(value = "/reports", method = RequestMethod.GET)
@@ -59,7 +62,8 @@ public class ReportController {
 	}
 
 	@RequestMapping(value = "/reports/{report_id}", method = RequestMethod.DELETE)
-	public @ResponseBody String deleteReport(@PathVariable("report_id") Long report_id) {
+	public @ResponseBody String deleteReport(
+			@PathVariable("report_id") Long report_id) {
 		reportService.delete(report_id);
 		return "Registro excluído com sucesso.";
 	}

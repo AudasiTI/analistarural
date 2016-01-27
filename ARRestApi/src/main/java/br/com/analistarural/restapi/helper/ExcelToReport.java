@@ -40,8 +40,17 @@ public final class ExcelToReport {
 				sample.setField(file[row][9]);
 				sample.setTipoAnalise(file[row][7]);
 
+				String unit = "";
+
 				for (int col = 10; col < 44; col++) {
 					ReportElementsDTO elements = new ReportElementsDTO();
+
+					if (!file[1][col].trim().isEmpty()) {
+						unit = file[1][col];
+					}
+
+					elements.setElementUnit(unit);
+					elements.setElementExtractor(file[2][col]);
 					elements.setElementName(file[3][col]);
 					try {
 						BigDecimal bd = new BigDecimal(file[row][col]);
@@ -73,8 +82,17 @@ public final class ExcelToReport {
 				sample.setCustomerElementIdent(file[row][1]);
 				sample.setTipoAnalise(file[row][5]);
 
+				String unit = "";
+
 				for (int col = 7; col < 20; col++) {
 					ReportElementsDTO elements = new ReportElementsDTO();
+
+					if (!file[3][col].trim().isEmpty()) {
+						unit = file[3][col];
+					}
+
+					elements.setElementUnit(unit);
+					elements.setElementExtractor(file[4][col]);
 					elements.setElementName(file[5][col]);
 
 					try {
