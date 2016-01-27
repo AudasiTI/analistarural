@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.analistarural.domain.dto.ReportDTO;
-import br.com.analistarural.domain.entity.report.Report;
 import br.com.analistarural.restapi.helper.ExcelToReport;
 import br.com.analistarural.restapi.service.report.ReportService;
 
@@ -34,26 +33,31 @@ public class ReportController {
 	// }
 
 	@RequestMapping(value = "/reports", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = "application/json")
-	public @ResponseBody Map<String, String> saveReports(
-			@RequestBody String[][] relatorio) {
+	public @ResponseBody Map<String, String> saveReports(@RequestBody String[][] relatorio) {
 
 		Map<String, String> map = new HashMap<String, String>();
 
-		try {
-			reportService.save(ExcelToReport.toReportDTO(relatorio));
-			map.put("Message", "Laudo importado com sucesso");
-		} catch (Exception e) {
-			map.put("Message", e.getMessage());
-			// TODO: handle exception
+		StringBuilder errors = ExcelToReport.validateExcelFile(relatorio);
+
+		if (!errors.toString().isEmpty()) {
+			map.put("message", "Falha na importação");
+			map.put("exceptions", errors.toString());
+		} else {
+			try {
+				reportService.save(ExcelToReport.toReportDTO(relatorio));
+				map.put("message", "Sucesso");
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
+				// TODO: handle exception
+			}
 		}
+		System.out.println(map.toString());
 		return map;
 	}
 
 	@RequestMapping(value = "/reports/{email:.+}", method = RequestMethod.GET)
-	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(
-			@PathVariable("email") String emailParam) {
-		return (Iterable<ReportDTO>) reportService
-				.findReportsByEmail(emailParam);
+	public @ResponseBody Iterable<ReportDTO> getReportsByEmail(@PathVariable("email") String emailParam) {
+		return (Iterable<ReportDTO>) reportService.findReportsByEmail(emailParam);
 	}
 
 	@RequestMapping(value = "/reports", method = RequestMethod.GET)
@@ -62,8 +66,7 @@ public class ReportController {
 	}
 
 	@RequestMapping(value = "/reports/{report_id}", method = RequestMethod.DELETE)
-	public @ResponseBody String deleteReport(
-			@PathVariable("report_id") Long report_id) {
+	public @ResponseBody String deleteReport(@PathVariable("report_id") Long report_id) {
 		reportService.delete(report_id);
 		return "Registro excluído com sucesso.";
 	}

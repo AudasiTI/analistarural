@@ -11,6 +11,26 @@ import br.com.analistarural.domain.dto.SampleDTO;
 
 public final class ExcelToReport {
 
+	/**
+	 * 
+	 */
+
+	public static StringBuilder validateExcelFile(String[][] file) {
+
+		StringBuilder errors = new StringBuilder();
+
+		if (!file[0][0].contentEquals("Laboratório Exata - Hoff & Brait Ltda. - www.labexata.com.br")) {
+			errors.append("A autoria do arquivo não foi confirmada");
+		} else if (!file[2][0].contentEquals("Email Cliente:")) {
+			errors.append("E-mail do cliente ausente");
+		} else if (!file[3][0].contentEquals("Email Solicitante:")) {
+			errors.append("E-mail do solicitante ausente");
+		} else if (!file[5][0].contentEquals("Lab")) {
+			errors.append("O formato do arquivo não parece ser válido.");
+		}
+		return errors;
+	}
+
 	public static ReportDTO toReportDTO(String[][] file) {
 
 		ReportDTO report = new ReportDTO();
@@ -24,15 +44,16 @@ public final class ExcelToReport {
 		// e.printStackTrace();
 		// }
 
-		if (file[4][7].contentEquals("Q,(Pres)(-MI)")) {
+		if (file[6][10].contentEquals("ph CaCl2")) {
 
-			report.setCode(file[4][8]);
-			report.setFarm(file[4][4]);
-			report.setCity(file[4][5]);
-			// report.setEmail(file[2][1]);
-			// report.setSecondaryEmail(file[3][1]);
+			report.setCode(file[7][8]);
+			report.setFarm(file[7][4]);
+			report.setCity(file[7][5]);
+			report.setSoilReport(true);
+			report.setPrimaryEmail(file[3][1]);
+			report.setSecondaryEmail(file[2][1]);
 
-			for (int row = 4; row < file.length; row++) {
+			for (int row = 7; row < file.length; row++) {
 
 				SampleDTO sample = new SampleDTO();
 				sample.setCrop(file[row][6]);
@@ -45,13 +66,13 @@ public final class ExcelToReport {
 				for (int col = 10; col < 44; col++) {
 					ReportElementsDTO elements = new ReportElementsDTO();
 
-					if (!file[1][col].trim().isEmpty()) {
-						unit = file[1][col];
+					if (!(file[4][col] == null)) {
+						unit = file[4][col];
 					}
 
 					elements.setElementUnit(unit);
-					elements.setElementExtractor(file[2][col]);
-					elements.setElementName(file[3][col]);
+					elements.setElementExtractor(file[5][col]);
+					elements.setElementName(file[6][col]);
 					try {
 						BigDecimal bd = new BigDecimal(file[row][col]);
 						bd = bd.setScale(2, RoundingMode.HALF_UP);
@@ -66,14 +87,14 @@ public final class ExcelToReport {
 				}
 				report.getSamples().add(sample);
 			}
-		} else if (file[6][5]
-				.contentEquals("COMPLETA (N,P,K,Ca,Mg,S,B,Cu,Fe,Mn,Zn)")) {
+		} else {
 
 			report.setCode(file[6][6]);
 			report.setFarm(file[6][2]);
 			report.setCity(file[6][3]);
 			report.setPrimaryEmail(file[2][1]);
 			report.setSecondaryEmail(file[3][1]);
+			report.setSoilReport(false);
 
 			for (int row = 6; row < file.length; row++) {
 
