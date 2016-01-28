@@ -19,13 +19,13 @@ public final class ExcelToReport {
 
 		StringBuilder errors = new StringBuilder();
 
-		if (!file[0][0].contentEquals("Laboratório Exata - Hoff & Brait Ltda. - www.labexata.com.br")) {
+		if (!file[0][0]
+				.contentEquals("Laboratório Exata - Hoff & Brait Ltda. - www.labexata.com.br")) {
 			errors.append("A autoria do arquivo não foi confirmada");
-		} else if (!file[2][0].contentEquals("Email Cliente:")) {
-			errors.append("E-mail do cliente ausente");
-		} else if (!file[3][0].contentEquals("Email Solicitante:")) {
-			errors.append("E-mail do solicitante ausente");
-		} else if (!file[5][0].contentEquals("Lab")) {
+		} else if (!file[2][0].contentEquals("Email Cliente:")
+				&& !file[2][0].contentEquals("Email Solicitante:")) {
+			errors.append("E-mail ausente");
+		} else if (!file[5][0].contentEquals("Lab") && !file[6][0].contentEquals("Lab")) {
 			errors.append("O formato do arquivo não parece ser válido.");
 		}
 		return errors;
@@ -108,7 +108,7 @@ public final class ExcelToReport {
 				for (int col = 7; col < 20; col++) {
 					ReportElementsDTO elements = new ReportElementsDTO();
 
-					if (!file[3][col].trim().isEmpty()) {
+					if (!(file[3][col] == null)) {
 						unit = file[3][col];
 					}
 

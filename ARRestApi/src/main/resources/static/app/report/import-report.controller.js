@@ -46,42 +46,51 @@
 													$scope.sheets = xlsxData.sheets;
 													$scope.isProcessing = false;
 													$scope.isCollapsed = true;
+
 													if ($scope.sheets[$scope.selectedSheetNameSolo] != null) {
+														if (vm
+																.validateFile($scope.sheets[$scope.selectedSheetNameSolo].data)) {
 
-														$scope.planilha = $scope.sheets[$scope.selectedSheetNameSolo].data;
+															$scope.planilha = $scope.sheets[$scope.selectedSheetNameSolo].data;
 
-														$scope.laudo = {
-															numero : $scope.planilha[7][8],
-															tipo : "Solo",
-															fazenda : $scope.planilha[7][4],
-															municipio : $scope.planilha[7][5],
-															emailSecundario : $scope.planilha[2][1],
-															emailPrincipal : $scope.planilha[3][1],
-															status : null,
-															exceptions : null,
-															importar : true,
-															planilha : $scope.planilha
+															$scope.laudo = {
+																numero : $scope.planilha[7][8],
+																tipo : "Solo",
+																fazenda : $scope.planilha[7][4],
+																municipio : $scope.planilha[7][5],
+																emailSecundario : $scope.planilha[2][1],
+																emailPrincipal : $scope.planilha[3][1],
+																status : null,
+																exceptions : null,
+																importar : true,
+																planilha : $scope.planilha
 
-														};
+															};
+															$scope.listaLaudos
+																	.push($scope.laudo);
+														}
 													} else {
+														if (vm
+																.validateFile($scope.sheets[$scope.selectedSheetNameFolha].data)) {
+															$scope.planilha = $scope.sheets[$scope.selectedSheetNameFolha].data;
 
-														$scope.planilha = $scope.sheets[$scope.selectedSheetNameFolha].data;
-
-														$scope.laudo = {
-															numero : $scope.planilha[6][6],
-															tipo : "Foliar",
-															fazenda : $scope.planilha[6][2],
-															municipio : $scope.planilha[6][3],
-															emailPrincipal : $scope.planilha[2][1],
-															emailSecundario : $scope.planilha[3][1],
-															status : null,
-															exceptions : null,
-															importar : true,
-															planilha : $scope.planilha
-														};
+															$scope.laudo = {
+																numero : $scope.planilha[6][6],
+																tipo : "Foliar",
+																fazenda : $scope.planilha[6][2],
+																municipio : $scope.planilha[6][3],
+																emailPrincipal : $scope.planilha[2][1],
+																emailSecundario : $scope.planilha[3][1],
+																status : null,
+																exceptions : null,
+																importar : true,
+																planilha : $scope.planilha
+															};
+															$scope.listaLaudos
+																	.push($scope.laudo);
+														}
 													}
-													$scope.listaLaudos
-															.push($scope.laudo);
+
 												});
 
 							}
@@ -114,8 +123,17 @@
 							}
 						}
 
-						$scope.validateFile = function(file) {
+						vm.validateFile = function(file) {
 
+							var validFile = false;
+
+							if (file[2][0] == "Email Cliente:"
+									|| file[2][0] == "Email Solicitante:") {
+								if (file[6][0] == "Lab" || file[5][0] == "Lab") {
+									validFile = true;
+								}
+							}
+							return validFile;
 						}
 
 					});

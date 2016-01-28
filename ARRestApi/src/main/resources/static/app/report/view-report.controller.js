@@ -32,8 +32,7 @@
 								$scope.reports = data;
 							},
 							function(error) {
-								$window.alert('Sorry, an error occurred: '
-										+ error.data.message);
+
 							});
 				}
 
