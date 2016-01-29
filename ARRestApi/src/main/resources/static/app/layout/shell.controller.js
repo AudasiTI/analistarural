@@ -3,11 +3,11 @@
 
     angular
         .module('analistaRural.layout')
-        .controller('Shell', Shell);
+        .controller('ShellController', ShellController);
 
-    Shell.$inject = ['$timeout', 'config', 'logger'];
+    ShellController.$inject = ['$timeout', 'config', 'logger'];
 
-    function Shell($timeout, config, logger) {
+    function ShellController($timeout, config, logger) {
         /*jshint validthis: true */
         var vm = this;
 
@@ -20,10 +20,6 @@
 
         function activate() {
             logger.success(config.appTitle + ' loaded!', null);
-//            Using a resolver on all routes or dataservice.ready in every controller
-//            dataservice.ready().then(function(){
-//                hideSplash();
-//            });
             hideSplash();
         }
 
