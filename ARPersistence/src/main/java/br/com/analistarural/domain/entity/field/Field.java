@@ -30,13 +30,19 @@ public @Entity class Field implements Serializable {
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL, optional = true)
 	@JoinColumn(name = "\"idFarm\"", referencedColumnName = "\"idFarm\"", nullable = false)
 	private Farm farm;
 
 	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"idFieldGroup\"", referencedColumnName = "\"idFieldGroup\"", nullable = true)
 	private FieldGroup fieldGroup;
+
+	@Column(name = "owner", nullable = false)
+	private Boolean owner;
+
+	@Column(name = "size", nullable = true)
+	private Double size;
 
 	public Long getId() {
 		return id;
@@ -68,6 +74,22 @@ public @Entity class Field implements Serializable {
 
 	public void setFieldGroup(FieldGroup fieldGroup) {
 		this.fieldGroup = fieldGroup;
+	}
+
+	public Boolean getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Boolean owner) {
+		this.owner = owner;
+	}
+
+	public Double getSize() {
+		return size;
+	}
+
+	public void setSize(Double size) {
+		this.size = size;
 	}
 
 }
