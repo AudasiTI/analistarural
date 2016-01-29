@@ -3,9 +3,9 @@ package br.com.analistarural.domain.repository.product;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
 
-import java.util.Optional;
-
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.config.ApplicationConfig;
+import br.com.analistarural.domain.entity.product.Feedstock;
 import br.com.analistarural.domain.entity.product.Seed;
 import br.com.analistarural.domain.entity.product.Variety;
 
@@ -30,10 +31,8 @@ public class SeedRepositoryTest {
 	VarietyRepository varietyRepository;
 	
 	@Autowired 
-	ProductCategoryRepository productCategoryRepository;
+	FeedstockRepository feedstockRepository;
 	
-	@Autowired 
-	ProductTypeRepository productTypeRepository;
 	
 	@Autowired
 	@Test
@@ -46,9 +45,9 @@ public class SeedRepositoryTest {
 	@Rollback(false)
 	public void repositoryFlowTest() {
 		Seed seed1 = seedRepository.save(createSeed());
-		Seed seed2 = seedRepository.save(createSeed());
+		//Seed seed2 = seedRepository.save(createSeed());
 
-		//assertThat(seedRepository.findById(seed1.getId()).isPresent(), is(true));
+		assertThat(seedRepository.findByIdSeed(seed1.getIdSeed()).isPresent(), is(true));
 		//assertThat(seedRepository.findById(seed2.getId()).isPresent(), is(true));
 	}
 	
@@ -56,11 +55,12 @@ public class SeedRepositoryTest {
 	
 	
 	private Seed createSeed(){
-		Seed s  = new Seed();
-		Optional<Variety> v = varietyRepository.findById((long) 3);
-		
-		
-		return s;
+		Seed seed  = new Seed();
+		List<Feedstock> feedstocks = (List<Feedstock>) feedstockRepository.findAll();
+		List<Variety> varietys = (List<Variety>) varietyRepository.findAll();
+		seed.setFeedstock(feedstocks.get(0));
+		seed.setVariety(varietys.get(0));
+		return seed;
 		
 		
 	}

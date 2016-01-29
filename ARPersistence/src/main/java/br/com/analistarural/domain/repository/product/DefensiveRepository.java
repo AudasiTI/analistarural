@@ -15,7 +15,7 @@ public interface DefensiveRepository extends CrudRepository<Defensive, Long> {
 	@Query("select d from Defensive d")
 	Stream<Defensive> streamAllDefensive();
 	
-	//Optional<Defensive> findById(Long idDefensive);
+	Optional<Defensive> findByIdDefensive(Long idDefensive);
 	
 	//Optional<Defensive> findByName(String name);
 }

@@ -13,7 +13,7 @@ public interface VarietyRepository extends CrudRepository<Variety, Long> {
 	Stream<Variety> streamAllVariety();
 
 	// CRUD method using Optional
-	Optional<Variety> findById(Long id);
+	Optional<Variety> findByIdVariety(Long idVariety);
 
 	// Query method using Optional
 

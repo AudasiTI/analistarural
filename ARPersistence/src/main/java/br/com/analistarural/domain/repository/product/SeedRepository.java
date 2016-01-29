@@ -14,7 +14,7 @@ public interface SeedRepository extends CrudRepository<Seed, Long> {
 	@Query("select s from Seed s")
 	Stream<Seed> streamAllSeeds();
 	
-	//Optional<Seed> findById(Long id);
+	Optional<Seed> findByIdSeed(Long idSeed);
 	
 	//Optional<Seed> findByName(String name);
 }

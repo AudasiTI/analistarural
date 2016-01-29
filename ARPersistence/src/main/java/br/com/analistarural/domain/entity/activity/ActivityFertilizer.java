@@ -27,7 +27,7 @@ public @Entity class ActivityFertilizer {
 	private Activity activity;
 	
 	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "\"idFertilizer\"", referencedColumnName = "\"idFertilizer\"", nullable = false)
+	@JoinColumn(name = "id_fertilizer", referencedColumnName = "id_fertilizer", nullable = false)
 	private Fertilizer fertilizer;
 
 	@Column(name = "quantity", length = 120, nullable = true)

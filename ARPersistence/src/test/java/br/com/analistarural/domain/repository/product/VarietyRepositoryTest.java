@@ -33,17 +33,17 @@ public class VarietyRepositoryTest {
 	@Rollback(false)
 	public void repositoryFlowTest() {
 		Variety variety1 = varietyRepository.save(createVariety());
-		Variety variety2 = varietyRepository.save(createVariety());
+		//Variety variety2 = varietyRepository.save(createVariety());
 
-		assertThat(varietyRepository.findById(variety1.getId()).isPresent(), is(true));
-		assertThat(varietyRepository.findById(variety2.getId()).isPresent(), is(true));
+		assertThat(varietyRepository.findByIdVariety(variety1.getIdVariety()).isPresent(), is(true));
+		//assertThat(varietyRepository.findById(variety2.getId()).isPresent(), is(true));
 	}
 	
 	
 	private Variety createVariety() {
-		Variety v = new Variety();
-		v.setName("RS5019");
-		return v;
+		Variety variety = new Variety();
+		variety.setName("RS5019");
+		return variety;
 	}
 	
 }
