@@ -37,8 +37,8 @@ public class ActivityRepositoryTest {
 	@Rollback(false)
 	public void saveActivityTest() {
 
-		Activity a = activityRepository.save(createActivityTest());
-		assertThat(activityRepository.findById(a.getId()).isPresent(), is(true));
+//		Activity a = activityRepository.save(createActivityTest());
+//		assertThat(activityRepository.findById(a.getId()).isPresent(), is(true));
 	}
 
 	private Activity createActivityTest() {

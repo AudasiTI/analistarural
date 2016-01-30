@@ -38,11 +38,11 @@ public class ActivityFertilizerRepositoryTest {
 	@Rollback(false)
 	public void saveActivityFertilizerTest() {
 
-		ActivityFertilizer af = activityFertilizerRepository
-				.save(createActivityFertilizerTest());
-		
-		assertThat(activityFertilizerRepository.findById(af.getId())
-				.isPresent(), is(true));
+//		ActivityFertilizer af = activityFertilizerRepository
+//				.save(createActivityFertilizerTest());
+//		
+//		assertThat(activityFertilizerRepository.findById(af.getId())
+//				.isPresent(), is(true));
 	}
 
 	private ActivityFertilizer createActivityFertilizerTest() {

@@ -17,6 +17,7 @@
 	/*
 	 * Feature areas
 	 */
-	'analistaRural.activities', 'analistaRural.layout' ]);
+	'analistaRural.activities', 'analistaRural.fields',
+			'analistaRural.layout' ]);
 
 })();
