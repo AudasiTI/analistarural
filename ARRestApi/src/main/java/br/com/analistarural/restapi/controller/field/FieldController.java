@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.analistarural.domain.dto.field.FieldDTO;
+import br.com.analistarural.domain.dto.field.FieldsDTO;
 import br.com.analistarural.restapi.service.field.FieldService;
 
 @RestController
@@ -22,17 +22,23 @@ public class FieldController {
 	private FieldService fieldService;
 
 	@RequestMapping(value = "/fields/farm/{farm_id}", method = RequestMethod.GET)
-	public @ResponseBody Iterable<FieldDTO> getFields(@PathVariable("farm_id") Long farmID) {
+	public @ResponseBody Iterable<FieldsDTO> getFieldsByFarm(@PathVariable("farm_id") Long farmID) {
 		return fieldService.findFieldsByFarm(farmID);
 	}
 
+	@RequestMapping(value = "/fields/systemaccount/{system_account_id}", method = RequestMethod.GET)
+	public @ResponseBody Iterable<FieldsDTO> getFieldsBySystemAccount(
+			@PathVariable("system_account_id") Long systemAccountID) {
+		return fieldService.findFieldsBySystemAccount(systemAccountID);
+	}
+
 	@RequestMapping(value = "/fields/{field_id}", method = RequestMethod.GET)
-	public @ResponseBody FieldDTO getField(@PathVariable("field_id") Long fieldID) {
+	public @ResponseBody FieldsDTO getField(@PathVariable("field_id") Long fieldID) {
 		return fieldService.findFieldByID(fieldID);
 	}
 
 	@RequestMapping(value = "/fields", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void saveField(@Valid @RequestBody FieldDTO fieldDTO) {
+	public void saveField(@Valid @RequestBody FieldsDTO fieldDTO) {
 		fieldService.save(fieldDTO);
 	}
 

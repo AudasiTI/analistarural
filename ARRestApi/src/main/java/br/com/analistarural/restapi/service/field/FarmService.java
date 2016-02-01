@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.analistarural.domain.dto.field.FarmDTO;
-import br.com.analistarural.domain.dto.field.FieldDTO;
+import br.com.analistarural.domain.dto.field.FieldsDTO;
 import br.com.analistarural.domain.entity.field.Farm;
 import br.com.analistarural.domain.entity.field.Field;
 import br.com.analistarural.domain.repository.FarmRepository;
@@ -20,16 +20,17 @@ public class FarmService {
 	@Autowired
 	private FarmRepository farmRepository;
 
-	public Iterable<FarmDTO> findFarmsBySystemAccount(Long systemAccountID) {
+	public Iterable<Farm> findFarmsBySystemAccount(Long systemAccountID) {
 
 		List<FarmDTO> farmDTOList = new ArrayList<FarmDTO>();
 
-		Iterable<Farm> farm = farmRepository.findFarmsBySystemAccount(systemAccountID);
+		Iterable<Farm> farms = farmRepository.findFarmsBySystemAccount(systemAccountID);
 
-		for (Farm farm2 : farm) {
-			farmDTOList.add(new FarmDTO(farm2));
-		}
-		return farmDTOList;
+		// for (Farm farm2 : farm) {
+		// farmDTOList.add(new FarmDTO(farm2));
+		// }
+
+		return farms;
 	}
 
 	@Transactional(readOnly = false)

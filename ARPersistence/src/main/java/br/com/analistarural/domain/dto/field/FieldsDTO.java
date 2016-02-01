@@ -7,7 +7,7 @@ import br.com.analistarural.domain.entity.field.Farm;
 import br.com.analistarural.domain.entity.field.Field;
 import br.com.analistarural.domain.entity.field.FieldGroup;
 
-public class FieldDTO implements Serializable {
+public class FieldsDTO implements Serializable {
 
 	/**
 	 * 
@@ -84,10 +84,10 @@ public class FieldDTO implements Serializable {
 		this.owner = owner;
 	}
 
-	public FieldDTO() {
+	public FieldsDTO() {
 	}
 
-	public FieldDTO(Field field) {
+	public FieldsDTO(Field field) {
 		setFarmName(field.getFarm().getName());
 
 		if (field.getFieldGroup() != null) {
@@ -100,7 +100,7 @@ public class FieldDTO implements Serializable {
 		setSystemAccount(field.getFarm().getSystemAccount().getId());
 	}
 
-	public Field toField(FieldDTO fieldDTO) {
+	public Field toField(FieldsDTO fieldDTO) {
 
 		Field field = new Field();
 		FieldGroup fieldGroup = new FieldGroup();

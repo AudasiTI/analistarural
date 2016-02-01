@@ -1,61 +1,36 @@
-<div class="container-fluid">
+<div class="container-fluid" ng-controller="FieldsController as vm">
 	<div class="row">
 		<div class="col-xs-offset-1">
-			<h3>
-				Fazendas<span class="badge">2</span>
-			</h3>
+
+			<h3>Fazendas</h3>
+
 			<div class="col-xs-2">
 				<div>Basic panel example</div>
 			</div>
+
 			<div class="col-xs-7">
-				<div>
-					<h4>
-						Fazenda XYZ<span class="badge">2 Grupos</span>
-					</h4>
-					<div>
-						<h4>
-							Talhão 1<span class="badge">4 áreas</span>
-						</h4>
-						<table class="table-hover table-striped">
-							<tr>
-								<td class="col-md-1">A-001</td>
-								<td class="col-md-1">50ha</td>
-								<td class="col-md-2">Soja - XYZ</td>
-								<td class="col-md-1"><a href>Detalhes</a></td>
-								<td class="col-md-1"><a href>Remover</a></td>
-							</tr>
-							<tr>
-								<td class="col-md-1">A-002</td>
-								<td class="col-md-1">50ha</td>
-								<td class="col-md-2">Soja - ZXX</td>
-								<td class="col-md-1"><a href>Detalhes</a></td>
-								<td class="col-md-1"><a href>Remover</a></td>
-							</tr>
-						</table>
-					</div>
-					<div>
-						<h4>
-							Talhão 2<span class="badge">2 áreas</span>
-						</h4>
-						<table class="table-hover table-striped">
-							<tr>
-								<td class="col-md-1">T2-001</td>
-								<td class="col-md-1">30ha</td>
-								<td class="col-md-2">Milho - XYZ</td>
-								<td class="col-md-1"><a href>Detalhes</a></td>
-								<td class="col-md-1"><a href>Remover</a></td>
-							</tr>
-							<tr>
-								<td class="col-md-1">T2-002</td>
-								<td class="col-md-1">30ha</td>
-								<td class="col-md-2">Milho - ZXX</td>
-								<td class="col-md-1"><a href>Detalhes</a></td>
-								<td class="col-md-1"><a href>Remover</a></td>
-							</tr>
-						</table>
+				<div ng-repeat="farm in vm.farms">
+					<h4>{{farm.name}}</h4>
+					<div ng-init="vm.getFields(farm.id)">
+						<div>
+							<table class="table-hover table-striped">
+								<tr ng-repeat="field in vm.getFields(farm.id) ">
+									<td class="col-md-1" ng-bind="field.name"></td>
+									<td class="col-md-1" ng-bind="field.size"></td>
+									<td class="col-md-1"><a href>Detalhes</a></td>
+									<td class="col-md-1"><a href>Remover</a></td>
+								</tr>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<h4>{{vm.farms}}</h4>
+	</div>
+	<div class="row">
+		<h4>{{vm.fields}}</h4>
 	</div>
 </div>

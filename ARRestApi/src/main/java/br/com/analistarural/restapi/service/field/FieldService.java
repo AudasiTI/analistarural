@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.analistarural.domain.dto.field.FieldDTO;
+import br.com.analistarural.domain.dto.field.FieldsDTO;
 import br.com.analistarural.domain.entity.field.Field;
 import br.com.analistarural.domain.repository.FarmRepository;
 import br.com.analistarural.domain.repository.FieldGroupRepository;
@@ -34,20 +34,20 @@ public class FieldService {
 		return fieldRepository.findAll();
 	}
 
-	public Iterable<FieldDTO> findFieldsByFarm(Long farmID) {
+	public Iterable<FieldsDTO> findFieldsByFarm(Long farmID) {
 
-		List<FieldDTO> fieldDTOList = new ArrayList<FieldDTO>();
+		List<FieldsDTO> fieldDTOList = new ArrayList<FieldsDTO>();
 
 		Iterable<Field> field = fieldRepository.findFieldsByFarm(farmID);
 
 		for (Field field2 : field) {
-			fieldDTOList.add(new FieldDTO(field2));
+			fieldDTOList.add(new FieldsDTO(field2));
 		}
 		return fieldDTOList;
 	}
 
 	@Transactional(readOnly = false)
-	public void save(FieldDTO fieldDTO) {
+	public void save(FieldsDTO fieldDTO) {
 
 		Field field = fieldDTO.toField(fieldDTO);
 
@@ -69,8 +69,19 @@ public class FieldService {
 		fieldRepository.delete(id);
 	}
 
-	public FieldDTO findFieldByID(Long fieldID) {
-		FieldDTO fieldDTO = new FieldDTO(fieldRepository.findById(fieldID).get());
+	public FieldsDTO findFieldByID(Long fieldID) {
+		FieldsDTO fieldDTO = new FieldsDTO(fieldRepository.findById(fieldID).get());
 		return fieldDTO;
+	}
+
+	public Iterable<FieldsDTO> findFieldsBySystemAccount(Long systemAccountID) {
+		List<FieldsDTO> fieldDTOList = new ArrayList<FieldsDTO>();
+
+		Iterable<Field> field = fieldRepository.findFieldsBySystemAccount(systemAccountID);
+
+		for (Field field2 : field) {
+			fieldDTOList.add(new FieldsDTO(field2));
+		}
+		return fieldDTOList;
 	}
 }
