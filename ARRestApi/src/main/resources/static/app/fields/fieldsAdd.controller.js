@@ -72,7 +72,7 @@
 		$scope.open = function(size) {
 			var modalInstance = $uibModal.open({
 				animation : $scope.animationsEnabled,
-				templateUrl : 'app/modal/modal.html',
+				templateUrl : 'myModalContent.html',
 				controller : 'ModalInstanceCtrl',
 				size : size,
 				resolve : {
