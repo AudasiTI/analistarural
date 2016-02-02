@@ -7,13 +7,18 @@
 
     /* @ngInject */
     function fieldsDataService($http, $location, $q, exception, logger) {
+    	
         var isPrimed = false;
         var primePromise;
+
         
         var serviceBase = "/api/fields/"
 
         var service = {
         	getFields: getFields,
+        	getFieldById: getFieldById,
+        	newField: newField,
+        	insertField : insertField,
             ready: ready
         };
 
@@ -31,6 +36,31 @@
                 return data.data;
             }
         }
+        
+        function getFieldById(fieldId) {
+            return $http.get(serviceBase + fieldId)
+                .then(results)
+                .catch(function(message) {
+                    exception.catcher('XHR Failed for getFields')(message);
+                    $location.url('/');
+                });
+
+            function results(data, status, headers, config) {
+                return data.data;
+            }
+        }
+        
+
+        function insertField(field) {
+            return $http.post(serviceBase, field).then(function (results) {
+                field.id = results.data.id;
+                return results.data;
+            });
+        };
+        
+        function newField() {
+            return $q.when({id: 0});
+        };
 
         function prime() {
             // This function can only be called once.

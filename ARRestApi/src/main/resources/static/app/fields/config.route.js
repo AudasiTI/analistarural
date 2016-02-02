@@ -18,6 +18,20 @@
 				controller : 'FieldsController',
 				controllerAs : 'vm'
 			}
+		}, {
+			url : '/fields/add',
+			config : {
+				templateUrl : 'app/fields/fieldsAdd.html',
+				controller : 'FieldsAddController',
+				controllerAs : 'vm'
+			}
+		}, {
+			url : '/fields/add/:fieldId',
+			config : {
+				templateUrl : 'app/fields/fieldsAdd.html',
+				controller : 'FieldsAddController',
+				controllerAs : 'vm'
+			}
 		} ];
 	}
 })();

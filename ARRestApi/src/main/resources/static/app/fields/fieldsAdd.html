@@ -1,0 +1,116 @@
+<div class="view">
+	<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <ul>
+                <li ng-repeat="item in items">
+                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
+                </li>
+            </ul>
+            Selected: <b>{{ selected.item }}</b>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+	<div class="container">
+		<header>
+			<h3>
+				<span class="glyphicon glyphicon-edit"></span> {{vm.title}} Áreas
+			</h3>
+		</header>
+		<form name="editForm" novalidate>
+			<div>
+				<div class="row">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>
+								{{ vm.field.name }} <span data-ng-hide="vm.field.id == 0">(<a
+									style="font-size: 12pt" href="#/customerorders/{{vm.field.id}}">View
+										Orders</a>)
+								</span>
+							</h4>
+							<br />
+						</div>
+					</div>
+					<div class="col-md-2">Nome da área:</div>
+					<div class="col-md-4">
+						<input type="text" name="name" class="form-control"
+							data-ng-model="vm.field.name" required /> <span
+							class="errorMessage"
+							ng-show="editForm.name.$touched && editForm.name.$invalid">
+							Nome da área é obrigatório </span>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-2">Tamanho:</div>
+					<div class="col-md-2">
+						<input type="text" name="size" class="form-control"
+							data-ng-model="vm.field.size" required /> <span
+							class="errorMessage"
+							ng-show="editForm.size.$touched && editForm.size.$invalid">
+							Tamanho é obrigatório </span>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-2">Grupo:</div>
+					<div class="col-md-4">
+						<select name="groupField" class="form-control"
+							data-ng-model="vm.field.groupField"
+							data-ng-options="groupField.id as groupField.name for groupField in vm.groupFields">
+							<option value=""></option>
+						</select>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-2">Fazenda:</div>
+					<div class="col-md-4">
+						<select name="farm" required class="form-control"
+							data-ng-model="vm.field.farmName"
+							data-ng-options="farm.name as farm.name for farm in vm.farms">
+							<option value=""></option>
+						</select> <span class="errorMessage"
+							ng-show="editForm.farm.$touched && editForm.farm.$invalid">
+							Nome da fazenda é obrigatório </span>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-primary"
+							data-ng-click="vm.saveField()"
+							ng-disabled="editForm.$invalid || !editForm.$dirty">
+							{{vm.buttonText}}</button>
+						&nbsp;&nbsp;
+						<button class="btn btn-danger" data-ng-if="vm.field.id > 0"
+							data-ng-click="vm.deleteField()">Delete</button>
+						<button class="btn btn-danger" data-ng-if="vm.field.id > 0"
+							data-ng-click="open()">Open</button>
+					</div>
+				</div>
+				<br />
+				<div class="statusRow">
+					<br />
+					<div class="label label-success" data-ng-show="vm.updateStatus">
+						<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Área
+						Atualizada
+					</div>
+				</div>
+				<div class="statusRow">
+					<br />
+					<div class="label label-important" data-ng-show="vm.errorMessage">
+						<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
+						{{ vm.errorMessage }}
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div>{{vm.field}}</div>
+</div>
