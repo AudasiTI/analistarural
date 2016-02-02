@@ -19,8 +19,8 @@
 
         return service;
 
-        function getFields(farmID) {
-            return $http.get(serviceBase + 'farm/' + farmID)
+        function getFields(systemAccount) {
+            return $http.get(serviceBase + 'systemaccount/' + systemAccount)
                 .then(results)
                 .catch(function(message) {
                     exception.catcher('XHR Failed for getFields')(message);

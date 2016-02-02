@@ -8,7 +8,6 @@
 	function FieldsController(fieldsDataService, farmsDataService, logger) {
 
 		var vm = this;
-		vm.farms = [];
 		vm.fields = [];
 		vm.systemAccount = 1;
 
@@ -16,24 +15,24 @@
 
 		function activate() {
 
-			return getFarms().then(function() {
+			return getFarms(vm.systemAccount).then(function() {
 				logger.info('Activated fields View');
 			});
 		}
 
-		function getFarms() {
-			return farmsDataService.getFarms(vm.systemAccount).then(
-					function(data) {
-						vm.farms = data;
-						return vm.farms;
-					});
+		function getFarms(accountID) {
+			return farmsDataService.getFarms(accountID).then(function(data) {
+				vm.farms = data;
+				return vm.farms;
+			});
 		}
 
-		vm.getFields = function(farmID) {
-			return fieldsDataService.getFields(farmID).then(function(data) {
-				vm.fields = data;
-				return vm.fields;
-			});
+		function getFields(systemAccount) {
+			return fieldsDataService.getFields(systemAccount).then(
+					function(data) {
+						vm.fields = data;
+						return vm.fields;
+					});
 		}
 
 	}

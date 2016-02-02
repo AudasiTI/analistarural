@@ -32,7 +32,8 @@ public class FarmController {
 
 	// @Secured("ROLE_ADMIN")
 	@RequestMapping(value = "/farms/systemaccount/{system_account_id}", method = RequestMethod.GET)
-	public @ResponseBody Iterable<Farm> getFarms(@PathVariable("system_account_id") Long systemID) {
+	public @ResponseBody Iterable<FarmDTO> getFarms(
+			@PathVariable("system_account_id") Long systemID) {
 		return farmService.findFarmsBySystemAccount(systemID);
 	}
 

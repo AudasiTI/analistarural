@@ -1,9 +1,12 @@
 package br.com.analistarural.domain.dto.field;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.analistarural.domain.entity.account.SystemAccount;
 import br.com.analistarural.domain.entity.field.Farm;
+import br.com.analistarural.domain.entity.field.Field;
 
 public class FarmDTO implements Serializable {
 
@@ -19,6 +22,16 @@ public class FarmDTO implements Serializable {
 	private Long systemAccount;
 
 	private Double size;
+	
+	private List<Field> fields = new ArrayList<Field>();
+
+	public List<Field> getFields() {
+		return fields;
+	}
+
+	public void setFields(List<Field> fields) {
+		this.fields = fields;
+	}
 
 	public Long getId() {
 		return id;
