@@ -19,6 +19,7 @@
         	getFieldById: getFieldById,
         	newField: newField,
         	insertField : insertField,
+        	deleteField : deleteField,
             ready: ready
         };
 
@@ -54,6 +55,13 @@
         function insertField(field) {
             return $http.post(serviceBase, field).then(function (results) {
                 field.id = results.data.id;
+                return results.data;
+            });
+        };
+        
+
+        function deleteField(id) {
+            return $http.delete(serviceBase + id).then(function (results) {
                 return results.data;
             });
         };

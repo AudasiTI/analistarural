@@ -22,10 +22,9 @@
 		vm.buttonText = (fieldId > 0) ? 'Atualizar' : 'Adicionar';
 		vm.updateStatus = false;
 		vm.errorMessage = '';
+		vm.shouldDeleteField = false;
 
-		$scope.items = [ 'item1', 'item2', 'item3' ];
-
-		$scope.animationsEnabled = true;
+		vm.animationsEnabled = true;
 
 		function activate() {
 			getFarms().then(
@@ -69,49 +68,34 @@
 			}
 		};
 
-		$scope.open = function(size) {
+		vm.modalOpenDelete = function() {
 			var modalInstance = $uibModal.open({
 				animation : $scope.animationsEnabled,
 				templateUrl : 'myModalContent.html',
 				controller : 'ModalInstanceCtrl',
-				size : size,
+				size : null,
 				resolve : {
-					items : function() {
-						return $scope.items;
-					}
+
 				}
 			});
 
-			modalInstance.result.then(function(selectedItem) {
-				$scope.selected = selectedItem;
+			modalInstance.result.then(function() {
+				vm.deleteField();
 			}, function() {
 				$log.info('Modal dismissed at: ' + new Date());
 			});
 
-		}
-		vm.deleteField = function() {
-
-			$scope.open('lg');
-			var fieldName = vm.field.name;
-
-			var modalOptions = {
-				closeButtonText : 'Cancelar',
-				actionButtonText : 'Delete Área',
-				headerText : 'Delete ' + fieldName + '?',
-				bodyText : 'Tem certeza que deseja deletar essa área?'
-			};
-
-			// modalService.showModal({}, modalOptions).then(function(result) {
-			// if (result === 'ok') {
-			// fieldDataService.deleteField(vm.field.id).then(function() {
-			// onRouteChangeOff(); // Stop listening for location
-			// // changes
-			// $location.path('/fields');
-			// }, processError);
-			// }
-			// });
-
 		};
+
+		vm.deleteField = function() {
+			// if (vm.shouldDeleteField) {
+			fieldsDataService.deleteField(vm.field.id).then(function() {
+				onRouteChangeOff(); // Stop listening for location
+				// changes
+				$location.path('/fields');
+			}, processError);
+			// }
+		}
 
 		activate();
 
@@ -120,22 +104,25 @@
 			if (!vm.editForm || !vm.editForm.$dirty)
 				return;
 
-			var modalOptions = {
-				closeButtonText : 'Cancel',
-				actionButtonText : 'Ignore Changes',
-				headerText : 'Unsaved Changes',
-				bodyText : 'You have unsaved changes. Leave the page?'
-			};
+			var modalInstance = $uibModal.open({
+				animation : $scope.animationsEnabled,
+				templateUrl : 'myModalContent.html',
+				controller : 'ModalInstanceCtrl',
+				size : null,
+				resolve : {
 
-			modalService.showModal({}, modalOptions).then(function(result) {
-				if (result === 'ok') {
-					onRouteChangeOff(); // Stop listening for location changes
-					$location.path($location.url(newUrl).hash()); // Go to
-					// page
-					// they're
-					// interested
-					// in
 				}
+			});
+
+			modalInstance.result.then(function() {
+				onRouteChangeOff(); // Stop listening for location changes
+				$location.path($location.url(newUrl).hash()); // Go to
+				// page
+				// they're
+				// interested
+				// in
+			}, function() {
+				$log.info('Modal dismissed at: ' + new Date());
 			});
 
 			// prevent navigation by default since we'll handle it

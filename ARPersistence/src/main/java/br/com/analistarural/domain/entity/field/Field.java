@@ -30,11 +30,11 @@ public @Entity class Field implements Serializable {
 	@Column(name = "name", length = 120, nullable = false)
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = true)
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "\"idFarm\"", referencedColumnName = "\"idFarm\"", nullable = false)
 	private Farm farm;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = true, fetch = FetchType.EAGER)
+	@ManyToOne(optional = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "\"idFieldGroup\"", referencedColumnName = "\"idFieldGroup\"", nullable = true)
 	private FieldGroup fieldGroup;
 

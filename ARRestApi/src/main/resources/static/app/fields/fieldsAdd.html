@@ -1,19 +1,14 @@
 <div class="view">
 	<script type="text/ng-template" id="myModalContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
+            <h3 class="modal-title">Aviso</h3>
         </div>
         <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
+			<h4>Deseja excluir essa área?</h4>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-primary" type="button" ng-click="ok()">Sim</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Não</button>
         </div>
     </script>
 	<div class="container">
@@ -89,9 +84,7 @@
 							{{vm.buttonText}}</button>
 						&nbsp;&nbsp;
 						<button class="btn btn-danger" data-ng-if="vm.field.id > 0"
-							data-ng-click="vm.deleteField()">Delete</button>
-						<button class="btn btn-danger" data-ng-if="vm.field.id > 0"
-							data-ng-click="open()">Open</button>
+							data-ng-click="vm.modalOpenDelete()">Excluir</button>
 					</div>
 				</div>
 				<br />
@@ -112,5 +105,4 @@
 			</div>
 		</form>
 	</div>
-	<div>{{vm.field}}</div>
 </div>
