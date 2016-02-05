@@ -1,0 +1,90 @@
+<div class="view">
+	<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Aviso</h3>
+        </div>
+        <div class="modal-body">
+			<h4>Deseja excluir essa Unidade?</h4>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Sim</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Não</button>
+        </div>
+    </script>
+	<div class="container">
+		<header>
+			<h3>
+				<span class="glyphicon glyphicon-edit"></span> {{vm.title}} Unidades
+			</h3>
+		</header>
+		<form name="editForm" novalidate>
+			<div>
+				<div class="row">
+					<div class="row">
+						<div class="col-md-12">
+							<h4>
+								{{ vm.measurement.name }} <span
+									data-ng-hide="vm.measurement.id == 0">(<a
+									style="font-size: 12pt"
+									href="#/customerorders/{{vm.measurement.id}}">View Orders</a>)
+								</span>
+							</h4>
+							<br />
+						</div>
+					</div>
+					<div class="col-md-2">Nome da Unidade:</div>
+					<div class="col-md-4">
+						<input type="text" name="name" class="form-control"
+							data-ng-model="vm.measurement.name" required /> <span
+							class="errorMessage"
+							ng-show="editForm.name.$touched && editForm.name.$invalid">
+							Nome da Unidade é obrigatório </span>
+					</div>
+				</div>
+				<br />
+				<div class="row">
+					<div class="col-md-2">Abreviacao:</div>
+					<div class="col-md-2">
+						<input type="text" name="size" class="form-control"
+							data-ng-model="vm.measurement.abbreviation" required /> <span
+							class="errorMessage"
+							ng-show="editForm.size.$touched && editForm.size.$invalid">
+							Abreviacao é obrigatório </span>
+					</div>
+				</div>
+				<br />
+
+				<div class="row">
+					<div class="col-md-12">
+						<button type="submit" class="btn btn-primary"
+							data-ng-click="vm.saveMeasurement()"
+							ng-disabled="editForm.$invalid || !editForm.$dirty">
+							{{vm.buttonText}}</button>
+						&nbsp;&nbsp;
+						
+						<button class="btn btn-danger"
+							data-ng-if="vm.measurement.idMeasurement > 0"
+							data-ng-click="vm.modalOpenDelete()">Excluir</button>
+					</div>
+				</div>
+				<br />
+
+				<div class="statusRow">
+					<br />
+					<div class="label label-success" data-ng-show="vm.updateStatus">
+						<span class="glyphicon glyphicon-thumbs-up icon-white"></span>&nbsp;&nbsp;Unidade
+						Atualizada
+					</div>
+				</div>
+
+				<div class="statusRow">
+					<br />
+					<div class="label label-important" data-ng-show="vm.errorMessage">
+						<span class="glyphicon glyphicon-thumbs-down icon-white"></span>&nbsp;&nbsp;Error:
+						{{ vm.errorMessage }}
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>

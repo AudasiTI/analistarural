@@ -1,0 +1,45 @@
+
+
+
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> -->
+<div class="container-fluid" ng-controller="MeasurementController as vm">
+	<script>
+new Tablesort(document.getElementById('tableMeasurement'));
+</script>
+	<div class="row">
+		<div class="col-xs-offset-1">
+
+			<h3>Unidade de Medida</h3>
+
+			<div class="col-xs-2">
+				<div>
+					<a class="btn btn-default" href="#measurements/add" role="button">Nova
+						Unidade</a>
+				</div>
+			</div>
+
+			<div class="col-xs-7">
+				<div>
+					<table class="table-hover table-striped" id="tableMeasurement">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Descrição</th>
+								<th>Abreviação</th>			
+							</tr>
+						</thead>
+						<tr ng-repeat="measurement in vm.measurements">
+
+							<td class="col-xs-1" ng-bind="measurement.idMeasurement"></td>
+							<td class="col-xs-1" ng-bind="measurement.name"></td>
+							<td class="col-xs-1" ng-bind="measurement.abbreviation"></td>
+							<td class="col-xs-1"><a
+								href="#measurements/add/{{measurement.idMeasurement}}">Detalhes</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>

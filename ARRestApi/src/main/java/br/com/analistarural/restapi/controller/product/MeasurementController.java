@@ -27,13 +27,13 @@ public class MeasurementController {
         return measurementService.findAll();
 	}
 	
-	@RequestMapping(value = "/measurement/{idMeasurement}", method = RequestMethod.GET)
+	@RequestMapping(value = "/measurements/{idMeasurement}", method = RequestMethod.GET)
     public Optional<Measurement> getMeasurement(@PathVariable("idMeasurement") Long idMeasurement) {
         return measurementService.findByIdMeasurement(idMeasurement);
 	}
 	
 	
-	@RequestMapping(value = "/measurement", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/measurements", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void saveMeasurement(@Valid @RequestBody Measurement measurement){
 		measurementService.save(measurement);
 	}
@@ -41,6 +41,5 @@ public class MeasurementController {
 	@RequestMapping(value = "/measurements/{idMeasurement}", method = RequestMethod.DELETE)
 	public @ResponseBody void deleteMeasurement(@PathVariable("idMeasurement") Long idMeasurement) {
 		measurementService.delete(idMeasurement);
-		//return "Registro excluído com sucesso.";
 	}
 }

@@ -2,44 +2,42 @@
 
 	'use strict';
 
-	angular.module('analistaRural.fields').controller('FieldsAddController',
-			FieldsAddController);
+	angular.module('analistaRural.measurement').controller(
+			'MeasurementAddController', MeasurementAddController);
 
-	function FieldsAddController(fieldsDataService, farmsDataService,
-			$routeParams, $scope, $location, $timeout, logger, $uibModal, $log) {
+	function MeasurementAddController(measurementDataService, $routeParams,
+			$scope, $location, $timeout, logger, $uibModal, $log) {
 
 		var vm = this;
-		var fieldId = ($routeParams.fieldId) ? parseInt($routeParams.fieldId)
+		var idMeasurement = ($routeParams.idMeasurement) ? parseInt($routeParams.idMeasurement)
 				: 0;
-		var systemAccount = 1;
+		//var idMeasurement = $routeParams.idMeasurement;
 		var onRouteChangeOff;
 		var timer;
 
-		vm.field = {};
-		vm.farms = [];
-		vm.groupField = [];
-		vm.title = (fieldId > 0) ? 'Editar' : 'Adicionar';
-		vm.buttonText = (fieldId > 0) ? 'Atualizar' : 'Adicionar';
+		vm.measurement = {};
+		vm.title = (idMeasurement > 0) ? 'Editar' : 'Adicionar';
+		vm.buttonText = (idMeasurement > 0) ? 'Atualizar' : 'Adicionar';
 		vm.updateStatus = false;
 		vm.errorMessage = '';
-		vm.shouldDeleteField = false;
+		vm.shouldDeleteMeasurement = false;
 
 		vm.animationsEnabled = true;
 
 		function activate() {
-			getFarms().then(
-					function() {
-						if (fieldId > 0) {
-							fieldsDataService.getFieldById(fieldId).then(
-									function(field) {
-										vm.field = field;
-									}, processError);
-						} else {
-							fieldsDataService.newField().then(function(field) {
-								vm.field = field;
-							});
-						}
-					});
+			if (idMeasurement > 0) {
+				measurementDataService.getMeasurementById(idMeasurement).then(
+						function(measurement) {
+							vm.measurement = measurement;
+						}, processError);
+			} else {
+				measurementDataService.newMeasurement().then(
+						function(measurement) {
+							vm.measurement = measurement;
+						});
+
+			}
+			;
 
 			// Make sure they're warned if they made a change but didn't save it
 			// Call to $on returns a "deregistration" function that can be
@@ -48,24 +46,22 @@
 			// it)
 			onRouteChangeOff = $scope.$on('$locationChangeStart', routeChange);
 		}
+		;
 
-		vm.isFarmSelected = function(fieldFarmId, farmId) {
-			return fieldFarmId === farmId;
-		};
+		vm.saveMeasurement = function() {
 
-		vm.saveField = function() {
-
-			vm.field.systemAccount = systemAccount;
+			// vm.field.systemAccount = systemAccount;
 
 			if ($scope.editForm.$valid) {
-				// if (!vm.field.id) {
-					fieldsDataService.insertField(vm.field).then(
-							processSuccess, processError);
-				} // else {
-					// fieldsDataService.updateField(vm.field).then(
-						// processSuccess, processError);
-				// }
-			//}
+				//if (!vm.measurement.id) {
+					measurementDataService.insertMeasurement(vm.measurement)
+							.then(processSuccess, processError);
+				//} else {
+					//measurementDataService.updateMeasurement(vm.measurement)
+						//	.then(processSuccess, processError);
+				//}
+			}
+			
 		};
 
 		vm.modalOpenDelete = function() {
@@ -80,19 +76,20 @@
 			});
 
 			modalInstance.result.then(function() {
-				vm.deleteField();
+				vm.deleteMeasurement();
 			}, function() {
 				$log.info('Modal dismissed at: ' + new Date());
 			});
 
 		};
 
-		vm.deleteField = function() {
+		vm.deleteMeasurement = function() {
 			// if (vm.shouldDeleteField) {
-			fieldsDataService.deleteField(vm.field.id).then(function() {
+			measurementDataService.deleteMeasurement(
+					vm.measurement.idMeasurement).then(function() {
 				onRouteChangeOff(); // Stop listening for location
 				// changes
-				$location.path('/fields');
+				$location.path('/measurements');
 			}, processError);
 			// }
 		}
@@ -131,12 +128,6 @@
 			return;
 		}
 
-		function getFarms() {
-			return farmsDataService.getFarms(systemAccount).then(
-					function(farms) {
-						vm.farms = farms;
-					}, processError);
-		}
 
 		function processSuccess() {
 			$scope.editForm.$dirty = false;
@@ -156,7 +147,7 @@
 				$timeout.cancel(timer);
 				vm.errorMessage = '';
 				vm.updateStatus = false;
-				$location.path('/fields');
+				$location.path('/measurements');
 			}, 1000);
 		}
 

@@ -1,6 +1,7 @@
 <html data-ng-app="analistaRural">
 <head>
-<meta charset="UTF-8">
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title data-ng-bind="title"></title>
 
 <style>
@@ -46,6 +47,7 @@
 	<script type="text/javascript" src="js/angular/ngplus-overlay.js"></script>
 	<script type="text/javascript"
 		src="js/angular/ui-bootstrap-tpls-1.1.2.js"></script>
+		<script src='js/tablesort.min.js'></script>
 
 	<!---------------------------------------------------------------------------- -->
 	<script src="/app/app.module.js"></script>
@@ -85,8 +87,16 @@
 	<script src="/app/fields/fields-data.service.js"></script>
 	<script src="/app/fields/farms-data.service.js"></script>
 
-	<script src="/app/modal/modal.module.js"></script>
 
+
+	<!--Measurement module-->
+	<script src="/app/products/measurement.module.js"></script>
+	<script src="/app/products/config.route.js"></script>
+	<script src="/app/products/measurement.controller.js"></script>
+	<script src="/app/products/measurementAdd.controller.js"></script>
+	<script src="/app/products/measurement-data.service.js"></script>
+
+	<script src="/app/modal/modal.module.js"></script>
 
 </body>
 
